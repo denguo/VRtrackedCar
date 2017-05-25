@@ -1,0 +1,144 @@
+dont_use_io iocell 1 0
+dont_use_io iocell 1 1
+dont_use_io iocell 1 3
+set_location "\UART:BUART:tx_state_1\" macrocell 3 2 0 2
+set_location "\PWM_Motor:PWMUDB:prevCompare1\" macrocell 3 0 0 3
+set_location "Net_223" macrocell 3 4 0 0
+set_location "\PWM_Servo:PWMUDB:sP16:pwmdp:u0\" datapathcell 2 4 2 
+set_location "\UART:BUART:rx_state_0\" macrocell 1 1 0 1
+set_location "\PWM_Servo:PWMUDB:sSTSReg:rstSts:stsreg\" statusicell 2 4 4 
+set_location "\Timer_Infrared_3:TimerUDB:capt_int_temp\" macrocell 2 2 1 2
+set_location "\UART:BUART:sRX:RxShifter:u0\" datapathcell 2 0 2 
+set_location "\UART:BUART:tx_state_2\" macrocell 3 2 1 3
+set_location "\Timer_Infrared_3:TimerUDB:rstSts:stsreg\" statusicell 2 2 4 
+set_location "\Timer_Infrared_1:TimerUDB:rstSts:stsreg\" statusicell 1 4 4 
+set_location "\Timer_Infrared_2:TimerUDB:rstSts:stsreg\" statusicell 0 1 4 
+set_location "\Timer_Infrared_0:TimerUDB:rstSts:stsreg\" statusicell 1 5 4 
+set_location "\UART:BUART:rx_postpoll\" macrocell 2 0 0 3
+set_location "\Timer_Infrared_2:TimerUDB:capt_fifo_load\" macrocell 0 1 1 0
+set_location "Net_744" macrocell 0 2 0 3
+set_location "Net_753" macrocell 0 2 1 1
+set_location "\Timer_Infrared_0:TimerUDB:sT24:timerdp:u2\" datapathcell 1 5 2 
+set_location "\Timer_Infrared_1:TimerUDB:sT24:timerdp:u2\" datapathcell 1 4 2 
+set_location "\Timer_Infrared_2:TimerUDB:sT24:timerdp:u2\" datapathcell 0 0 2 
+set_location "\Timer_Infrared_0:TimerUDB:status_tc\" macrocell 1 5 0 1
+set_location "\Timer_Infrared_1:TimerUDB:status_tc\" macrocell 1 4 0 3
+set_location "\Timer_Infrared_2:TimerUDB:status_tc\" macrocell 0 0 0 0
+set_location "\Timer_Infrared_3:TimerUDB:status_tc\" macrocell 2 2 0 0
+set_location "\UART:BUART:txn\" macrocell 3 1 1 0
+set_location "\Timer_Infrared_1:TimerUDB:capture_last\" macrocell 0 3 1 3
+set_location "\UART:BUART:tx_state_0\" macrocell 3 3 1 1
+set_location "MODIN7_1" macrocell 1 5 0 2
+set_location "\Timer_Infrared_0:TimerUDB:capt_fifo_load\" macrocell 0 4 0 1
+set_location "\UART:BUART:pollcount_1\" macrocell 1 0 0 3
+set_location "\UART:BUART:sTX:TxShifter:u0\" datapathcell 3 4 2 
+set_location "\Timer_Infrared_3:TimerUDB:sT24:timerdp:u1\" datapathcell 3 2 2 
+set_location "\Timer_Infrared_0:TimerUDB:capture_last\" macrocell 0 4 1 2
+set_location "\Timer_Infrared_3:TimerUDB:sT24:timerdp:u0\" datapathcell 3 3 2 
+set_location "\Timer_Infrared_1:TimerUDB:capt_fifo_load\" macrocell 0 3 0 2
+set_location "MODIN7_0" macrocell 1 4 0 2
+set_location "\UART:BUART:tx_status_2\" macrocell 3 4 1 3
+set_location "\PWM_Motor:PWMUDB:sSTSReg:rstSts:stsreg\" statusicell 3 0 4 
+set_location "\PWM_Servo:PWMUDB:prevCompare1\" macrocell 2 4 0 3
+set_location "\UART:BUART:rx_address_detected\" macrocell 2 1 0 3
+set_location "\UART:BUART:sTX:sCLOCK:TxBitClkGen\" datapathcell 3 1 2 
+set_location "\Timer_Infrared_3:TimerUDB:capt_fifo_load\" macrocell 2 1 1 3
+set_location "\UART:BUART:tx_bitclk_enable_pre\" macrocell 3 4 0 1
+set_location "\Timer_Infrared_3:TimerUDB:sT24:timerdp:u2\" datapathcell 2 2 2 
+set_location "\UART:BUART:rx_status_5\" macrocell 1 0 1 2
+set_location "\UART:BUART:pollcount_0\" macrocell 1 0 0 0
+set_location "\UART:BUART:rx_state_stop1_reg\" macrocell 1 0 1 3
+set_location "\UART:BUART:rx_state_3\" macrocell 1 2 1 3
+set_location "\PWM_Motor:PWMUDB:runmode_enable\" macrocell 3 0 1 0
+set_location "\Timer_Infrared_0:TimerUDB:capt_int_temp\" macrocell 1 5 1 0
+set_location "\Timer_Infrared_2:TimerUDB:capt_int_temp\" macrocell 0 1 1 2
+set_location "Net_733" macrocell 0 2 1 0
+set_location "Net_742" macrocell 0 2 0 1
+set_location "\PWM_Servo:PWMUDB:status_5\" macrocell 2 4 0 0
+set_location "\UART:BUART:rx_bitclk_enable\" macrocell 1 0 0 1
+set_location "MODIN10_0" macrocell 1 3 0 2
+set_location "\UART:BUART:sRX:RxBitCounter\" count7cell 1 0 7 
+set_location "\PWM_Motor:PWMUDB:sP8:pwmdp:u0\" datapathcell 3 0 2 
+set_location "\UART:BUART:rx_counter_load\" macrocell 2 0 0 1
+set_location "Net_487" macrocell 3 4 0 3
+set_location "\UART:BUART:tx_status_0\" macrocell 3 3 0 0
+set_location "MODIN13_1" macrocell 0 1 0 2
+set_location "Net_785" macrocell 0 2 0 2
+set_location "Net_789" macrocell 2 2 0 2
+set_location "\UART:BUART:tx_bitclk\" macrocell 3 3 1 2
+set_location "\Timer_Infrared_3:TimerUDB:int_capt_count_1\" macrocell 2 3 1 1
+set_location "\Timer_Infrared_1:TimerUDB:capt_int_temp\" macrocell 1 4 0 0
+set_location "\PWM_Servo:PWMUDB:final_kill_reg\" macrocell 2 4 0 2
+set_location "Net_19" macrocell 3 1 0 0
+set_location "\PWM_Motor:PWMUDB:status_5\" macrocell 3 0 0 0
+set_location "\Timer_Infrared_1:TimerUDB:sT24:timerdp:u0\" datapathcell 0 3 2 
+set_location "\Timer_Infrared_2:TimerUDB:sT24:timerdp:u0\" datapathcell 1 1 2 
+set_location "\Timer_Infrared_0:TimerUDB:sT24:timerdp:u0\" datapathcell 0 4 2 
+set_location "\UART:BUART:rx_status_4\" macrocell 2 0 0 0
+set_location "MODIN13_0" macrocell 0 2 1 3
+set_location "\Timer_Infrared_3:TimerUDB:int_capt_count_0\" macrocell 2 3 0 1
+set_location "Net_1017" macrocell 0 3 1 0
+set_location "Net_1115" macrocell 0 3 0 3
+set_location "\PWM_Servo:PWMUDB:runmode_enable\" macrocell 2 4 1 0
+set_location "\UART:BUART:counter_load_not\" macrocell 3 1 0 2
+set_location "\UART:BUART:sRX:RxSts\" statusicell 0 0 4 
+set_location "\PWM_Motor:PWMUDB:final_kill_reg\" macrocell 3 0 1 2
+set_location "\UART:BUART:rx_status_3\" macrocell 1 0 0 2
+set_location "MODIN10_1" macrocell 1 3 1 3
+set_location "\UART:BUART:sTX:TxSts\" statusicell 3 4 4 
+set_location "\UART:BUART:rx_load_fifo\" macrocell 2 1 1 0
+set_location "\Timer_Infrared_3:TimerUDB:capture_last\" macrocell 2 2 1 3
+set_location "\UART:BUART:rx_state_2\" macrocell 1 2 0 3
+set_location "\PWM_Servo:PWMUDB:sP16:pwmdp:u1\" datapathcell 2 3 2 
+set_location "\PWM_Motor:PWMUDB:status_0\" macrocell 3 0 0 1
+set_location "\Timer_Infrared_2:TimerUDB:sT24:timerdp:u1\" datapathcell 0 1 2 
+set_location "\Timer_Infrared_1:TimerUDB:sT24:timerdp:u1\" datapathcell 1 3 2 
+set_location "\Timer_Infrared_0:TimerUDB:sT24:timerdp:u1\" datapathcell 0 5 2 
+set_location "Net_153" macrocell 2 1 0 1
+set_location "\UART:BUART:rx_last\" macrocell 1 1 0 0
+set_location "__ONE__" macrocell 3 2 0 3
+set_location "\PWM_Servo:PWMUDB:status_0\" macrocell 2 4 1 3
+set_location "\Timer_Infrared_2:TimerUDB:capture_last\" macrocell 0 1 0 1
+set_location "\Timer_Infrared_3:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\" controlcell 2 3 6 
+set_location "inter_infrared_falling_0" interrupt -1 -1 4
+set_location "inter_infrared_rising_0" interrupt -1 -1 8
+set_location "inter_infrared_rising_1" interrupt -1 -1 9
+set_location "inter_infrared_falling_1" interrupt -1 -1 5
+set_location "inter_infrared_rising_3" interrupt -1 -1 11
+set_location "inter_infrared_falling_3" interrupt -1 -1 7
+set_location "inter_infrared_rising_2" interrupt -1 -1 10
+set_location "inter_infrared_falling_2" interrupt -1 -1 6
+set_location "\Timer_HE:TimerHW\" timercell -1 -1 0
+set_location "\Control_Reg:Sync:ctrl_reg\" controlcell 0 2 6 
+set_io "Pin_8(0)" iocell 5 4
+set_location "ClockBlock" clockblockcell -1 -1 0
+set_io "Pin_7(0)" iocell 5 6
+set_io "\LCD:LCDPort(3)\" iocell 2 3
+set_io "\LCD:LCDPort(2)\" iocell 2 2
+set_io "\LCD:LCDPort(5)\" iocell 2 5
+set_io "\LCD:LCDPort(4)\" iocell 2 4
+set_io "\LCD:LCDPort(1)\" iocell 2 1
+set_io "\LCD:LCDPort(0)\" iocell 2 0
+set_io "\LCD:LCDPort(6)\" iocell 2 6
+set_location "\UART:RXInternalInterrupt\" interrupt -1 -1 0
+set_location "\PWM_Servo:PWMUDB:sCTRLReg:SyncCtl:ctrlreg\" controlcell 2 4 6 
+set_io "Rx_1(0)" iocell 5 5
+set_location "\Timer_Infrared_1:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\" controlcell 1 3 6 
+set_location "\Timer_Infrared_0:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\" controlcell 1 5 6 
+set_location "\Timer_Infrared_2:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\" controlcell 0 1 6 
+set_io "Tx_1(0)" iocell 5 7
+set_io "Pin_1(0)" iocell 4 6
+set_location "\PWM_Motor:PWMUDB:sCTRLReg:SyncCtl:ctrlreg\" controlcell 3 1 6 
+set_io "Pin_6(0)" iocell 4 4
+set_io "Pin_4(0)" iocell 4 0
+set_io "Pin_5(0)" iocell 4 2
+set_io "Pin_3(0)" iocell 4 3
+set_io "Pin_10(0)" iocell 5 0
+set_io "Pin_2(0)" iocell 4 1
+set_io "Pin_11(0)" iocell 5 1
+set_location "\Timer_Nav:TimerHW\" timercell -1 -1 1
+set_io "Pin_9(0)" iocell 5 2
+set_location "inter_horizontalSync" interrupt -1 -1 3
+set_location "inter_comparator" interrupt -1 -1 2
+set_location "inter_verticalSync" interrupt -1 -1 12
+set_location "inter_HE" interrupt -1 -1 1

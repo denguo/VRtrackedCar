@@ -1,0 +1,20 @@
+//Files/dwguo/PSoC\ Creator/carlab_302/carlab_302.cydsn/DP8051/DP8051_Keil_903/Debug/CyBootAsmKeil.obj : //Files/dwguo/PSoC\ Creator/carlab_302/carlab_302.cydsn/Generated_Source/PSoC3/PSoC3_8051.inc //Files/dwguo/PSoC\ Creator/carlab_302/carlab_302.cydsn/Generated_Source/PSoC3/cydevicekeil.inc //Files/dwguo/PSoC\ Creator/carlab_302/carlab_302.cydsn/Generated_Source/PSoC3/cydevicekeil_trm.inc //Files/dwguo/PSoC\ Creator/carlab_302/carlab_302.cydsn/Generated_Source/PSoC3/cyfitterkeil.inc //Files/dwguo/PSoC\ Creator/carlab_302/carlab_302.cydsn/Generated_Source/PSoC3/CyBootAsmKeil.a51 
+
+//Files/dwguo/PSoC\ Creator/carlab_302/carlab_302.cydsn/Generated_Source/PSoC3/PSoC3_8051.inc : 
+
+//Files/dwguo/PSoC\ Creator/carlab_302/carlab_302.cydsn/Generated_Source/PSoC3/cydevicekeil.inc : 
+
+//Files/dwguo/PSoC\ Creator/carlab_302/carlab_302.cydsn/Generated_Source/PSoC3/cydevicekeil_trm.inc : 
+
+//Files/dwguo/PSoC\ Creator/carlab_302/carlab_302.cydsn/Generated_Source/PSoC3/cyfitterkeil.inc : 
+
+//Files/dwguo/PSoC\ Creator/carlab_302/carlab_302.cydsn/Generated_Source/PSoC3/CyBootAsmKeil.a51 : 
+
+//Files/dwguo/PSoC\ Creator/carlab_302/carlab_302.cydsn/DP8051/DP8051_Keil_903/Debug/KeilStart.obj : //Files/dwguo/PSoC\ Creator/carlab_302/carlab_302.cydsn/Generated_Source/PSoC3/PSoC3_8051.inc //Files/dwguo/PSoC\ Creator/carlab_302/carlab_302.cydsn/Generated_Source/PSoC3/cydevicekeil.inc //Files/dwguo/PSoC\ Creator/carlab_302/carlab_302.cydsn/Generated_Source/PSoC3/cydevicekeil_trm.inc //Files/dwguo/PSoC\ Creator/carlab_302/carlab_302.cydsn/Generated_Source/PSoC3/cyfitterkeil.inc //Files/dwguo/PSoC\ Creator/carlab_302/carlab_302.cydsn/Generated_Source/PSoC3/KeilStart.a51 
+
+//Files/dwguo/PSoC\ Creator/carlab_302/carlab_302.cydsn/Generated_Source/PSoC3/KeilStart.a51 : 
+
+//Files/dwguo/PSoC\ Creator/carlab_302/carlab_302.cydsn/DP8051/DP8051_Keil_903/Debug/cymem.obj : //Files/dwguo/PSoC\ Creator/carlab_302/carlab_302.cydsn/Generated_Source/PSoC3/cymem.a51 
+
+//Files/dwguo/PSoC\ Creator/carlab_302/carlab_302.cydsn/Generated_Source/PSoC3/cymem.a51 : 
+

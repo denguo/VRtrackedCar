@@ -1,0 +1,1014 @@
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\cczAvwRL.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 18, 4
+  12              		.thumb
+  13              		.file	"Timer_Infrared_3_PM.c"
+  14              		.section	.debug_abbrev,"",%progbits
+  15              	.Ldebug_abbrev0:
+  16              		.section	.debug_info,"",%progbits
+  17              	.Ldebug_info0:
+  18              		.section	.debug_line,"",%progbits
+  19              	.Ldebug_line0:
+  20 0000 DD000000 		.text
+  20      02008200 
+  20      00000201 
+  20      FB0E0D00 
+  20      01010101 
+  21              	.Ltext0:
+  22              		.cfi_sections	.debug_frame
+  23              		.bss
+  24              		.align	2
+  25              	Timer_Infrared_3_backup:
+  26 0000 00000000 		.space	12
+  26      00000000 
+  26      00000000 
+  27              		.section	.text.Timer_Infrared_3_SaveConfig,"ax",%progbits
+  28              		.align	2
+  29              		.global	Timer_Infrared_3_SaveConfig
+  30              		.thumb
+  31              		.thumb_func
+  32              		.type	Timer_Infrared_3_SaveConfig, %function
+  33              	Timer_Infrared_3_SaveConfig:
+  34              	.LFB0:
+  35              		.file 1 ".\\Generated_Source\\PSoC5\\Timer_Infrared_3_PM.c"
+   1:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** /*******************************************************************************
+   2:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * File Name: Timer_Infrared_3_PM.c
+   3:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * Version 2.30
+   4:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *
+   5:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *  Description:
+   6:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *     This file provides the power management source code to API for the
+   7:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *     Timer.
+   8:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *
+   9:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *   Note:
+  10:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *     None
+  11:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *
+  12:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *******************************************************************************
+  13:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * Copyright 2008-2012, Cypress Semiconductor Corporation.  All rights reserved.
+  14:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * You may use this file only in accordance with the license, terms, conditions,
+  15:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  16:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * the software package with which this file was provided.
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\cczAvwRL.s 			page 2
+
+
+  17:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** ********************************************************************************/
+  18:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** 
+  19:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** #include "Timer_Infrared_3.h"
+  20:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** static Timer_Infrared_3_backupStruct Timer_Infrared_3_backup;
+  21:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** 
+  22:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** 
+  23:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** /*******************************************************************************
+  24:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * Function Name: Timer_Infrared_3_SaveConfig
+  25:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** ********************************************************************************
+  26:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *
+  27:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * Summary:
+  28:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *     Save the current user configuration
+  29:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *
+  30:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * Parameters:
+  31:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *  void
+  32:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *
+  33:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * Return:
+  34:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *  void
+  35:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *
+  36:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * Global variables:
+  37:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *  Timer_Infrared_3_backup:  Variables of this global structure are modified to
+  38:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *  store the values of non retention configuration registers when Sleep() API is
+  39:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *  called.
+  40:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *
+  41:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *******************************************************************************/
+  42:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** void Timer_Infrared_3_SaveConfig(void) 
+  43:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** {
+  36              		.loc 1 43 0
+  37              		.cfi_startproc
+  38              		@ args = 0, pretend = 0, frame = 0
+  39              		@ frame_needed = 1, uses_anonymous_args = 0
+  40 0000 80B5     		push	{r7, lr}
+  41              	.LCFI0:
+  42              		.cfi_def_cfa_offset 8
+  43 0002 00AF     		add	r7, sp, #0
+  44              		.cfi_offset 14, -4
+  45              		.cfi_offset 7, -8
+  46              	.LCFI1:
+  47              		.cfi_def_cfa_register 7
+  44:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****     #if (!Timer_Infrared_3_UsingFixedFunction)
+  45:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         /* Backup the UDB non-rentention registers for PSoC5A*/
+  46:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         #if (CY_PSOC5A)
+  47:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             Timer_Infrared_3_backup.TimerUdb = Timer_Infrared_3_ReadCounter();
+  48:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             Timer_Infrared_3_backup.TimerPeriod = Timer_Infrared_3_ReadPeriod();
+  49:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             Timer_Infrared_3_backup.InterruptMaskValue = Timer_Infrared_3_STATUS_MASK;
+  50:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             #if (Timer_Infrared_3_UsingHWCaptureCounter)
+  51:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****                 Timer_Infrared_3_backup.TimerCaptureCounter = Timer_Infrared_3_ReadCaptureCount();
+  52:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             #endif /* Backup the UDB non-rentention register capture counter for PSoC5A */
+  53:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         #endif /* Backup the UDB non-rentention registers for PSoC5A */
+  54:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** 
+  55:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         #if (CY_PSOC3 || CY_PSOC5LP)
+  56:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             Timer_Infrared_3_backup.TimerUdb = Timer_Infrared_3_ReadCounter();
+  48              		.loc 1 56 0
+  49 0004 FFF7FEFF 		bl	Timer_Infrared_3_ReadCounter
+  50 0008 0246     		mov	r2, r0
+  51 000a 40F20003 		movw	r3, #:lower16:Timer_Infrared_3_backup
+  52 000e C0F20003 		movt	r3, #:upper16:Timer_Infrared_3_backup
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\cczAvwRL.s 			page 3
+
+
+  53 0012 5A60     		str	r2, [r3, #4]
+  57:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             Timer_Infrared_3_backup.InterruptMaskValue = Timer_Infrared_3_STATUS_MASK;
+  54              		.loc 1 57 0
+  55 0014 46F28743 		movw	r3, #:lower16:1073767559
+  56 0018 C4F20003 		movt	r3, #:upper16:1073767559
+  57 001c 1B78     		ldrb	r3, [r3, #0]
+  58 001e DAB2     		uxtb	r2, r3
+  59 0020 40F20003 		movw	r3, #:lower16:Timer_Infrared_3_backup
+  60 0024 C0F20003 		movt	r3, #:upper16:Timer_Infrared_3_backup
+  61 0028 1A72     		strb	r2, [r3, #8]
+  58:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             #if (Timer_Infrared_3_UsingHWCaptureCounter)
+  59:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****                 Timer_Infrared_3_backup.TimerCaptureCounter = Timer_Infrared_3_ReadCaptureCount();
+  60:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             #endif /* Back Up capture counter register  */
+  61:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         #endif /* Backup non retention registers, interrupt mask and capture counter for PSoC3 or P
+  62:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** 
+  63:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         #if(!Timer_Infrared_3_ControlRegRemoved)
+  64:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             Timer_Infrared_3_backup.TimerControlRegister = Timer_Infrared_3_ReadControlRegister();
+  62              		.loc 1 64 0
+  63 002a FFF7FEFF 		bl	Timer_Infrared_3_ReadControlRegister
+  64 002e 0346     		mov	r3, r0
+  65 0030 1A46     		mov	r2, r3
+  66 0032 40F20003 		movw	r3, #:lower16:Timer_Infrared_3_backup
+  67 0036 C0F20003 		movt	r3, #:upper16:Timer_Infrared_3_backup
+  68 003a 5A72     		strb	r2, [r3, #9]
+  65:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         #endif /* Backup the enable state of the Timer component */
+  66:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****     #endif /* Backup non retention registers in UDB implementation. All fixed function registers ar
+  67:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** }
+  69              		.loc 1 67 0
+  70 003c 80BD     		pop	{r7, pc}
+  71              		.cfi_endproc
+  72              	.LFE0:
+  73              		.size	Timer_Infrared_3_SaveConfig, .-Timer_Infrared_3_SaveConfig
+  74 003e 00BF     		.section	.text.Timer_Infrared_3_RestoreConfig,"ax",%progbits
+  75              		.align	2
+  76              		.global	Timer_Infrared_3_RestoreConfig
+  77              		.thumb
+  78              		.thumb_func
+  79              		.type	Timer_Infrared_3_RestoreConfig, %function
+  80              	Timer_Infrared_3_RestoreConfig:
+  81              	.LFB1:
+  68:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** 
+  69:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** 
+  70:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** /*******************************************************************************
+  71:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * Function Name: Timer_Infrared_3_RestoreConfig
+  72:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** ********************************************************************************
+  73:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *
+  74:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * Summary:
+  75:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *  Restores the current user configuration.
+  76:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *
+  77:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * Parameters:
+  78:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *  void
+  79:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *
+  80:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * Return:
+  81:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *  void
+  82:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *
+  83:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * Global variables:
+  84:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *  Timer_Infrared_3_backup:  Variables of this global structure are used to
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\cczAvwRL.s 			page 4
+
+
+  85:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *  restore the values of non retention registers on wakeup from sleep mode.
+  86:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *
+  87:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *******************************************************************************/
+  88:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** void Timer_Infrared_3_RestoreConfig(void) 
+  89:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** {   
+  82              		.loc 1 89 0
+  83              		.cfi_startproc
+  84              		@ args = 0, pretend = 0, frame = 0
+  85              		@ frame_needed = 1, uses_anonymous_args = 0
+  86 0000 80B5     		push	{r7, lr}
+  87              	.LCFI2:
+  88              		.cfi_def_cfa_offset 8
+  89 0002 00AF     		add	r7, sp, #0
+  90              		.cfi_offset 14, -4
+  91              		.cfi_offset 7, -8
+  92              	.LCFI3:
+  93              		.cfi_def_cfa_register 7
+  90:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****     #if (!Timer_Infrared_3_UsingFixedFunction)
+  91:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         /* Restore the UDB non-rentention registers for PSoC5A */
+  92:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         #if (CY_PSOC5A)
+  93:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             /* Interrupt State Backup for Critical Region*/
+  94:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             uint8 Timer_Infrared_3_interruptState;
+  95:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** 
+  96:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             Timer_Infrared_3_WriteCounter(Timer_Infrared_3_backup.TimerUdb);
+  97:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             Timer_Infrared_3_WritePeriod(Timer_Infrared_3_backup.TimerPeriod);
+  98:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             /* CyEnterCriticalRegion and CyExitCriticalRegion are used to mark following region cri
+  99:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             /* Enter Critical Region*/
+ 100:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             Timer_Infrared_3_interruptState = CyEnterCriticalSection();
+ 101:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             /* Use the interrupt output of the status register for IRQ output */
+ 102:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             Timer_Infrared_3_STATUS_AUX_CTRL |= Timer_Infrared_3_STATUS_ACTL_INT_EN_MASK;
+ 103:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             /* Exit Critical Region*/
+ 104:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             CyExitCriticalSection(Timer_Infrared_3_interruptState);
+ 105:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             Timer_Infrared_3_STATUS_MASK =Timer_Infrared_3_backup.InterruptMaskValue;
+ 106:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             #if (Timer_Infrared_3_UsingHWCaptureCounter)
+ 107:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****                 Timer_Infrared_3_SetCaptureCount(Timer_Infrared_3_backup.TimerCaptureCounter);
+ 108:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             #endif /* Restore the UDB non-rentention register capture counter for PSoC5A */
+ 109:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         #endif /* Restore the UDB non-rentention registers for PSoC5A */
+ 110:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** 
+ 111:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         #if (CY_PSOC3 || CY_PSOC5LP)
+ 112:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             Timer_Infrared_3_WriteCounter(Timer_Infrared_3_backup.TimerUdb);
+  94              		.loc 1 112 0
+  95 0004 40F20003 		movw	r3, #:lower16:Timer_Infrared_3_backup
+  96 0008 C0F20003 		movt	r3, #:upper16:Timer_Infrared_3_backup
+  97 000c 5B68     		ldr	r3, [r3, #4]
+  98 000e 1846     		mov	r0, r3
+  99 0010 FFF7FEFF 		bl	Timer_Infrared_3_WriteCounter
+ 113:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             Timer_Infrared_3_STATUS_MASK =Timer_Infrared_3_backup.InterruptMaskValue;
+ 100              		.loc 1 113 0
+ 101 0014 46F28743 		movw	r3, #:lower16:1073767559
+ 102 0018 C4F20003 		movt	r3, #:upper16:1073767559
+ 103 001c 40F20002 		movw	r2, #:lower16:Timer_Infrared_3_backup
+ 104 0020 C0F20002 		movt	r2, #:upper16:Timer_Infrared_3_backup
+ 105 0024 127A     		ldrb	r2, [r2, #8]	@ zero_extendqisi2
+ 106 0026 1A70     		strb	r2, [r3, #0]
+ 114:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             #if (Timer_Infrared_3_UsingHWCaptureCounter)
+ 115:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****                 Timer_Infrared_3_SetCaptureCount(Timer_Infrared_3_backup.TimerCaptureCounter);
+ 116:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             #endif /* Restore Capture counter register*/
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\cczAvwRL.s 			page 5
+
+
+ 117:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         #endif /* Restore up non retention registers, interrupt mask and capture counter for PSoC3 
+ 118:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** 
+ 119:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         #if(!Timer_Infrared_3_ControlRegRemoved)
+ 120:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             Timer_Infrared_3_WriteControlRegister(Timer_Infrared_3_backup.TimerControlRegister);
+ 107              		.loc 1 120 0
+ 108 0028 40F20003 		movw	r3, #:lower16:Timer_Infrared_3_backup
+ 109 002c C0F20003 		movt	r3, #:upper16:Timer_Infrared_3_backup
+ 110 0030 5B7A     		ldrb	r3, [r3, #9]	@ zero_extendqisi2
+ 111 0032 1846     		mov	r0, r3
+ 112 0034 FFF7FEFF 		bl	Timer_Infrared_3_WriteControlRegister
+ 121:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         #endif /* Restore the enable state of the Timer component */
+ 122:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****     #endif /* Restore non retention registers in the UDB implementation only */
+ 123:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** }
+ 113              		.loc 1 123 0
+ 114 0038 80BD     		pop	{r7, pc}
+ 115              		.cfi_endproc
+ 116              	.LFE1:
+ 117              		.size	Timer_Infrared_3_RestoreConfig, .-Timer_Infrared_3_RestoreConfig
+ 118 003a 00BF     		.section	.text.Timer_Infrared_3_Sleep,"ax",%progbits
+ 119              		.align	2
+ 120              		.global	Timer_Infrared_3_Sleep
+ 121              		.thumb
+ 122              		.thumb_func
+ 123              		.type	Timer_Infrared_3_Sleep, %function
+ 124              	Timer_Infrared_3_Sleep:
+ 125              	.LFB2:
+ 124:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** 
+ 125:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** 
+ 126:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** /*******************************************************************************
+ 127:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * Function Name: Timer_Infrared_3_Sleep
+ 128:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** ********************************************************************************
+ 129:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *
+ 130:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * Summary:
+ 131:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *     Stop and Save the user configuration
+ 132:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *
+ 133:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * Parameters:
+ 134:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *  void
+ 135:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *
+ 136:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * Return:
+ 137:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *  void
+ 138:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *
+ 139:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * Global variables:
+ 140:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *  Timer_Infrared_3_backup.TimerEnableState:  Is modified depending on the
+ 141:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *  enable state of the block before entering sleep mode.
+ 142:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *
+ 143:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *******************************************************************************/
+ 144:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** void Timer_Infrared_3_Sleep(void) 
+ 145:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** {
+ 126              		.loc 1 145 0
+ 127              		.cfi_startproc
+ 128              		@ args = 0, pretend = 0, frame = 0
+ 129              		@ frame_needed = 1, uses_anonymous_args = 0
+ 130 0000 80B5     		push	{r7, lr}
+ 131              	.LCFI4:
+ 132              		.cfi_def_cfa_offset 8
+ 133 0002 00AF     		add	r7, sp, #0
+ 134              		.cfi_offset 14, -4
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\cczAvwRL.s 			page 6
+
+
+ 135              		.cfi_offset 7, -8
+ 136              	.LCFI5:
+ 137              		.cfi_def_cfa_register 7
+ 146:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****     #if(!Timer_Infrared_3_ControlRegRemoved)
+ 147:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         /* Save Counter's enable state */
+ 148:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         if(Timer_Infrared_3_CTRL_ENABLE == (Timer_Infrared_3_CONTROL & Timer_Infrared_3_CTRL_ENABLE
+ 138              		.loc 1 148 0
+ 139 0004 46F27443 		movw	r3, #:lower16:1073767540
+ 140 0008 C4F20003 		movt	r3, #:upper16:1073767540
+ 141 000c 1B78     		ldrb	r3, [r3, #0]
+ 142 000e DBB2     		uxtb	r3, r3
+ 143 0010 5BB2     		sxtb	r3, r3
+ 144 0012 002B     		cmp	r3, #0
+ 145 0014 07DA     		bge	.L6
+ 149:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         {
+ 150:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             /* Timer is enabled */
+ 151:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             Timer_Infrared_3_backup.TimerEnableState = 1u;
+ 146              		.loc 1 151 0
+ 147 0016 40F20003 		movw	r3, #:lower16:Timer_Infrared_3_backup
+ 148 001a C0F20003 		movt	r3, #:upper16:Timer_Infrared_3_backup
+ 149 001e 4FF00102 		mov	r2, #1
+ 150 0022 1A70     		strb	r2, [r3, #0]
+ 151 0024 06E0     		b	.L7
+ 152              	.L6:
+ 152:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         }
+ 153:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         else
+ 154:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         {
+ 155:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             /* Timer is disabled */
+ 156:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****             Timer_Infrared_3_backup.TimerEnableState = 0u;
+ 153              		.loc 1 156 0
+ 154 0026 40F20003 		movw	r3, #:lower16:Timer_Infrared_3_backup
+ 155 002a C0F20003 		movt	r3, #:upper16:Timer_Infrared_3_backup
+ 156 002e 4FF00002 		mov	r2, #0
+ 157 0032 1A70     		strb	r2, [r3, #0]
+ 158              	.L7:
+ 157:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         }
+ 158:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****     #endif /* Back up enable state from the Timer control register */
+ 159:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****     Timer_Infrared_3_Stop();
+ 159              		.loc 1 159 0
+ 160 0034 FFF7FEFF 		bl	Timer_Infrared_3_Stop
+ 160:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****     Timer_Infrared_3_SaveConfig();
+ 161              		.loc 1 160 0
+ 162 0038 FFF7FEFF 		bl	Timer_Infrared_3_SaveConfig
+ 161:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** }
+ 163              		.loc 1 161 0
+ 164 003c 80BD     		pop	{r7, pc}
+ 165              		.cfi_endproc
+ 166              	.LFE2:
+ 167              		.size	Timer_Infrared_3_Sleep, .-Timer_Infrared_3_Sleep
+ 168 003e 00BF     		.section	.text.Timer_Infrared_3_Wakeup,"ax",%progbits
+ 169              		.align	2
+ 170              		.global	Timer_Infrared_3_Wakeup
+ 171              		.thumb
+ 172              		.thumb_func
+ 173              		.type	Timer_Infrared_3_Wakeup, %function
+ 174              	Timer_Infrared_3_Wakeup:
+ 175              	.LFB3:
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\cczAvwRL.s 			page 7
+
+
+ 162:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** 
+ 163:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** 
+ 164:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** /*******************************************************************************
+ 165:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * Function Name: Timer_Infrared_3_Wakeup
+ 166:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** ********************************************************************************
+ 167:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *
+ 168:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * Summary:
+ 169:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *  Restores and enables the user configuration
+ 170:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *
+ 171:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * Parameters:
+ 172:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *  void
+ 173:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *
+ 174:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * Return:
+ 175:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *  void
+ 176:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *
+ 177:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** * Global variables:
+ 178:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *  Timer_Infrared_3_backup.enableState:  Is used to restore the enable state of
+ 179:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *  block on wakeup from sleep mode.
+ 180:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *
+ 181:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** *******************************************************************************/
+ 182:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** void Timer_Infrared_3_Wakeup(void) 
+ 183:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** {
+ 176              		.loc 1 183 0
+ 177              		.cfi_startproc
+ 178              		@ args = 0, pretend = 0, frame = 0
+ 179              		@ frame_needed = 1, uses_anonymous_args = 0
+ 180 0000 80B5     		push	{r7, lr}
+ 181              	.LCFI6:
+ 182              		.cfi_def_cfa_offset 8
+ 183 0002 00AF     		add	r7, sp, #0
+ 184              		.cfi_offset 14, -4
+ 185              		.cfi_offset 7, -8
+ 186              	.LCFI7:
+ 187              		.cfi_def_cfa_register 7
+ 184:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****     Timer_Infrared_3_RestoreConfig();
+ 188              		.loc 1 184 0
+ 189 0004 FFF7FEFF 		bl	Timer_Infrared_3_RestoreConfig
+ 185:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****     #if(!Timer_Infrared_3_ControlRegRemoved)
+ 186:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         if(Timer_Infrared_3_backup.TimerEnableState == 1u)
+ 190              		.loc 1 186 0
+ 191 0008 40F20003 		movw	r3, #:lower16:Timer_Infrared_3_backup
+ 192 000c C0F20003 		movt	r3, #:upper16:Timer_Infrared_3_backup
+ 193 0010 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 194 0012 012B     		cmp	r3, #1
+ 195 0014 01D1     		bne	.L11
+ 187:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         {     /* Enable Timer's operation */
+ 188:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****                 Timer_Infrared_3_Enable();
+ 196              		.loc 1 188 0
+ 197 0016 FFF7FEFF 		bl	Timer_Infrared_3_Enable
+ 198              	.L11:
+ 189:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****         } /* Do nothing if Timer was disabled before */
+ 190:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c ****     #endif /* Remove this code section if Control register is removed */
+ 191:.\Generated_Source\PSoC5/Timer_Infrared_3_PM.c **** }
+ 199              		.loc 1 191 0
+ 200 001a 80BD     		pop	{r7, pc}
+ 201              		.cfi_endproc
+ 202              	.LFE3:
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\cczAvwRL.s 			page 8
+
+
+ 203              		.size	Timer_Infrared_3_Wakeup, .-Timer_Infrared_3_Wakeup
+ 204              		.text
+ 205              	.Letext0:
+ 206              		.section	.debug_loc,"",%progbits
+ 207              	.Ldebug_loc0:
+ 208              	.LLST0:
+ 209 0000 00000000 		.4byte	.LFB0
+ 210 0004 02000000 		.4byte	.LCFI0
+ 211 0008 0100     		.2byte	0x1
+ 212 000a 5D       		.byte	0x5d
+ 213 000b 02000000 		.4byte	.LCFI0
+ 214 000f 04000000 		.4byte	.LCFI1
+ 215 0013 0200     		.2byte	0x2
+ 216 0015 7D       		.byte	0x7d
+ 217 0016 08       		.sleb128 8
+ 218 0017 04000000 		.4byte	.LCFI1
+ 219 001b 3E000000 		.4byte	.LFE0
+ 220 001f 0200     		.2byte	0x2
+ 221 0021 77       		.byte	0x77
+ 222 0022 08       		.sleb128 8
+ 223 0023 00000000 		.4byte	0x0
+ 224 0027 00000000 		.4byte	0x0
+ 225              	.LLST1:
+ 226 002b 00000000 		.4byte	.LFB1
+ 227 002f 02000000 		.4byte	.LCFI2
+ 228 0033 0100     		.2byte	0x1
+ 229 0035 5D       		.byte	0x5d
+ 230 0036 02000000 		.4byte	.LCFI2
+ 231 003a 04000000 		.4byte	.LCFI3
+ 232 003e 0200     		.2byte	0x2
+ 233 0040 7D       		.byte	0x7d
+ 234 0041 08       		.sleb128 8
+ 235 0042 04000000 		.4byte	.LCFI3
+ 236 0046 3A000000 		.4byte	.LFE1
+ 237 004a 0200     		.2byte	0x2
+ 238 004c 77       		.byte	0x77
+ 239 004d 08       		.sleb128 8
+ 240 004e 00000000 		.4byte	0x0
+ 241 0052 00000000 		.4byte	0x0
+ 242              	.LLST2:
+ 243 0056 00000000 		.4byte	.LFB2
+ 244 005a 02000000 		.4byte	.LCFI4
+ 245 005e 0100     		.2byte	0x1
+ 246 0060 5D       		.byte	0x5d
+ 247 0061 02000000 		.4byte	.LCFI4
+ 248 0065 04000000 		.4byte	.LCFI5
+ 249 0069 0200     		.2byte	0x2
+ 250 006b 7D       		.byte	0x7d
+ 251 006c 08       		.sleb128 8
+ 252 006d 04000000 		.4byte	.LCFI5
+ 253 0071 3E000000 		.4byte	.LFE2
+ 254 0075 0200     		.2byte	0x2
+ 255 0077 77       		.byte	0x77
+ 256 0078 08       		.sleb128 8
+ 257 0079 00000000 		.4byte	0x0
+ 258 007d 00000000 		.4byte	0x0
+ 259              	.LLST3:
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\cczAvwRL.s 			page 9
+
+
+ 260 0081 00000000 		.4byte	.LFB3
+ 261 0085 02000000 		.4byte	.LCFI6
+ 262 0089 0100     		.2byte	0x1
+ 263 008b 5D       		.byte	0x5d
+ 264 008c 02000000 		.4byte	.LCFI6
+ 265 0090 04000000 		.4byte	.LCFI7
+ 266 0094 0200     		.2byte	0x2
+ 267 0096 7D       		.byte	0x7d
+ 268 0097 08       		.sleb128 8
+ 269 0098 04000000 		.4byte	.LCFI7
+ 270 009c 1C000000 		.4byte	.LFE3
+ 271 00a0 0200     		.2byte	0x2
+ 272 00a2 77       		.byte	0x77
+ 273 00a3 08       		.sleb128 8
+ 274 00a4 00000000 		.4byte	0x0
+ 275 00a8 00000000 		.4byte	0x0
+ 276              		.file 2 ".\\Generated_Source\\PSoC5\\/cytypes.h"
+ 277              		.file 3 ".\\Generated_Source\\PSoC5\\/Timer_Infrared_3.h"
+ 278              		.section	.debug_info
+ 279 0000 41010000 		.4byte	0x141
+ 280 0004 0200     		.2byte	0x2
+ 281 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 282 000a 04       		.byte	0x4
+ 283 000b 01       		.uleb128 0x1
+ 284 000c 2A010000 		.4byte	.LASF21
+ 285 0010 01       		.byte	0x1
+ 286 0011 49010000 		.4byte	.LASF22
+ 287 0015 7B000000 		.4byte	.LASF23
+ 288 0019 00000000 		.4byte	0x0
+ 289 001d 00000000 		.4byte	0x0
+ 290 0021 00000000 		.4byte	.Ldebug_ranges0+0x0
+ 291 0025 00000000 		.4byte	.Ldebug_line0
+ 292 0029 02       		.uleb128 0x2
+ 293 002a 01       		.byte	0x1
+ 294 002b 06       		.byte	0x6
+ 295 002c B0010000 		.4byte	.LASF0
+ 296 0030 02       		.uleb128 0x2
+ 297 0031 01       		.byte	0x1
+ 298 0032 08       		.byte	0x8
+ 299 0033 36010000 		.4byte	.LASF1
+ 300 0037 02       		.uleb128 0x2
+ 301 0038 02       		.byte	0x2
+ 302 0039 05       		.byte	0x5
+ 303 003a 81010000 		.4byte	.LASF2
+ 304 003e 02       		.uleb128 0x2
+ 305 003f 02       		.byte	0x2
+ 306 0040 07       		.byte	0x7
+ 307 0041 9D010000 		.4byte	.LASF3
+ 308 0045 02       		.uleb128 0x2
+ 309 0046 04       		.byte	0x4
+ 310 0047 05       		.byte	0x5
+ 311 0048 78010000 		.4byte	.LASF4
+ 312 004c 02       		.uleb128 0x2
+ 313 004d 04       		.byte	0x4
+ 314 004e 07       		.byte	0x7
+ 315 004f 8B010000 		.4byte	.LASF5
+ 316 0053 02       		.uleb128 0x2
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\cczAvwRL.s 			page 10
+
+
+ 317 0054 08       		.byte	0x8
+ 318 0055 05       		.byte	0x5
+ 319 0056 00000000 		.4byte	.LASF6
+ 320 005a 02       		.uleb128 0x2
+ 321 005b 08       		.byte	0x8
+ 322 005c 07       		.byte	0x7
+ 323 005d D6000000 		.4byte	.LASF7
+ 324 0061 03       		.uleb128 0x3
+ 325 0062 04       		.byte	0x4
+ 326 0063 05       		.byte	0x5
+ 327 0064 696E7400 		.ascii	"int\000"
+ 328 0068 02       		.uleb128 0x2
+ 329 0069 04       		.byte	0x4
+ 330 006a 07       		.byte	0x7
+ 331 006b 31000000 		.4byte	.LASF8
+ 332 006f 02       		.uleb128 0x2
+ 333 0070 01       		.byte	0x1
+ 334 0071 08       		.byte	0x8
+ 335 0072 44010000 		.4byte	.LASF9
+ 336 0076 04       		.uleb128 0x4
+ 337 0077 75000000 		.4byte	.LASF10
+ 338 007b 02       		.byte	0x2
+ 339 007c 60       		.byte	0x60
+ 340 007d 30000000 		.4byte	0x30
+ 341 0081 04       		.uleb128 0x4
+ 342 0082 0E000000 		.4byte	.LASF11
+ 343 0086 02       		.byte	0x2
+ 344 0087 62       		.byte	0x62
+ 345 0088 4C000000 		.4byte	0x4c
+ 346 008c 05       		.uleb128 0x5
+ 347 008d 04       		.byte	0x4
+ 348 008e 07       		.byte	0x7
+ 349 008f 06       		.uleb128 0x6
+ 350 0090 B8000000 		.4byte	.LASF16
+ 351 0094 0C       		.byte	0xc
+ 352 0095 03       		.byte	0x3
+ 353 0096 3B       		.byte	0x3b
+ 354 0097 D4000000 		.4byte	0xd4
+ 355 009b 07       		.uleb128 0x7
+ 356 009c 19010000 		.4byte	.LASF12
+ 357 00a0 03       		.byte	0x3
+ 358 00a1 3C       		.byte	0x3c
+ 359 00a2 76000000 		.4byte	0x76
+ 360 00a6 02       		.byte	0x2
+ 361 00a7 23       		.byte	0x23
+ 362 00a8 00       		.uleb128 0x0
+ 363 00a9 07       		.uleb128 0x7
+ 364 00aa D4010000 		.4byte	.LASF13
+ 365 00ae 03       		.byte	0x3
+ 366 00af 48       		.byte	0x48
+ 367 00b0 81000000 		.4byte	0x81
+ 368 00b4 02       		.byte	0x2
+ 369 00b5 23       		.byte	0x23
+ 370 00b6 04       		.uleb128 0x4
+ 371 00b7 07       		.uleb128 0x7
+ 372 00b8 DD010000 		.4byte	.LASF14
+ 373 00bc 03       		.byte	0x3
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\cczAvwRL.s 			page 11
+
+
+ 374 00bd 49       		.byte	0x49
+ 375 00be 76000000 		.4byte	0x76
+ 376 00c2 02       		.byte	0x2
+ 377 00c3 23       		.byte	0x23
+ 378 00c4 08       		.uleb128 0x8
+ 379 00c5 07       		.uleb128 0x7
+ 380 00c6 ED000000 		.4byte	.LASF15
+ 381 00ca 03       		.byte	0x3
+ 382 00cb 50       		.byte	0x50
+ 383 00cc 76000000 		.4byte	0x76
+ 384 00d0 02       		.byte	0x2
+ 385 00d1 23       		.byte	0x23
+ 386 00d2 09       		.uleb128 0x9
+ 387 00d3 00       		.byte	0x0
+ 388 00d4 04       		.uleb128 0x4
+ 389 00d5 B8000000 		.4byte	.LASF16
+ 390 00d9 03       		.byte	0x3
+ 391 00da 53       		.byte	0x53
+ 392 00db 8F000000 		.4byte	0x8f
+ 393 00df 08       		.uleb128 0x8
+ 394 00e0 01       		.byte	0x1
+ 395 00e1 15000000 		.4byte	.LASF17
+ 396 00e5 01       		.byte	0x1
+ 397 00e6 2A       		.byte	0x2a
+ 398 00e7 01       		.byte	0x1
+ 399 00e8 00000000 		.4byte	.LFB0
+ 400 00ec 3E000000 		.4byte	.LFE0
+ 401 00f0 00000000 		.4byte	.LLST0
+ 402 00f4 08       		.uleb128 0x8
+ 403 00f5 01       		.byte	0x1
+ 404 00f6 56000000 		.4byte	.LASF18
+ 405 00fa 01       		.byte	0x1
+ 406 00fb 58       		.byte	0x58
+ 407 00fc 01       		.byte	0x1
+ 408 00fd 00000000 		.4byte	.LFB1
+ 409 0101 3A000000 		.4byte	.LFE1
+ 410 0105 2B000000 		.4byte	.LLST1
+ 411 0109 08       		.uleb128 0x8
+ 412 010a 01       		.byte	0x1
+ 413 010b 02010000 		.4byte	.LASF19
+ 414 010f 01       		.byte	0x1
+ 415 0110 90       		.byte	0x90
+ 416 0111 01       		.byte	0x1
+ 417 0112 00000000 		.4byte	.LFB2
+ 418 0116 3E000000 		.4byte	.LFE2
+ 419 011a 56000000 		.4byte	.LLST2
+ 420 011e 08       		.uleb128 0x8
+ 421 011f 01       		.byte	0x1
+ 422 0120 3E000000 		.4byte	.LASF20
+ 423 0124 01       		.byte	0x1
+ 424 0125 B6       		.byte	0xb6
+ 425 0126 01       		.byte	0x1
+ 426 0127 00000000 		.4byte	.LFB3
+ 427 012b 1C000000 		.4byte	.LFE3
+ 428 012f 81000000 		.4byte	.LLST3
+ 429 0133 09       		.uleb128 0x9
+ 430 0134 BC010000 		.4byte	.LASF24
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\cczAvwRL.s 			page 12
+
+
+ 431 0138 01       		.byte	0x1
+ 432 0139 14       		.byte	0x14
+ 433 013a D4000000 		.4byte	0xd4
+ 434 013e 05       		.byte	0x5
+ 435 013f 03       		.byte	0x3
+ 436 0140 00000000 		.4byte	Timer_Infrared_3_backup
+ 437 0144 00       		.byte	0x0
+ 438              		.section	.debug_abbrev
+ 439 0000 01       		.uleb128 0x1
+ 440 0001 11       		.uleb128 0x11
+ 441 0002 01       		.byte	0x1
+ 442 0003 25       		.uleb128 0x25
+ 443 0004 0E       		.uleb128 0xe
+ 444 0005 13       		.uleb128 0x13
+ 445 0006 0B       		.uleb128 0xb
+ 446 0007 03       		.uleb128 0x3
+ 447 0008 0E       		.uleb128 0xe
+ 448 0009 1B       		.uleb128 0x1b
+ 449 000a 0E       		.uleb128 0xe
+ 450 000b 11       		.uleb128 0x11
+ 451 000c 01       		.uleb128 0x1
+ 452 000d 52       		.uleb128 0x52
+ 453 000e 01       		.uleb128 0x1
+ 454 000f 55       		.uleb128 0x55
+ 455 0010 06       		.uleb128 0x6
+ 456 0011 10       		.uleb128 0x10
+ 457 0012 06       		.uleb128 0x6
+ 458 0013 00       		.byte	0x0
+ 459 0014 00       		.byte	0x0
+ 460 0015 02       		.uleb128 0x2
+ 461 0016 24       		.uleb128 0x24
+ 462 0017 00       		.byte	0x0
+ 463 0018 0B       		.uleb128 0xb
+ 464 0019 0B       		.uleb128 0xb
+ 465 001a 3E       		.uleb128 0x3e
+ 466 001b 0B       		.uleb128 0xb
+ 467 001c 03       		.uleb128 0x3
+ 468 001d 0E       		.uleb128 0xe
+ 469 001e 00       		.byte	0x0
+ 470 001f 00       		.byte	0x0
+ 471 0020 03       		.uleb128 0x3
+ 472 0021 24       		.uleb128 0x24
+ 473 0022 00       		.byte	0x0
+ 474 0023 0B       		.uleb128 0xb
+ 475 0024 0B       		.uleb128 0xb
+ 476 0025 3E       		.uleb128 0x3e
+ 477 0026 0B       		.uleb128 0xb
+ 478 0027 03       		.uleb128 0x3
+ 479 0028 08       		.uleb128 0x8
+ 480 0029 00       		.byte	0x0
+ 481 002a 00       		.byte	0x0
+ 482 002b 04       		.uleb128 0x4
+ 483 002c 16       		.uleb128 0x16
+ 484 002d 00       		.byte	0x0
+ 485 002e 03       		.uleb128 0x3
+ 486 002f 0E       		.uleb128 0xe
+ 487 0030 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\cczAvwRL.s 			page 13
+
+
+ 488 0031 0B       		.uleb128 0xb
+ 489 0032 3B       		.uleb128 0x3b
+ 490 0033 0B       		.uleb128 0xb
+ 491 0034 49       		.uleb128 0x49
+ 492 0035 13       		.uleb128 0x13
+ 493 0036 00       		.byte	0x0
+ 494 0037 00       		.byte	0x0
+ 495 0038 05       		.uleb128 0x5
+ 496 0039 24       		.uleb128 0x24
+ 497 003a 00       		.byte	0x0
+ 498 003b 0B       		.uleb128 0xb
+ 499 003c 0B       		.uleb128 0xb
+ 500 003d 3E       		.uleb128 0x3e
+ 501 003e 0B       		.uleb128 0xb
+ 502 003f 00       		.byte	0x0
+ 503 0040 00       		.byte	0x0
+ 504 0041 06       		.uleb128 0x6
+ 505 0042 13       		.uleb128 0x13
+ 506 0043 01       		.byte	0x1
+ 507 0044 03       		.uleb128 0x3
+ 508 0045 0E       		.uleb128 0xe
+ 509 0046 0B       		.uleb128 0xb
+ 510 0047 0B       		.uleb128 0xb
+ 511 0048 3A       		.uleb128 0x3a
+ 512 0049 0B       		.uleb128 0xb
+ 513 004a 3B       		.uleb128 0x3b
+ 514 004b 0B       		.uleb128 0xb
+ 515 004c 01       		.uleb128 0x1
+ 516 004d 13       		.uleb128 0x13
+ 517 004e 00       		.byte	0x0
+ 518 004f 00       		.byte	0x0
+ 519 0050 07       		.uleb128 0x7
+ 520 0051 0D       		.uleb128 0xd
+ 521 0052 00       		.byte	0x0
+ 522 0053 03       		.uleb128 0x3
+ 523 0054 0E       		.uleb128 0xe
+ 524 0055 3A       		.uleb128 0x3a
+ 525 0056 0B       		.uleb128 0xb
+ 526 0057 3B       		.uleb128 0x3b
+ 527 0058 0B       		.uleb128 0xb
+ 528 0059 49       		.uleb128 0x49
+ 529 005a 13       		.uleb128 0x13
+ 530 005b 38       		.uleb128 0x38
+ 531 005c 0A       		.uleb128 0xa
+ 532 005d 00       		.byte	0x0
+ 533 005e 00       		.byte	0x0
+ 534 005f 08       		.uleb128 0x8
+ 535 0060 2E       		.uleb128 0x2e
+ 536 0061 00       		.byte	0x0
+ 537 0062 3F       		.uleb128 0x3f
+ 538 0063 0C       		.uleb128 0xc
+ 539 0064 03       		.uleb128 0x3
+ 540 0065 0E       		.uleb128 0xe
+ 541 0066 3A       		.uleb128 0x3a
+ 542 0067 0B       		.uleb128 0xb
+ 543 0068 3B       		.uleb128 0x3b
+ 544 0069 0B       		.uleb128 0xb
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\cczAvwRL.s 			page 14
+
+
+ 545 006a 27       		.uleb128 0x27
+ 546 006b 0C       		.uleb128 0xc
+ 547 006c 11       		.uleb128 0x11
+ 548 006d 01       		.uleb128 0x1
+ 549 006e 12       		.uleb128 0x12
+ 550 006f 01       		.uleb128 0x1
+ 551 0070 40       		.uleb128 0x40
+ 552 0071 06       		.uleb128 0x6
+ 553 0072 00       		.byte	0x0
+ 554 0073 00       		.byte	0x0
+ 555 0074 09       		.uleb128 0x9
+ 556 0075 34       		.uleb128 0x34
+ 557 0076 00       		.byte	0x0
+ 558 0077 03       		.uleb128 0x3
+ 559 0078 0E       		.uleb128 0xe
+ 560 0079 3A       		.uleb128 0x3a
+ 561 007a 0B       		.uleb128 0xb
+ 562 007b 3B       		.uleb128 0x3b
+ 563 007c 0B       		.uleb128 0xb
+ 564 007d 49       		.uleb128 0x49
+ 565 007e 13       		.uleb128 0x13
+ 566 007f 02       		.uleb128 0x2
+ 567 0080 0A       		.uleb128 0xa
+ 568 0081 00       		.byte	0x0
+ 569 0082 00       		.byte	0x0
+ 570 0083 00       		.byte	0x0
+ 571              		.section	.debug_pubnames,"",%progbits
+ 572 0000 88000000 		.4byte	0x88
+ 573 0004 0200     		.2byte	0x2
+ 574 0006 00000000 		.4byte	.Ldebug_info0
+ 575 000a 45010000 		.4byte	0x145
+ 576 000e DF000000 		.4byte	0xdf
+ 577 0012 54696D65 		.ascii	"Timer_Infrared_3_SaveConfig\000"
+ 577      725F496E 
+ 577      66726172 
+ 577      65645F33 
+ 577      5F536176 
+ 578 002e F4000000 		.4byte	0xf4
+ 579 0032 54696D65 		.ascii	"Timer_Infrared_3_RestoreConfig\000"
+ 579      725F496E 
+ 579      66726172 
+ 579      65645F33 
+ 579      5F526573 
+ 580 0051 09010000 		.4byte	0x109
+ 581 0055 54696D65 		.ascii	"Timer_Infrared_3_Sleep\000"
+ 581      725F496E 
+ 581      66726172 
+ 581      65645F33 
+ 581      5F536C65 
+ 582 006c 1E010000 		.4byte	0x11e
+ 583 0070 54696D65 		.ascii	"Timer_Infrared_3_Wakeup\000"
+ 583      725F496E 
+ 583      66726172 
+ 583      65645F33 
+ 583      5F57616B 
+ 584 0088 00000000 		.4byte	0x0
+ 585              		.section	.debug_aranges,"",%progbits
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\cczAvwRL.s 			page 15
+
+
+ 586 0000 34000000 		.4byte	0x34
+ 587 0004 0200     		.2byte	0x2
+ 588 0006 00000000 		.4byte	.Ldebug_info0
+ 589 000a 04       		.byte	0x4
+ 590 000b 00       		.byte	0x0
+ 591 000c 0000     		.2byte	0x0
+ 592 000e 0000     		.2byte	0x0
+ 593 0010 00000000 		.4byte	.LFB0
+ 594 0014 3E000000 		.4byte	.LFE0-.LFB0
+ 595 0018 00000000 		.4byte	.LFB1
+ 596 001c 3A000000 		.4byte	.LFE1-.LFB1
+ 597 0020 00000000 		.4byte	.LFB2
+ 598 0024 3E000000 		.4byte	.LFE2-.LFB2
+ 599 0028 00000000 		.4byte	.LFB3
+ 600 002c 1C000000 		.4byte	.LFE3-.LFB3
+ 601 0030 00000000 		.4byte	0x0
+ 602 0034 00000000 		.4byte	0x0
+ 603              		.section	.debug_ranges,"",%progbits
+ 604              	.Ldebug_ranges0:
+ 605 0000 00000000 		.4byte	.Ltext0
+ 606 0004 00000000 		.4byte	.Letext0
+ 607 0008 00000000 		.4byte	.LFB0
+ 608 000c 3E000000 		.4byte	.LFE0
+ 609 0010 00000000 		.4byte	.LFB1
+ 610 0014 3A000000 		.4byte	.LFE1
+ 611 0018 00000000 		.4byte	.LFB2
+ 612 001c 3E000000 		.4byte	.LFE2
+ 613 0020 00000000 		.4byte	.LFB3
+ 614 0024 1C000000 		.4byte	.LFE3
+ 615 0028 00000000 		.4byte	0x0
+ 616 002c 00000000 		.4byte	0x0
+ 617              		.section	.debug_str,"MS",%progbits,1
+ 618              	.LASF6:
+ 619 0000 6C6F6E67 		.ascii	"long long int\000"
+ 619      206C6F6E 
+ 619      6720696E 
+ 619      7400
+ 620              	.LASF11:
+ 621 000e 75696E74 		.ascii	"uint32\000"
+ 621      333200
+ 622              	.LASF17:
+ 623 0015 54696D65 		.ascii	"Timer_Infrared_3_SaveConfig\000"
+ 623      725F496E 
+ 623      66726172 
+ 623      65645F33 
+ 623      5F536176 
+ 624              	.LASF8:
+ 625 0031 756E7369 		.ascii	"unsigned int\000"
+ 625      676E6564 
+ 625      20696E74 
+ 625      00
+ 626              	.LASF20:
+ 627 003e 54696D65 		.ascii	"Timer_Infrared_3_Wakeup\000"
+ 627      725F496E 
+ 627      66726172 
+ 627      65645F33 
+ 627      5F57616B 
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\cczAvwRL.s 			page 16
+
+
+ 628              	.LASF18:
+ 629 0056 54696D65 		.ascii	"Timer_Infrared_3_RestoreConfig\000"
+ 629      725F496E 
+ 629      66726172 
+ 629      65645F33 
+ 629      5F526573 
+ 630              	.LASF10:
+ 631 0075 75696E74 		.ascii	"uint8\000"
+ 631      3800
+ 632              	.LASF23:
+ 633 007b 433A5C55 		.ascii	"C:\\Users\\Public\\Documents\\Carlab\\carlab_302\\c"
+ 633      73657273 
+ 633      5C507562 
+ 633      6C69635C 
+ 633      446F6375 
+ 634 00a8 61726C61 		.ascii	"arlab_302.cydsn\000"
+ 634      625F3330 
+ 634      322E6379 
+ 634      64736E00 
+ 635              	.LASF16:
+ 636 00b8 54696D65 		.ascii	"Timer_Infrared_3_backupStruct\000"
+ 636      725F496E 
+ 636      66726172 
+ 636      65645F33 
+ 636      5F626163 
+ 637              	.LASF7:
+ 638 00d6 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 638      206C6F6E 
+ 638      6720756E 
+ 638      7369676E 
+ 638      65642069 
+ 639              	.LASF15:
+ 640 00ed 54696D65 		.ascii	"TimerControlRegister\000"
+ 640      72436F6E 
+ 640      74726F6C 
+ 640      52656769 
+ 640      73746572 
+ 641              	.LASF19:
+ 642 0102 54696D65 		.ascii	"Timer_Infrared_3_Sleep\000"
+ 642      725F496E 
+ 642      66726172 
+ 642      65645F33 
+ 642      5F536C65 
+ 643              	.LASF12:
+ 644 0119 54696D65 		.ascii	"TimerEnableState\000"
+ 644      72456E61 
+ 644      626C6553 
+ 644      74617465 
+ 644      00
+ 645              	.LASF21:
+ 646 012a 474E5520 		.ascii	"GNU C 4.4.1\000"
+ 646      4320342E 
+ 646      342E3100 
+ 647              	.LASF1:
+ 648 0136 756E7369 		.ascii	"unsigned char\000"
+ 648      676E6564 
+ 648      20636861 
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\cczAvwRL.s 			page 17
+
+
+ 648      7200
+ 649              	.LASF9:
+ 650 0144 63686172 		.ascii	"char\000"
+ 650      00
+ 651              	.LASF22:
+ 652 0149 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\Timer_Infrared_3_PM.c\000"
+ 652      6E657261 
+ 652      7465645F 
+ 652      536F7572 
+ 652      63655C50 
+ 653              	.LASF4:
+ 654 0178 6C6F6E67 		.ascii	"long int\000"
+ 654      20696E74 
+ 654      00
+ 655              	.LASF2:
+ 656 0181 73686F72 		.ascii	"short int\000"
+ 656      7420696E 
+ 656      7400
+ 657              	.LASF5:
+ 658 018b 6C6F6E67 		.ascii	"long unsigned int\000"
+ 658      20756E73 
+ 658      69676E65 
+ 658      6420696E 
+ 658      7400
+ 659              	.LASF3:
+ 660 019d 73686F72 		.ascii	"short unsigned int\000"
+ 660      7420756E 
+ 660      7369676E 
+ 660      65642069 
+ 660      6E7400
+ 661              	.LASF0:
+ 662 01b0 7369676E 		.ascii	"signed char\000"
+ 662      65642063 
+ 662      68617200 
+ 663              	.LASF24:
+ 664 01bc 54696D65 		.ascii	"Timer_Infrared_3_backup\000"
+ 664      725F496E 
+ 664      66726172 
+ 664      65645F33 
+ 664      5F626163 
+ 665              	.LASF13:
+ 666 01d4 54696D65 		.ascii	"TimerUdb\000"
+ 666      72556462 
+ 666      00
+ 667              	.LASF14:
+ 668 01dd 496E7465 		.ascii	"InterruptMaskValue\000"
+ 668      72727570 
+ 668      744D6173 
+ 668      6B56616C 
+ 668      756500
+ 669              		.ident	"GCC: (Sourcery G++ Lite 2010q1-188) 4.4.1"

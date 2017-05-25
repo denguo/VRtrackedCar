@@ -1,0 +1,4046 @@
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 18, 4
+  12              		.thumb
+  13              		.file	"main.c"
+  14              		.section	.debug_abbrev,"",%progbits
+  15              	.Ldebug_abbrev0:
+  16              		.section	.debug_info,"",%progbits
+  17              	.Ldebug_info0:
+  18              		.section	.debug_line,"",%progbits
+  19              	.Ldebug_line0:
+  20 0000 BE010000 		.text
+  20      02004600 
+  20      00000201 
+  20      FB0E0D00 
+  20      01010101 
+  21              	.Ltext0:
+  22              		.cfi_sections	.debug_frame
+  23              		.global	circumference
+  24              		.data
+  25              		.align	3
+  26              		.type	circumference, %object
+  27              		.size	circumference, 8
+  28              	circumference:
+  29 0000 85EB51B8 		.word	-1202590843
+  30 0004 1E851E40 		.word	1075741982
+  31              		.global	clock_freq
+  32              		.align	2
+  33              		.type	clock_freq, %object
+  34              		.size	clock_freq, 4
+  35              	clock_freq:
+  36 0008 10270000 		.word	10000
+  37              		.global	n_sensors_per_rev
+  38              		.align	2
+  39              		.type	n_sensors_per_rev, %object
+  40              		.size	n_sensors_per_rev, 4
+  41              	n_sensors_per_rev:
+  42 000c 05000000 		.word	5
+  43              		.global	inches_per_foot
+  44              		.align	2
+  45              		.type	inches_per_foot, %object
+  46              		.size	inches_per_foot, 4
+  47              	inches_per_foot:
+  48 0010 0C000000 		.word	12
+  49              		.global	max_timer_count
+  50              		.align	2
+  51              		.type	max_timer_count, %object
+  52              		.size	max_timer_count, 4
+  53              	max_timer_count:
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 2
+
+
+  54 0014 00000100 		.word	65536
+  55              		.global	target_speed
+  56              		.align	3
+  57              		.type	target_speed, %object
+  58              		.size	target_speed, 8
+  59              	target_speed:
+  60 0018 00000000 		.word	0
+  61 001c 00001040 		.word	1074790400
+  62              		.comm	previous_capture,4,4
+  63              		.comm	kp,8,8
+  64              		.comm	ki,8,8
+  65              		.comm	err_current,8,8
+  66              		.comm	speed,8,8
+  67              		.comm	delta_t,8,8
+  68              		.comm	output_current,8,8
+  69              		.comm	error_sum,8,8
+  70              		.comm	weight,8,8
+  71              		.comm	output_initial,4,4
+  72              		.comm	i,4,4
+  73              		.comm	j,4,4
+  74              		.global	inf_clk
+  75              		.align	2
+  76              		.type	inf_clk, %object
+  77              		.size	inf_clk, 4
+  78              	inf_clk:
+  79 0020 18000000 		.word	24
+  80              		.global	inf_timer_count
+  81              		.align	2
+  82              		.type	inf_timer_count, %object
+  83              		.size	inf_timer_count, 4
+  84              	inf_timer_count:
+  85 0024 00000001 		.word	16777216
+  86              		.global	timing_tolerance
+  87              		.align	2
+  88              		.type	timing_tolerance, %object
+  89              		.size	timing_tolerance, 4
+  90              	timing_tolerance:
+  91 0028 05000000 		.word	5
+  92              		.comm	inf_rise,16,4
+  93              		.comm	inf_rise_prev,16,4
+  94              		.comm	inf_fall,16,4
+  95              		.comm	risingEdge,16,4
+  96              		.comm	dx,16,4
+  97              		.comm	dy,16,4
+  98              		.comm	n_fallingEdges,16,4
+  99              		.comm	skip,4,4
+ 100              		.comm	axis,16,4
+ 101              		.comm	sync_width,8,8
+ 102              		.comm	inf_dbg,4,4
+ 103              		.comm	xUpdated,4,4
+ 104              		.comm	yUpdated,4,4
+ 105              		.comm	dbg3,4,4
+ 106              		.global	activate_0
+ 107              		.align	2
+ 108              		.type	activate_0, %object
+ 109              		.size	activate_0, 4
+ 110              	activate_0:
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 3
+
+
+ 111 002c 01000000 		.word	1
+ 112              		.global	activate_1
+ 113              		.align	2
+ 114              		.type	activate_1, %object
+ 115              		.size	activate_1, 4
+ 116              	activate_1:
+ 117 0030 02000000 		.word	2
+ 118              		.global	activate_2
+ 119              		.align	2
+ 120              		.type	activate_2, %object
+ 121              		.size	activate_2, 4
+ 122              	activate_2:
+ 123 0034 04000000 		.word	4
+ 124              		.global	activate_3
+ 125              		.align	2
+ 126              		.type	activate_3, %object
+ 127              		.size	activate_3, 4
+ 128              	activate_3:
+ 129 0038 08000000 		.word	8
+ 130              		.global	time_slice
+ 131              		.align	2
+ 132              		.type	time_slice, %object
+ 133              		.size	time_slice, 4
+ 134              	time_slice:
+ 135 003c 0A000000 		.word	10
+ 136              		.section	.text.zeroIntArr,"ax",%progbits
+ 137              		.align	2
+ 138              		.thumb
+ 139              		.thumb_func
+ 140              		.type	zeroIntArr, %function
+ 141              	zeroIntArr:
+ 142              	.LFB29:
+ 143              		.file 1 ".\\main.c"
+   1:.\main.c      **** /* ========================================
+   2:.\main.c      ****  *
+   3:.\main.c      ****  * Copyright YOUR COMPANY, THE YEAR
+   4:.\main.c      ****  * All Rights Reserved
+   5:.\main.c      ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:.\main.c      ****  *
+   7:.\main.c      ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:.\main.c      ****  * WHICH IS THE PROPERTY OF your company.
+   9:.\main.c      ****  *
+  10:.\main.c      ****  * ========================================
+  11:.\main.c      **** */
+  12:.\main.c      **** #include <device.h>
+  13:.\main.c      **** #include <stdio.h>
+  14:.\main.c      **** #include <math.h>
+  15:.\main.c      **** #include <stdlib.h>
+  16:.\main.c      **** 
+  17:.\main.c      **** #define n_sensors 4
+  18:.\main.c      **** 
+  19:.\main.c      **** /*------speed control------*/
+  20:.\main.c      **** // constants
+  21:.\main.c      **** double circumference = 7.63;      // inches/revolution
+  22:.\main.c      **** int clock_freq = 10000;           // 10 kHz = counts/sec
+  23:.\main.c      **** int n_sensors_per_rev = 5;
+  24:.\main.c      **** int inches_per_foot = 12;
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 4
+
+
+  25:.\main.c      **** int max_timer_count = 65536;
+  26:.\main.c      **** 
+  27:.\main.c      **** double target_speed = 4.0;        // feet/sec
+  28:.\main.c      **** int previous_capture;
+  29:.\main.c      **** 
+  30:.\main.c      **** double kp;                        // PID proportional term constant
+  31:.\main.c      **** double ki;                        // PID integral term constant
+  32:.\main.c      **** double err_current;               // current error value
+  33:.\main.c      **** double speed;
+  34:.\main.c      **** 
+  35:.\main.c      **** double delta_t;                   // time between measurements, used in integral term
+  36:.\main.c      **** double output_current;            // current PWM duty cycle output
+  37:.\main.c      **** double error_sum;
+  38:.\main.c      **** double weight;
+  39:.\main.c      **** int output_initial;
+  40:.\main.c      **** 
+  41:.\main.c      **** int i;
+  42:.\main.c      **** int j;
+  43:.\main.c      **** 
+  44:.\main.c      **** /*------infrared tracking------*/
+  45:.\main.c      **** int inf_clk = 24; //(MHz)
+  46:.\main.c      **** int inf_timer_count = 16777216;
+  47:.\main.c      **** int timing_tolerance = 5;
+  48:.\main.c      **** 
+  49:.\main.c      **** int inf_rise[n_sensors];
+  50:.\main.c      **** int inf_rise_prev[n_sensors];
+  51:.\main.c      **** int inf_fall[n_sensors];
+  52:.\main.c      **** int risingEdge[n_sensors];
+  53:.\main.c      **** int dx[n_sensors];
+  54:.\main.c      **** int dy[n_sensors];
+  55:.\main.c      **** int n_fallingEdges[n_sensors];
+  56:.\main.c      **** 
+  57:.\main.c      **** int skip;
+  58:.\main.c      **** int axis[n_sensors];
+  59:.\main.c      **** 
+  60:.\main.c      **** double sync_width;
+  61:.\main.c      **** int inf_dbg;
+  62:.\main.c      **** int xUpdated;
+  63:.\main.c      **** int yUpdated;
+  64:.\main.c      **** int dbg3;
+  65:.\main.c      **** 
+  66:.\main.c      **** int activate_0 = 1;
+  67:.\main.c      **** int activate_1 = 2;
+  68:.\main.c      **** int activate_2 = 4;
+  69:.\main.c      **** int activate_3 = 8;
+  70:.\main.c      **** int time_slice = 10;
+  71:.\main.c      **** 
+  72:.\main.c      **** static void zeroIntArr(int arr[], int length) {
+ 144              		.loc 1 72 0
+ 145              		.cfi_startproc
+ 146              		@ args = 0, pretend = 0, frame = 16
+ 147              		@ frame_needed = 1, uses_anonymous_args = 0
+ 148              		@ link register save eliminated.
+ 149 0000 80B4     		push	{r7}
+ 150              	.LCFI0:
+ 151              		.cfi_def_cfa_offset 4
+ 152 0002 85B0     		sub	sp, sp, #20
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 5
+
+
+ 153              	.LCFI1:
+ 154              		.cfi_def_cfa_offset 24
+ 155 0004 00AF     		add	r7, sp, #0
+ 156              		.cfi_offset 7, -4
+ 157              	.LCFI2:
+ 158              		.cfi_def_cfa_register 7
+ 159 0006 7860     		str	r0, [r7, #4]
+ 160 0008 3960     		str	r1, [r7, #0]
+  73:.\main.c      ****     int i;
+  74:.\main.c      ****     for (i = 0; i < length; i++) {
+ 161              		.loc 1 74 0
+ 162 000a 4FF00003 		mov	r3, #0
+ 163 000e FB60     		str	r3, [r7, #12]
+ 164 0010 0BE0     		b	.L2
+ 165              	.L3:
+  75:.\main.c      ****         arr[i] = 0;
+ 166              		.loc 1 75 0
+ 167 0012 FB68     		ldr	r3, [r7, #12]
+ 168 0014 4FEA8302 		lsl	r2, r3, #2
+ 169 0018 7B68     		ldr	r3, [r7, #4]
+ 170 001a 1344     		add	r3, r2, r3
+ 171 001c 4FF00002 		mov	r2, #0
+ 172 0020 1A60     		str	r2, [r3, #0]
+ 173              		.loc 1 74 0
+ 174 0022 FB68     		ldr	r3, [r7, #12]
+ 175 0024 03F10103 		add	r3, r3, #1
+ 176 0028 FB60     		str	r3, [r7, #12]
+ 177              	.L2:
+ 178 002a FA68     		ldr	r2, [r7, #12]
+ 179 002c 3B68     		ldr	r3, [r7, #0]
+ 180 002e 9A42     		cmp	r2, r3
+ 181 0030 EFDB     		blt	.L3
+  76:.\main.c      ****     }
+  77:.\main.c      ****     return;
+  78:.\main.c      **** }
+ 182              		.loc 1 78 0
+ 183 0032 07F11407 		add	r7, r7, #20
+ 184 0036 BD46     		mov	sp, r7
+ 185 0038 80BC     		pop	{r7}
+ 186 003a 7047     		bx	lr
+ 187              		.cfi_endproc
+ 188              	.LFE29:
+ 189              		.size	zeroIntArr, .-zeroIntArr
+ 190              		.section	.text.sendWireless,"ax",%progbits
+ 191              		.align	2
+ 192              		.thumb
+ 193              		.thumb_func
+ 194              		.type	sendWireless, %function
+ 195              	sendWireless:
+ 196              	.LFB30:
+  79:.\main.c      **** 
+  80:.\main.c      **** static void sendWireless(int id, int dt, int axis) {
+ 197              		.loc 1 80 0
+ 198              		.cfi_startproc
+ 199              		@ args = 0, pretend = 0, frame = 16
+ 200              		@ frame_needed = 1, uses_anonymous_args = 0
+ 201 0000 80B5     		push	{r7, lr}
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 6
+
+
+ 202              	.LCFI3:
+ 203              		.cfi_def_cfa_offset 8
+ 204 0002 84B0     		sub	sp, sp, #16
+ 205              	.LCFI4:
+ 206              		.cfi_def_cfa_offset 24
+ 207 0004 00AF     		add	r7, sp, #0
+ 208              		.cfi_offset 14, -4
+ 209              		.cfi_offset 7, -8
+ 210              	.LCFI5:
+ 211              		.cfi_def_cfa_register 7
+ 212 0006 F860     		str	r0, [r7, #12]
+ 213 0008 B960     		str	r1, [r7, #8]
+ 214 000a 7A60     		str	r2, [r7, #4]
+  81:.\main.c      ****     UART_PutChar('s');
+ 215              		.loc 1 81 0
+ 216 000c 4FF07300 		mov	r0, #115
+ 217 0010 FFF7FEFF 		bl	UART_PutChar
+  82:.\main.c      ****     UART_PutChar(id);
+ 218              		.loc 1 82 0
+ 219 0014 FB68     		ldr	r3, [r7, #12]
+ 220 0016 DBB2     		uxtb	r3, r3
+ 221 0018 1846     		mov	r0, r3
+ 222 001a FFF7FEFF 		bl	UART_PutChar
+  83:.\main.c      ****     UART_PutChar(axis);
+ 223              		.loc 1 83 0
+ 224 001e 7B68     		ldr	r3, [r7, #4]
+ 225 0020 DBB2     		uxtb	r3, r3
+ 226 0022 1846     		mov	r0, r3
+ 227 0024 FFF7FEFF 		bl	UART_PutChar
+  84:.\main.c      ****     
+  85:.\main.c      ****     // big endian byte order
+  86:.\main.c      ****     UART_PutChar((char) dt & 0xff);
+ 228              		.loc 1 86 0
+ 229 0028 BB68     		ldr	r3, [r7, #8]
+ 230 002a DBB2     		uxtb	r3, r3
+ 231 002c 1846     		mov	r0, r3
+ 232 002e FFF7FEFF 		bl	UART_PutChar
+  87:.\main.c      ****     UART_PutChar((char) (dt >> 8) & 0xff);
+ 233              		.loc 1 87 0
+ 234 0032 BB68     		ldr	r3, [r7, #8]
+ 235 0034 4FEA2323 		asr	r3, r3, #8
+ 236 0038 DBB2     		uxtb	r3, r3
+ 237 003a 1846     		mov	r0, r3
+ 238 003c FFF7FEFF 		bl	UART_PutChar
+  88:.\main.c      ****     UART_PutChar((char) (dt >> 16) & 0xff);
+ 239              		.loc 1 88 0
+ 240 0040 BB68     		ldr	r3, [r7, #8]
+ 241 0042 4FEA2343 		asr	r3, r3, #16
+ 242 0046 DBB2     		uxtb	r3, r3
+ 243 0048 1846     		mov	r0, r3
+ 244 004a FFF7FEFF 		bl	UART_PutChar
+  89:.\main.c      **** }
+ 245              		.loc 1 89 0
+ 246 004e 07F11007 		add	r7, r7, #16
+ 247 0052 BD46     		mov	sp, r7
+ 248 0054 80BD     		pop	{r7, pc}
+ 249              		.cfi_endproc
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 7
+
+
+ 250              	.LFE30:
+ 251              		.size	sendWireless, .-sendWireless
+ 252 0056 00BF     		.section	.text.updateSensorPos,"ax",%progbits
+ 253              		.align	2
+ 254              		.thumb
+ 255              		.thumb_func
+ 256              		.type	updateSensorPos, %function
+ 257              	updateSensorPos:
+ 258              	.LFB31:
+  90:.\main.c      **** 
+  91:.\main.c      **** static void updateSensorPos(int id) {
+ 259              		.loc 1 91 0
+ 260              		.cfi_startproc
+ 261              		@ args = 0, pretend = 0, frame = 24
+ 262              		@ frame_needed = 1, uses_anonymous_args = 0
+ 263              		@ link register save eliminated.
+ 264 0000 80B4     		push	{r7}
+ 265              	.LCFI6:
+ 266              		.cfi_def_cfa_offset 4
+ 267 0002 87B0     		sub	sp, sp, #28
+ 268              	.LCFI7:
+ 269              		.cfi_def_cfa_offset 32
+ 270 0004 00AF     		add	r7, sp, #0
+ 271              		.cfi_offset 7, -4
+ 272              	.LCFI8:
+ 273              		.cfi_def_cfa_register 7
+ 274 0006 7860     		str	r0, [r7, #4]
+  92:.\main.c      ****     int n_counts;
+  93:.\main.c      ****     if (inf_fall[id] > inf_rise[id]) {
+ 275              		.loc 1 93 0
+ 276 0008 7A68     		ldr	r2, [r7, #4]
+ 277 000a 40F20003 		movw	r3, #:lower16:inf_fall
+ 278 000e C0F20003 		movt	r3, #:upper16:inf_fall
+ 279 0012 53F82220 		ldr	r2, [r3, r2, lsl #2]
+ 280 0016 7968     		ldr	r1, [r7, #4]
+ 281 0018 40F20003 		movw	r3, #:lower16:inf_rise
+ 282 001c C0F20003 		movt	r3, #:upper16:inf_rise
+ 283 0020 53F82130 		ldr	r3, [r3, r1, lsl #2]
+ 284 0024 9A42     		cmp	r2, r3
+ 285 0026 11DD     		ble	.L8
+  94:.\main.c      ****         n_counts = inf_fall[id] - inf_rise[id];
+ 286              		.loc 1 94 0
+ 287 0028 7A68     		ldr	r2, [r7, #4]
+ 288 002a 40F20003 		movw	r3, #:lower16:inf_fall
+ 289 002e C0F20003 		movt	r3, #:upper16:inf_fall
+ 290 0032 53F82220 		ldr	r2, [r3, r2, lsl #2]
+ 291 0036 7968     		ldr	r1, [r7, #4]
+ 292 0038 40F20003 		movw	r3, #:lower16:inf_rise
+ 293 003c C0F20003 		movt	r3, #:upper16:inf_rise
+ 294 0040 53F82130 		ldr	r3, [r3, r1, lsl #2]
+ 295 0044 C3EB0203 		rsb	r3, r3, r2
+ 296 0048 FB60     		str	r3, [r7, #12]
+ 297 004a 16E0     		b	.L9
+ 298              	.L8:
+  95:.\main.c      ****     }
+  96:.\main.c      ****     else {
+  97:.\main.c      ****         n_counts = inf_fall[id] + (inf_timer_count - inf_rise[id]);
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 8
+
+
+ 299              		.loc 1 97 0
+ 300 004c 7A68     		ldr	r2, [r7, #4]
+ 301 004e 40F20003 		movw	r3, #:lower16:inf_fall
+ 302 0052 C0F20003 		movt	r3, #:upper16:inf_fall
+ 303 0056 53F82220 		ldr	r2, [r3, r2, lsl #2]
+ 304 005a 40F20003 		movw	r3, #:lower16:inf_timer_count
+ 305 005e C0F20003 		movt	r3, #:upper16:inf_timer_count
+ 306 0062 1968     		ldr	r1, [r3, #0]
+ 307 0064 7868     		ldr	r0, [r7, #4]
+ 308 0066 40F20003 		movw	r3, #:lower16:inf_rise
+ 309 006a C0F20003 		movt	r3, #:upper16:inf_rise
+ 310 006e 53F82030 		ldr	r3, [r3, r0, lsl #2]
+ 311 0072 C3EB0103 		rsb	r3, r3, r1
+ 312 0076 1344     		add	r3, r2, r3
+ 313 0078 FB60     		str	r3, [r7, #12]
+ 314              	.L9:
+  98:.\main.c      ****     }
+  99:.\main.c      ****     
+ 100:.\main.c      ****     int sync_width = n_counts / inf_clk;
+ 315              		.loc 1 100 0
+ 316 007a 40F20003 		movw	r3, #:lower16:inf_clk
+ 317 007e C0F20003 		movt	r3, #:upper16:inf_clk
+ 318 0082 1B68     		ldr	r3, [r3, #0]
+ 319 0084 FA68     		ldr	r2, [r7, #12]
+ 320 0086 92FBF3F3 		sdiv	r3, r2, r3
+ 321 008a 3B61     		str	r3, [r7, #16]
+ 101:.\main.c      ****     if (sync_width < 40) {
+ 322              		.loc 1 101 0
+ 323 008c 3B69     		ldr	r3, [r7, #16]
+ 324 008e 272B     		cmp	r3, #39
+ 325 0090 53DC     		bgt	.L10
+ 326              	.LBB2:
+ 102:.\main.c      ****         int dt;
+ 103:.\main.c      ****         if (inf_rise_prev[id] > inf_fall[id]) {
+ 327              		.loc 1 103 0
+ 328 0092 7A68     		ldr	r2, [r7, #4]
+ 329 0094 40F20003 		movw	r3, #:lower16:inf_rise_prev
+ 330 0098 C0F20003 		movt	r3, #:upper16:inf_rise_prev
+ 331 009c 53F82220 		ldr	r2, [r3, r2, lsl #2]
+ 332 00a0 7968     		ldr	r1, [r7, #4]
+ 333 00a2 40F20003 		movw	r3, #:lower16:inf_fall
+ 334 00a6 C0F20003 		movt	r3, #:upper16:inf_fall
+ 335 00aa 53F82130 		ldr	r3, [r3, r1, lsl #2]
+ 336 00ae 9A42     		cmp	r2, r3
+ 337 00b0 11DD     		ble	.L11
+ 104:.\main.c      ****             dt = inf_rise_prev[id] - inf_fall[id];
+ 338              		.loc 1 104 0
+ 339 00b2 7A68     		ldr	r2, [r7, #4]
+ 340 00b4 40F20003 		movw	r3, #:lower16:inf_rise_prev
+ 341 00b8 C0F20003 		movt	r3, #:upper16:inf_rise_prev
+ 342 00bc 53F82220 		ldr	r2, [r3, r2, lsl #2]
+ 343 00c0 7968     		ldr	r1, [r7, #4]
+ 344 00c2 40F20003 		movw	r3, #:lower16:inf_fall
+ 345 00c6 C0F20003 		movt	r3, #:upper16:inf_fall
+ 346 00ca 53F82130 		ldr	r3, [r3, r1, lsl #2]
+ 347 00ce C3EB0203 		rsb	r3, r3, r2
+ 348 00d2 7B61     		str	r3, [r7, #20]
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 9
+
+
+ 349 00d4 16E0     		b	.L12
+ 350              	.L11:
+ 105:.\main.c      ****         }
+ 106:.\main.c      ****         else {
+ 107:.\main.c      ****             dt = inf_rise_prev[id] + (inf_timer_count - inf_fall[id]);
+ 351              		.loc 1 107 0
+ 352 00d6 7A68     		ldr	r2, [r7, #4]
+ 353 00d8 40F20003 		movw	r3, #:lower16:inf_rise_prev
+ 354 00dc C0F20003 		movt	r3, #:upper16:inf_rise_prev
+ 355 00e0 53F82220 		ldr	r2, [r3, r2, lsl #2]
+ 356 00e4 40F20003 		movw	r3, #:lower16:inf_timer_count
+ 357 00e8 C0F20003 		movt	r3, #:upper16:inf_timer_count
+ 358 00ec 1968     		ldr	r1, [r3, #0]
+ 359 00ee 7868     		ldr	r0, [r7, #4]
+ 360 00f0 40F20003 		movw	r3, #:lower16:inf_fall
+ 361 00f4 C0F20003 		movt	r3, #:upper16:inf_fall
+ 362 00f8 53F82030 		ldr	r3, [r3, r0, lsl #2]
+ 363 00fc C3EB0103 		rsb	r3, r3, r1
+ 364 0100 1344     		add	r3, r2, r3
+ 365 0102 7B61     		str	r3, [r7, #20]
+ 366              	.L12:
+ 108:.\main.c      ****         }
+ 109:.\main.c      ****         
+ 110:.\main.c      ****         if (axis[id] == 0) {
+ 367              		.loc 1 110 0
+ 368 0104 7A68     		ldr	r2, [r7, #4]
+ 369 0106 40F20003 		movw	r3, #:lower16:axis
+ 370 010a C0F20003 		movt	r3, #:upper16:axis
+ 371 010e 53F82230 		ldr	r3, [r3, r2, lsl #2]
+ 372 0112 002B     		cmp	r3, #0
+ 373 0114 08D1     		bne	.L13
+ 111:.\main.c      ****             dx[id] = dt;
+ 374              		.loc 1 111 0
+ 375 0116 7A68     		ldr	r2, [r7, #4]
+ 376 0118 40F20003 		movw	r3, #:lower16:dx
+ 377 011c C0F20003 		movt	r3, #:upper16:dx
+ 378 0120 7969     		ldr	r1, [r7, #20]
+ 379 0122 43F82210 		str	r1, [r3, r2, lsl #2]
+ 112:.\main.c      ****         }
+ 113:.\main.c      ****         else {
+ 114:.\main.c      ****             dy[id] = dt;
+ 380              		.loc 1 114 0
+ 381 0126 67E0     		b	.L19
+ 382              	.L13:
+ 383 0128 7A68     		ldr	r2, [r7, #4]
+ 384 012a 40F20003 		movw	r3, #:lower16:dy
+ 385 012e C0F20003 		movt	r3, #:upper16:dy
+ 386 0132 7969     		ldr	r1, [r7, #20]
+ 387 0134 43F82210 		str	r1, [r3, r2, lsl #2]
+ 388 0138 5EE0     		b	.L19
+ 389              	.L10:
+ 390              	.LBE2:
+ 115:.\main.c      ****         }
+ 116:.\main.c      ****     }
+ 117:.\main.c      ****     else if (abs(sync_width - 63) <= timing_tolerance) {
+ 391              		.loc 1 117 0
+ 392 013a 3B69     		ldr	r3, [r7, #16]
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 10
+
+
+ 393 013c A3F13F03 		sub	r3, r3, #63
+ 394 0140 83EAE372 		eor	r2, r3, r3, asr #31
+ 395 0144 A2EBE372 		sub	r2, r2, r3, asr #31
+ 396 0148 40F20003 		movw	r3, #:lower16:timing_tolerance
+ 397 014c C0F20003 		movt	r3, #:upper16:timing_tolerance
+ 398 0150 1B68     		ldr	r3, [r3, #0]
+ 399 0152 9A42     		cmp	r2, r3
+ 400 0154 09DC     		bgt	.L16
+ 118:.\main.c      ****         axis[id] = 0;
+ 401              		.loc 1 118 0
+ 402 0156 7A68     		ldr	r2, [r7, #4]
+ 403 0158 40F20003 		movw	r3, #:lower16:axis
+ 404 015c C0F20003 		movt	r3, #:upper16:axis
+ 405 0160 4FF00001 		mov	r1, #0
+ 406 0164 43F82210 		str	r1, [r3, r2, lsl #2]
+ 407 0168 46E0     		b	.L19
+ 408              	.L16:
+ 119:.\main.c      ****     }
+ 120:.\main.c      ****     else if (abs(sync_width - 73) <= timing_tolerance) {
+ 409              		.loc 1 120 0
+ 410 016a 3B69     		ldr	r3, [r7, #16]
+ 411 016c A3F14903 		sub	r3, r3, #73
+ 412 0170 83EAE372 		eor	r2, r3, r3, asr #31
+ 413 0174 A2EBE372 		sub	r2, r2, r3, asr #31
+ 414 0178 40F20003 		movw	r3, #:lower16:timing_tolerance
+ 415 017c C0F20003 		movt	r3, #:upper16:timing_tolerance
+ 416 0180 1B68     		ldr	r3, [r3, #0]
+ 417 0182 9A42     		cmp	r2, r3
+ 418 0184 09DC     		bgt	.L17
+ 121:.\main.c      ****         axis[id] = 1;
+ 419              		.loc 1 121 0
+ 420 0186 7A68     		ldr	r2, [r7, #4]
+ 421 0188 40F20003 		movw	r3, #:lower16:axis
+ 422 018c C0F20003 		movt	r3, #:upper16:axis
+ 423 0190 4FF00101 		mov	r1, #1
+ 424 0194 43F82210 		str	r1, [r3, r2, lsl #2]
+ 425 0198 2EE0     		b	.L19
+ 426              	.L17:
+ 122:.\main.c      ****     }
+ 123:.\main.c      ****     else if (abs(sync_width - 83) <= timing_tolerance) {
+ 427              		.loc 1 123 0
+ 428 019a 3B69     		ldr	r3, [r7, #16]
+ 429 019c A3F15303 		sub	r3, r3, #83
+ 430 01a0 83EAE372 		eor	r2, r3, r3, asr #31
+ 431 01a4 A2EBE372 		sub	r2, r2, r3, asr #31
+ 432 01a8 40F20003 		movw	r3, #:lower16:timing_tolerance
+ 433 01ac C0F20003 		movt	r3, #:upper16:timing_tolerance
+ 434 01b0 1B68     		ldr	r3, [r3, #0]
+ 435 01b2 9A42     		cmp	r2, r3
+ 436 01b4 09DC     		bgt	.L18
+ 124:.\main.c      ****         axis[id] = 0;
+ 437              		.loc 1 124 0
+ 438 01b6 7A68     		ldr	r2, [r7, #4]
+ 439 01b8 40F20003 		movw	r3, #:lower16:axis
+ 440 01bc C0F20003 		movt	r3, #:upper16:axis
+ 441 01c0 4FF00001 		mov	r1, #0
+ 442 01c4 43F82210 		str	r1, [r3, r2, lsl #2]
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 11
+
+
+ 443 01c8 16E0     		b	.L19
+ 444              	.L18:
+ 125:.\main.c      ****     }
+ 126:.\main.c      ****     else if (abs(sync_width - 94) <= timing_tolerance) {
+ 445              		.loc 1 126 0
+ 446 01ca 3B69     		ldr	r3, [r7, #16]
+ 447 01cc A3F15E03 		sub	r3, r3, #94
+ 448 01d0 83EAE372 		eor	r2, r3, r3, asr #31
+ 449 01d4 A2EBE372 		sub	r2, r2, r3, asr #31
+ 450 01d8 40F20003 		movw	r3, #:lower16:timing_tolerance
+ 451 01dc C0F20003 		movt	r3, #:upper16:timing_tolerance
+ 452 01e0 1B68     		ldr	r3, [r3, #0]
+ 453 01e2 9A42     		cmp	r2, r3
+ 454 01e4 08DC     		bgt	.L19
+ 127:.\main.c      ****         axis[id] = 1;
+ 455              		.loc 1 127 0
+ 456 01e6 7A68     		ldr	r2, [r7, #4]
+ 457 01e8 40F20003 		movw	r3, #:lower16:axis
+ 458 01ec C0F20003 		movt	r3, #:upper16:axis
+ 459 01f0 4FF00101 		mov	r1, #1
+ 460 01f4 43F82210 		str	r1, [r3, r2, lsl #2]
+ 461              	.L19:
+ 128:.\main.c      ****     }
+ 129:.\main.c      ****     return;
+ 130:.\main.c      **** }
+ 462              		.loc 1 130 0
+ 463 01f8 07F11C07 		add	r7, r7, #28
+ 464 01fc BD46     		mov	sp, r7
+ 465 01fe 80BC     		pop	{r7}
+ 466 0200 7047     		bx	lr
+ 467              		.cfi_endproc
+ 468              	.LFE31:
+ 469              		.size	updateSensorPos, .-updateSensorPos
+ 470              		.global	__aeabi_i2d
+ 471              		.global	__aeabi_dmul
+ 472              		.global	__aeabi_ddiv
+ 473              		.global	__aeabi_dsub
+ 474              		.global	__aeabi_dadd
+ 475              		.global	__aeabi_dcmplt
+ 476              		.global	__aeabi_d2uiz
+ 477 0202 00BF     		.section	.text.inter_HE,"ax",%progbits
+ 478              		.align	2
+ 479              		.global	inter_HE
+ 480              		.thumb
+ 481              		.thumb_func
+ 482              		.type	inter_HE, %function
+ 483              	inter_HE:
+ 484              	.LFB32:
+ 131:.\main.c      **** 
+ 132:.\main.c      **** /*
+ 133:.\main.c      **** int bufferFull(int[] dx, int[] dy) {
+ 134:.\main.c      ****     for (i = 0; i < n_sensors - 1; i++) {
+ 135:.\main.c      ****         if (dx == 0 || dy == 0) {
+ 136:.\main.c      ****             return 0;
+ 137:.\main.c      ****         }
+ 138:.\main.c      ****     }
+ 139:.\main.c      ****     return 1;
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 12
+
+
+ 140:.\main.c      **** }*/
+ 141:.\main.c      **** 
+ 142:.\main.c      **** CY_ISR(inter_HE)
+ 143:.\main.c      **** {   
+ 485              		.loc 1 143 0
+ 486              		.cfi_startproc
+ 487              		@ args = 0, pretend = 0, frame = 8
+ 488              		@ frame_needed = 1, uses_anonymous_args = 0
+ 489 0000 B0B5     		push	{r4, r5, r7, lr}
+ 490              	.LCFI9:
+ 491              		.cfi_def_cfa_offset 16
+ 492 0002 82B0     		sub	sp, sp, #8
+ 493              	.LCFI10:
+ 494              		.cfi_def_cfa_offset 24
+ 495 0004 00AF     		add	r7, sp, #0
+ 496              		.cfi_offset 14, -4
+ 497              		.cfi_offset 7, -8
+ 498              		.cfi_offset 5, -12
+ 499              		.cfi_offset 4, -16
+ 500              	.LCFI11:
+ 501              		.cfi_def_cfa_register 7
+ 144:.\main.c      ****     //char strbuffer[15];
+ 145:.\main.c      ****     int current_capture = (int) Timer_HE_ReadCapture();
+ 502              		.loc 1 145 0
+ 503 0006 FFF7FEFF 		bl	Timer_HE_ReadCapture
+ 504 000a 0346     		mov	r3, r0
+ 505 000c 3B60     		str	r3, [r7, #0]
+ 146:.\main.c      ****     int counts = 0;
+ 506              		.loc 1 146 0
+ 507 000e 4FF00003 		mov	r3, #0
+ 508 0012 7B60     		str	r3, [r7, #4]
+ 147:.\main.c      ****     
+ 148:.\main.c      ****     if (current_capture > previous_capture) {   // rollover
+ 509              		.loc 1 148 0
+ 510 0014 40F20003 		movw	r3, #:lower16:previous_capture
+ 511 0018 C0F20003 		movt	r3, #:upper16:previous_capture
+ 512 001c 1B68     		ldr	r3, [r3, #0]
+ 513 001e 3A68     		ldr	r2, [r7, #0]
+ 514 0020 9A42     		cmp	r2, r3
+ 515 0022 0FDD     		ble	.L21
+ 149:.\main.c      ****         counts = max_timer_count - current_capture + previous_capture;
+ 516              		.loc 1 149 0
+ 517 0024 40F20003 		movw	r3, #:lower16:max_timer_count
+ 518 0028 C0F20003 		movt	r3, #:upper16:max_timer_count
+ 519 002c 1A68     		ldr	r2, [r3, #0]
+ 520 002e 3B68     		ldr	r3, [r7, #0]
+ 521 0030 C3EB0202 		rsb	r2, r3, r2
+ 522 0034 40F20003 		movw	r3, #:lower16:previous_capture
+ 523 0038 C0F20003 		movt	r3, #:upper16:previous_capture
+ 524 003c 1B68     		ldr	r3, [r3, #0]
+ 525 003e 1344     		add	r3, r2, r3
+ 526 0040 7B60     		str	r3, [r7, #4]
+ 527 0042 08E0     		b	.L22
+ 528              	.L21:
+ 150:.\main.c      ****     }
+ 151:.\main.c      ****     else {
+ 152:.\main.c      ****         counts = previous_capture - current_capture;
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 13
+
+
+ 529              		.loc 1 152 0
+ 530 0044 40F20003 		movw	r3, #:lower16:previous_capture
+ 531 0048 C0F20003 		movt	r3, #:upper16:previous_capture
+ 532 004c 1A68     		ldr	r2, [r3, #0]
+ 533 004e 3B68     		ldr	r3, [r7, #0]
+ 534 0050 C3EB0203 		rsb	r3, r3, r2
+ 535 0054 7B60     		str	r3, [r7, #4]
+ 536              	.L22:
+ 153:.\main.c      ****     }
+ 154:.\main.c      ****     previous_capture = current_capture;
+ 537              		.loc 1 154 0
+ 538 0056 40F20003 		movw	r3, #:lower16:previous_capture
+ 539 005a C0F20003 		movt	r3, #:upper16:previous_capture
+ 540 005e 3A68     		ldr	r2, [r7, #0]
+ 541 0060 1A60     		str	r2, [r3, #0]
+ 155:.\main.c      ****     
+ 156:.\main.c      ****     // on first loop through interrupt function, make sure error starts positive by setting speed i
+ 157:.\main.c      ****     if (i == 0) {
+ 542              		.loc 1 157 0
+ 543 0062 40F20003 		movw	r3, #:lower16:i
+ 544 0066 C0F20003 		movt	r3, #:upper16:i
+ 545 006a 1B68     		ldr	r3, [r3, #0]
+ 546 006c 002B     		cmp	r3, #0
+ 547 006e 11D1     		bne	.L23
+ 158:.\main.c      ****         speed = 0;
+ 548              		.loc 1 158 0
+ 549 0070 40F20003 		movw	r3, #:lower16:speed
+ 550 0074 C0F20003 		movt	r3, #:upper16:speed
+ 551 0078 4FF00000 		mov	r0, #0
+ 552 007c 4FF00001 		mov	r1, #0
+ 553 0080 C3E90001 		strd	r0, [r3]
+ 159:.\main.c      ****         i = 1;
+ 554              		.loc 1 159 0
+ 555 0084 40F20003 		movw	r3, #:lower16:i
+ 556 0088 C0F20003 		movt	r3, #:upper16:i
+ 557 008c 4FF00102 		mov	r2, #1
+ 558 0090 1A60     		str	r2, [r3, #0]
+ 559 0092 35E0     		b	.L24
+ 560              	.L23:
+ 160:.\main.c      ****     }
+ 161:.\main.c      ****     else {
+ 162:.\main.c      ****         speed = (double) (circumference * clock_freq) / (counts * n_sensors_per_rev * inches_per_fo
+ 561              		.loc 1 162 0
+ 562 0094 40F20003 		movw	r3, #:lower16:clock_freq
+ 563 0098 C0F20003 		movt	r3, #:upper16:clock_freq
+ 564 009c 1B68     		ldr	r3, [r3, #0]
+ 565 009e 1846     		mov	r0, r3
+ 566 00a0 FFF7FEFF 		bl	__aeabi_i2d
+ 567 00a4 40F20003 		movw	r3, #:lower16:circumference
+ 568 00a8 C0F20003 		movt	r3, #:upper16:circumference
+ 569 00ac D3E90023 		ldrd	r2, [r3]
+ 570 00b0 FFF7FEFF 		bl	__aeabi_dmul
+ 571 00b4 0246     		mov	r2, r0
+ 572 00b6 0B46     		mov	r3, r1
+ 573 00b8 1446     		mov	r4, r2
+ 574 00ba 1D46     		mov	r5, r3
+ 575 00bc 40F20003 		movw	r3, #:lower16:n_sensors_per_rev
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 14
+
+
+ 576 00c0 C0F20003 		movt	r3, #:upper16:n_sensors_per_rev
+ 577 00c4 1B68     		ldr	r3, [r3, #0]
+ 578 00c6 7A68     		ldr	r2, [r7, #4]
+ 579 00c8 02FB03F2 		mul	r2, r2, r3
+ 580 00cc 40F20003 		movw	r3, #:lower16:inches_per_foot
+ 581 00d0 C0F20003 		movt	r3, #:upper16:inches_per_foot
+ 582 00d4 1B68     		ldr	r3, [r3, #0]
+ 583 00d6 03FB02F3 		mul	r3, r3, r2
+ 584 00da 1846     		mov	r0, r3
+ 585 00dc FFF7FEFF 		bl	__aeabi_i2d
+ 586 00e0 0246     		mov	r2, r0
+ 587 00e2 0B46     		mov	r3, r1
+ 588 00e4 2046     		mov	r0, r4
+ 589 00e6 2946     		mov	r1, r5
+ 590 00e8 FFF7FEFF 		bl	__aeabi_ddiv
+ 591 00ec 0246     		mov	r2, r0
+ 592 00ee 0B46     		mov	r3, r1
+ 593 00f0 1046     		mov	r0, r2
+ 594 00f2 1946     		mov	r1, r3
+ 595 00f4 40F20003 		movw	r3, #:lower16:speed
+ 596 00f8 C0F20003 		movt	r3, #:upper16:speed
+ 597 00fc C3E90001 		strd	r0, [r3]
+ 598              	.L24:
+ 163:.\main.c      ****     }
+ 164:.\main.c      ****     
+ 165:.\main.c      ****     err_current = target_speed - speed;
+ 599              		.loc 1 165 0
+ 600 0100 40F20003 		movw	r3, #:lower16:target_speed
+ 601 0104 C0F20003 		movt	r3, #:upper16:target_speed
+ 602 0108 D3E90001 		ldrd	r0, [r3]
+ 603 010c 40F20003 		movw	r3, #:lower16:speed
+ 604 0110 C0F20003 		movt	r3, #:upper16:speed
+ 605 0114 D3E90023 		ldrd	r2, [r3]
+ 606 0118 FFF7FEFF 		bl	__aeabi_dsub
+ 607 011c 0246     		mov	r2, r0
+ 608 011e 0B46     		mov	r3, r1
+ 609 0120 1046     		mov	r0, r2
+ 610 0122 1946     		mov	r1, r3
+ 611 0124 40F20003 		movw	r3, #:lower16:err_current
+ 612 0128 C0F20003 		movt	r3, #:upper16:err_current
+ 613 012c C3E90001 		strd	r0, [r3]
+ 166:.\main.c      ****     
+ 167:.\main.c      ****     error_sum = error_sum + err_current;
+ 614              		.loc 1 167 0
+ 615 0130 40F20003 		movw	r3, #:lower16:error_sum
+ 616 0134 C0F20003 		movt	r3, #:upper16:error_sum
+ 617 0138 D3E90001 		ldrd	r0, [r3]
+ 618 013c 40F20003 		movw	r3, #:lower16:err_current
+ 619 0140 C0F20003 		movt	r3, #:upper16:err_current
+ 620 0144 D3E90023 		ldrd	r2, [r3]
+ 621 0148 FFF7FEFF 		bl	__aeabi_dadd
+ 622 014c 0246     		mov	r2, r0
+ 623 014e 0B46     		mov	r3, r1
+ 624 0150 1046     		mov	r0, r2
+ 625 0152 1946     		mov	r1, r3
+ 626 0154 40F20003 		movw	r3, #:lower16:error_sum
+ 627 0158 C0F20003 		movt	r3, #:upper16:error_sum
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 15
+
+
+ 628 015c C3E90001 		strd	r0, [r3]
+ 168:.\main.c      ****     output_current = (kp*err_current) + (ki*error_sum);   // PI control calculation
+ 629              		.loc 1 168 0
+ 630 0160 40F20003 		movw	r3, #:lower16:kp
+ 631 0164 C0F20003 		movt	r3, #:upper16:kp
+ 632 0168 D3E90001 		ldrd	r0, [r3]
+ 633 016c 40F20003 		movw	r3, #:lower16:err_current
+ 634 0170 C0F20003 		movt	r3, #:upper16:err_current
+ 635 0174 D3E90023 		ldrd	r2, [r3]
+ 636 0178 FFF7FEFF 		bl	__aeabi_dmul
+ 637 017c 0246     		mov	r2, r0
+ 638 017e 0B46     		mov	r3, r1
+ 639 0180 1446     		mov	r4, r2
+ 640 0182 1D46     		mov	r5, r3
+ 641 0184 40F20003 		movw	r3, #:lower16:ki
+ 642 0188 C0F20003 		movt	r3, #:upper16:ki
+ 643 018c D3E90001 		ldrd	r0, [r3]
+ 644 0190 40F20003 		movw	r3, #:lower16:error_sum
+ 645 0194 C0F20003 		movt	r3, #:upper16:error_sum
+ 646 0198 D3E90023 		ldrd	r2, [r3]
+ 647 019c FFF7FEFF 		bl	__aeabi_dmul
+ 648 01a0 0246     		mov	r2, r0
+ 649 01a2 0B46     		mov	r3, r1
+ 650 01a4 2046     		mov	r0, r4
+ 651 01a6 2946     		mov	r1, r5
+ 652 01a8 FFF7FEFF 		bl	__aeabi_dadd
+ 653 01ac 0246     		mov	r2, r0
+ 654 01ae 0B46     		mov	r3, r1
+ 655 01b0 1046     		mov	r0, r2
+ 656 01b2 1946     		mov	r1, r3
+ 657 01b4 40F20003 		movw	r3, #:lower16:output_current
+ 658 01b8 C0F20003 		movt	r3, #:upper16:output_current
+ 659 01bc C3E90001 		strd	r0, [r3]
+ 169:.\main.c      ****     
+ 170:.\main.c      ****     // 0 bound guard
+ 171:.\main.c      ****     if (output_current < 0) output_current = 0;
+ 660              		.loc 1 171 0
+ 661 01c0 40F20003 		movw	r3, #:lower16:output_current
+ 662 01c4 C0F20003 		movt	r3, #:upper16:output_current
+ 663 01c8 D3E90023 		ldrd	r2, [r3]
+ 664 01cc 4FF00001 		mov	r1, #0
+ 665 01d0 0C46     		mov	r4, r1
+ 666 01d2 1046     		mov	r0, r2
+ 667 01d4 1946     		mov	r1, r3
+ 668 01d6 4FF00002 		mov	r2, #0
+ 669 01da 4FF00003 		mov	r3, #0
+ 670 01de FFF7FEFF 		bl	__aeabi_dcmplt
+ 671 01e2 0346     		mov	r3, r0
+ 672 01e4 002B     		cmp	r3, #0
+ 673 01e6 02D0     		beq	.L25
+ 674              	.L26:
+ 675 01e8 4FF00103 		mov	r3, #1
+ 676 01ec 1C46     		mov	r4, r3
+ 677              	.L25:
+ 678 01ee E3B2     		uxtb	r3, r4
+ 679 01f0 002B     		cmp	r3, #0
+ 680 01f2 09D0     		beq	.L27
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 16
+
+
+ 681 01f4 40F20003 		movw	r3, #:lower16:output_current
+ 682 01f8 C0F20003 		movt	r3, #:upper16:output_current
+ 683 01fc 4FF00000 		mov	r0, #0
+ 684 0200 4FF00001 		mov	r1, #0
+ 685 0204 C3E90001 		strd	r0, [r3]
+ 686              	.L27:
+ 172:.\main.c      ****     
+ 173:.\main.c      ****     // if two laps have been completed, set output to zero
+ 174:.\main.c      ****     //if (HE_interrupt_count > HE_interrupts_final) output_current = 0;
+ 175:.\main.c      ****     
+ 176:.\main.c      ****     // set new duty cycle 
+ 177:.\main.c      ****     PWM_Motor_WriteCompare(output_current); 
+ 687              		.loc 1 177 0
+ 688 0208 40F20003 		movw	r3, #:lower16:output_current
+ 689 020c C0F20003 		movt	r3, #:upper16:output_current
+ 690 0210 D3E90023 		ldrd	r2, [r3]
+ 691 0214 1046     		mov	r0, r2
+ 692 0216 1946     		mov	r1, r3
+ 693 0218 FFF7FEFF 		bl	__aeabi_d2uiz
+ 694 021c 0346     		mov	r3, r0
+ 695 021e DBB2     		uxtb	r3, r3
+ 696 0220 1846     		mov	r0, r3
+ 697 0222 FFF7FEFF 		bl	PWM_Motor_WriteCompare
+ 178:.\main.c      ****     /*
+ 179:.\main.c      ****     sprintf(strbuffer, "%i", HE_interrupt_count);
+ 180:.\main.c      ****     LCD_Position(1,0);
+ 181:.\main.c      ****     LCD_PrintString(strbuffer);
+ 182:.\main.c      ****     */
+ 183:.\main.c      ****     
+ 184:.\main.c      ****     //HE_interrupt_count += 1;
+ 185:.\main.c      **** }
+ 698              		.loc 1 185 0
+ 699 0226 07F10807 		add	r7, r7, #8
+ 700 022a BD46     		mov	sp, r7
+ 701 022c B0BD     		pop	{r4, r5, r7, pc}
+ 702              		.cfi_endproc
+ 703              	.LFE32:
+ 704              		.size	inter_HE, .-inter_HE
+ 705              		.section	.text.inter_infrared_rising_0,"ax",%progbits
+ 706              		.align	2
+ 707              		.global	inter_infrared_rising_0
+ 708              		.thumb
+ 709              		.thumb_func
+ 710              		.type	inter_infrared_rising_0, %function
+ 711              	inter_infrared_rising_0:
+ 712              	.LFB33:
+ 186:.\main.c      **** 
+ 187:.\main.c      **** // 1
+ 188:.\main.c      **** CY_ISR(inter_infrared_rising_0) {
+ 713              		.loc 1 188 0
+ 714              		.cfi_startproc
+ 715              		@ args = 0, pretend = 0, frame = 0
+ 716              		@ frame_needed = 1, uses_anonymous_args = 0
+ 717 0000 80B5     		push	{r7, lr}
+ 718              	.LCFI12:
+ 719              		.cfi_def_cfa_offset 8
+ 720 0002 00AF     		add	r7, sp, #0
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 17
+
+
+ 721              		.cfi_offset 14, -4
+ 722              		.cfi_offset 7, -8
+ 723              	.LCFI13:
+ 724              		.cfi_def_cfa_register 7
+ 189:.\main.c      ****     inf_rise_prev[0] = inf_rise[0];
+ 725              		.loc 1 189 0
+ 726 0004 40F20003 		movw	r3, #:lower16:inf_rise
+ 727 0008 C0F20003 		movt	r3, #:upper16:inf_rise
+ 728 000c 1A68     		ldr	r2, [r3, #0]
+ 729 000e 40F20003 		movw	r3, #:lower16:inf_rise_prev
+ 730 0012 C0F20003 		movt	r3, #:upper16:inf_rise_prev
+ 731 0016 1A60     		str	r2, [r3, #0]
+ 190:.\main.c      ****     inf_rise[0] = (int) Timer_Infrared_0_ReadCapture();
+ 732              		.loc 1 190 0
+ 733 0018 FFF7FEFF 		bl	Timer_Infrared_0_ReadCapture
+ 734 001c 0346     		mov	r3, r0
+ 735 001e 1A46     		mov	r2, r3
+ 736 0020 40F20003 		movw	r3, #:lower16:inf_rise
+ 737 0024 C0F20003 		movt	r3, #:upper16:inf_rise
+ 738 0028 1A60     		str	r2, [r3, #0]
+ 191:.\main.c      ****     updateSensorPos(0);
+ 739              		.loc 1 191 0
+ 740 002a 4FF00000 		mov	r0, #0
+ 741 002e FFF7FEFF 		bl	updateSensorPos
+ 192:.\main.c      **** }
+ 742              		.loc 1 192 0
+ 743 0032 80BD     		pop	{r7, pc}
+ 744              		.cfi_endproc
+ 745              	.LFE33:
+ 746              		.size	inter_infrared_rising_0, .-inter_infrared_rising_0
+ 747              		.section	.rodata
+ 748              		.align	2
+ 749              	.LC0:
+ 750 0000 256900   		.ascii	"%i\000"
+ 751 0003 00       		.section	.text.inter_infrared_falling_0,"ax",%progbits
+ 752              		.align	2
+ 753              		.global	inter_infrared_falling_0
+ 754              		.thumb
+ 755              		.thumb_func
+ 756              		.type	inter_infrared_falling_0, %function
+ 757              	inter_infrared_falling_0:
+ 758              	.LFB34:
+ 193:.\main.c      **** 
+ 194:.\main.c      **** CY_ISR(inter_infrared_falling_0) {
+ 759              		.loc 1 194 0
+ 760              		.cfi_startproc
+ 761              		@ args = 0, pretend = 0, frame = 16
+ 762              		@ frame_needed = 1, uses_anonymous_args = 0
+ 763 0000 80B5     		push	{r7, lr}
+ 764              	.LCFI14:
+ 765              		.cfi_def_cfa_offset 8
+ 766 0002 84B0     		sub	sp, sp, #16
+ 767              	.LCFI15:
+ 768              		.cfi_def_cfa_offset 24
+ 769 0004 00AF     		add	r7, sp, #0
+ 770              		.cfi_offset 14, -4
+ 771              		.cfi_offset 7, -8
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 18
+
+
+ 772              	.LCFI16:
+ 773              		.cfi_def_cfa_register 7
+ 195:.\main.c      ****     char strbuffer[15];
+ 196:.\main.c      ****     inf_fall[0] = (int) Timer_Infrared_0_ReadCapture();
+ 774              		.loc 1 196 0
+ 775 0006 FFF7FEFF 		bl	Timer_Infrared_0_ReadCapture
+ 776 000a 0346     		mov	r3, r0
+ 777 000c 1A46     		mov	r2, r3
+ 778 000e 40F20003 		movw	r3, #:lower16:inf_fall
+ 779 0012 C0F20003 		movt	r3, #:upper16:inf_fall
+ 780 0016 1A60     		str	r2, [r3, #0]
+ 197:.\main.c      ****     n_fallingEdges[0] += 1;
+ 781              		.loc 1 197 0
+ 782 0018 40F20003 		movw	r3, #:lower16:n_fallingEdges
+ 783 001c C0F20003 		movt	r3, #:upper16:n_fallingEdges
+ 784 0020 1B68     		ldr	r3, [r3, #0]
+ 785 0022 03F10102 		add	r2, r3, #1
+ 786 0026 40F20003 		movw	r3, #:lower16:n_fallingEdges
+ 787 002a C0F20003 		movt	r3, #:upper16:n_fallingEdges
+ 788 002e 1A60     		str	r2, [r3, #0]
+ 198:.\main.c      ****     
+ 199:.\main.c      ****     sprintf(strbuffer, "%i", n_fallingEdges[0]);
+ 789              		.loc 1 199 0
+ 790 0030 40F20003 		movw	r3, #:lower16:n_fallingEdges
+ 791 0034 C0F20003 		movt	r3, #:upper16:n_fallingEdges
+ 792 0038 1B68     		ldr	r3, [r3, #0]
+ 793 003a 3A46     		mov	r2, r7
+ 794 003c 1046     		mov	r0, r2
+ 795 003e 40F20001 		movw	r1, #:lower16:.LC0
+ 796 0042 C0F20001 		movt	r1, #:upper16:.LC0
+ 797 0046 1A46     		mov	r2, r3
+ 798 0048 FFF7FEFF 		bl	sprintf
+ 200:.\main.c      ****     LCD_Position(0,0);
+ 799              		.loc 1 200 0
+ 800 004c 4FF00000 		mov	r0, #0
+ 801 0050 4FF00001 		mov	r1, #0
+ 802 0054 FFF7FEFF 		bl	LCD_Position
+ 201:.\main.c      ****     LCD_PrintString(strbuffer);
+ 803              		.loc 1 201 0
+ 804 0058 3B46     		mov	r3, r7
+ 805 005a 1846     		mov	r0, r3
+ 806 005c FFF7FEFF 		bl	LCD_PrintString
+ 202:.\main.c      **** }
+ 807              		.loc 1 202 0
+ 808 0060 07F11007 		add	r7, r7, #16
+ 809 0064 BD46     		mov	sp, r7
+ 810 0066 80BD     		pop	{r7, pc}
+ 811              		.cfi_endproc
+ 812              	.LFE34:
+ 813              		.size	inter_infrared_falling_0, .-inter_infrared_falling_0
+ 814              		.section	.text.inter_infrared_rising_1,"ax",%progbits
+ 815              		.align	2
+ 816              		.global	inter_infrared_rising_1
+ 817              		.thumb
+ 818              		.thumb_func
+ 819              		.type	inter_infrared_rising_1, %function
+ 820              	inter_infrared_rising_1:
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 19
+
+
+ 821              	.LFB35:
+ 203:.\main.c      **** 
+ 204:.\main.c      **** // 2
+ 205:.\main.c      **** CY_ISR(inter_infrared_rising_1) {
+ 822              		.loc 1 205 0
+ 823              		.cfi_startproc
+ 824              		@ args = 0, pretend = 0, frame = 0
+ 825              		@ frame_needed = 1, uses_anonymous_args = 0
+ 826 0000 80B5     		push	{r7, lr}
+ 827              	.LCFI17:
+ 828              		.cfi_def_cfa_offset 8
+ 829 0002 00AF     		add	r7, sp, #0
+ 830              		.cfi_offset 14, -4
+ 831              		.cfi_offset 7, -8
+ 832              	.LCFI18:
+ 833              		.cfi_def_cfa_register 7
+ 206:.\main.c      ****     inf_rise_prev[1] = inf_rise[1];
+ 834              		.loc 1 206 0
+ 835 0004 40F20003 		movw	r3, #:lower16:inf_rise
+ 836 0008 C0F20003 		movt	r3, #:upper16:inf_rise
+ 837 000c 5A68     		ldr	r2, [r3, #4]
+ 838 000e 40F20003 		movw	r3, #:lower16:inf_rise_prev
+ 839 0012 C0F20003 		movt	r3, #:upper16:inf_rise_prev
+ 840 0016 5A60     		str	r2, [r3, #4]
+ 207:.\main.c      ****     inf_rise[1] = (int) Timer_Infrared_1_ReadCapture();
+ 841              		.loc 1 207 0
+ 842 0018 FFF7FEFF 		bl	Timer_Infrared_1_ReadCapture
+ 843 001c 0346     		mov	r3, r0
+ 844 001e 1A46     		mov	r2, r3
+ 845 0020 40F20003 		movw	r3, #:lower16:inf_rise
+ 846 0024 C0F20003 		movt	r3, #:upper16:inf_rise
+ 847 0028 5A60     		str	r2, [r3, #4]
+ 208:.\main.c      ****     updateSensorPos(1);
+ 848              		.loc 1 208 0
+ 849 002a 4FF00100 		mov	r0, #1
+ 850 002e FFF7FEFF 		bl	updateSensorPos
+ 209:.\main.c      **** }
+ 851              		.loc 1 209 0
+ 852 0032 80BD     		pop	{r7, pc}
+ 853              		.cfi_endproc
+ 854              	.LFE35:
+ 855              		.size	inter_infrared_rising_1, .-inter_infrared_rising_1
+ 856              		.section	.text.inter_infrared_falling_1,"ax",%progbits
+ 857              		.align	2
+ 858              		.global	inter_infrared_falling_1
+ 859              		.thumb
+ 860              		.thumb_func
+ 861              		.type	inter_infrared_falling_1, %function
+ 862              	inter_infrared_falling_1:
+ 863              	.LFB36:
+ 210:.\main.c      **** 
+ 211:.\main.c      **** CY_ISR(inter_infrared_falling_1) {
+ 864              		.loc 1 211 0
+ 865              		.cfi_startproc
+ 866              		@ args = 0, pretend = 0, frame = 16
+ 867              		@ frame_needed = 1, uses_anonymous_args = 0
+ 868 0000 80B5     		push	{r7, lr}
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 20
+
+
+ 869              	.LCFI19:
+ 870              		.cfi_def_cfa_offset 8
+ 871 0002 84B0     		sub	sp, sp, #16
+ 872              	.LCFI20:
+ 873              		.cfi_def_cfa_offset 24
+ 874 0004 00AF     		add	r7, sp, #0
+ 875              		.cfi_offset 14, -4
+ 876              		.cfi_offset 7, -8
+ 877              	.LCFI21:
+ 878              		.cfi_def_cfa_register 7
+ 212:.\main.c      ****     char strbuffer[15];
+ 213:.\main.c      ****     inf_fall[1] = (int) Timer_Infrared_1_ReadCapture();
+ 879              		.loc 1 213 0
+ 880 0006 FFF7FEFF 		bl	Timer_Infrared_1_ReadCapture
+ 881 000a 0346     		mov	r3, r0
+ 882 000c 1A46     		mov	r2, r3
+ 883 000e 40F20003 		movw	r3, #:lower16:inf_fall
+ 884 0012 C0F20003 		movt	r3, #:upper16:inf_fall
+ 885 0016 5A60     		str	r2, [r3, #4]
+ 214:.\main.c      ****     n_fallingEdges[1] += 1;
+ 886              		.loc 1 214 0
+ 887 0018 40F20003 		movw	r3, #:lower16:n_fallingEdges
+ 888 001c C0F20003 		movt	r3, #:upper16:n_fallingEdges
+ 889 0020 5B68     		ldr	r3, [r3, #4]
+ 890 0022 03F10102 		add	r2, r3, #1
+ 891 0026 40F20003 		movw	r3, #:lower16:n_fallingEdges
+ 892 002a C0F20003 		movt	r3, #:upper16:n_fallingEdges
+ 893 002e 5A60     		str	r2, [r3, #4]
+ 215:.\main.c      ****     
+ 216:.\main.c      ****     sprintf(strbuffer, "%i", n_fallingEdges[1]);
+ 894              		.loc 1 216 0
+ 895 0030 40F20003 		movw	r3, #:lower16:n_fallingEdges
+ 896 0034 C0F20003 		movt	r3, #:upper16:n_fallingEdges
+ 897 0038 5B68     		ldr	r3, [r3, #4]
+ 898 003a 3A46     		mov	r2, r7
+ 899 003c 1046     		mov	r0, r2
+ 900 003e 40F20001 		movw	r1, #:lower16:.LC0
+ 901 0042 C0F20001 		movt	r1, #:upper16:.LC0
+ 902 0046 1A46     		mov	r2, r3
+ 903 0048 FFF7FEFF 		bl	sprintf
+ 217:.\main.c      ****     LCD_Position(0,7);
+ 904              		.loc 1 217 0
+ 905 004c 4FF00000 		mov	r0, #0
+ 906 0050 4FF00701 		mov	r1, #7
+ 907 0054 FFF7FEFF 		bl	LCD_Position
+ 218:.\main.c      ****     LCD_PrintString(strbuffer);
+ 908              		.loc 1 218 0
+ 909 0058 3B46     		mov	r3, r7
+ 910 005a 1846     		mov	r0, r3
+ 911 005c FFF7FEFF 		bl	LCD_PrintString
+ 219:.\main.c      **** }
+ 912              		.loc 1 219 0
+ 913 0060 07F11007 		add	r7, r7, #16
+ 914 0064 BD46     		mov	sp, r7
+ 915 0066 80BD     		pop	{r7, pc}
+ 916              		.cfi_endproc
+ 917              	.LFE36:
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 21
+
+
+ 918              		.size	inter_infrared_falling_1, .-inter_infrared_falling_1
+ 919              		.section	.text.inter_infrared_rising_2,"ax",%progbits
+ 920              		.align	2
+ 921              		.global	inter_infrared_rising_2
+ 922              		.thumb
+ 923              		.thumb_func
+ 924              		.type	inter_infrared_rising_2, %function
+ 925              	inter_infrared_rising_2:
+ 926              	.LFB37:
+ 220:.\main.c      **** 
+ 221:.\main.c      **** // 3
+ 222:.\main.c      **** CY_ISR(inter_infrared_rising_2) {
+ 927              		.loc 1 222 0
+ 928              		.cfi_startproc
+ 929              		@ args = 0, pretend = 0, frame = 0
+ 930              		@ frame_needed = 1, uses_anonymous_args = 0
+ 931 0000 80B5     		push	{r7, lr}
+ 932              	.LCFI22:
+ 933              		.cfi_def_cfa_offset 8
+ 934 0002 00AF     		add	r7, sp, #0
+ 935              		.cfi_offset 14, -4
+ 936              		.cfi_offset 7, -8
+ 937              	.LCFI23:
+ 938              		.cfi_def_cfa_register 7
+ 223:.\main.c      ****     inf_rise_prev[2] = inf_rise[2];
+ 939              		.loc 1 223 0
+ 940 0004 40F20003 		movw	r3, #:lower16:inf_rise
+ 941 0008 C0F20003 		movt	r3, #:upper16:inf_rise
+ 942 000c 9A68     		ldr	r2, [r3, #8]
+ 943 000e 40F20003 		movw	r3, #:lower16:inf_rise_prev
+ 944 0012 C0F20003 		movt	r3, #:upper16:inf_rise_prev
+ 945 0016 9A60     		str	r2, [r3, #8]
+ 224:.\main.c      ****     inf_rise[2] = (int) Timer_Infrared_2_ReadCapture();
+ 946              		.loc 1 224 0
+ 947 0018 FFF7FEFF 		bl	Timer_Infrared_2_ReadCapture
+ 948 001c 0346     		mov	r3, r0
+ 949 001e 1A46     		mov	r2, r3
+ 950 0020 40F20003 		movw	r3, #:lower16:inf_rise
+ 951 0024 C0F20003 		movt	r3, #:upper16:inf_rise
+ 952 0028 9A60     		str	r2, [r3, #8]
+ 225:.\main.c      ****     updateSensorPos(2);
+ 953              		.loc 1 225 0
+ 954 002a 4FF00200 		mov	r0, #2
+ 955 002e FFF7FEFF 		bl	updateSensorPos
+ 226:.\main.c      **** }
+ 956              		.loc 1 226 0
+ 957 0032 80BD     		pop	{r7, pc}
+ 958              		.cfi_endproc
+ 959              	.LFE37:
+ 960              		.size	inter_infrared_rising_2, .-inter_infrared_rising_2
+ 961              		.section	.text.inter_infrared_falling_2,"ax",%progbits
+ 962              		.align	2
+ 963              		.global	inter_infrared_falling_2
+ 964              		.thumb
+ 965              		.thumb_func
+ 966              		.type	inter_infrared_falling_2, %function
+ 967              	inter_infrared_falling_2:
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 22
+
+
+ 968              	.LFB38:
+ 227:.\main.c      **** 
+ 228:.\main.c      **** CY_ISR(inter_infrared_falling_2) {
+ 969              		.loc 1 228 0
+ 970              		.cfi_startproc
+ 971              		@ args = 0, pretend = 0, frame = 16
+ 972              		@ frame_needed = 1, uses_anonymous_args = 0
+ 973 0000 80B5     		push	{r7, lr}
+ 974              	.LCFI24:
+ 975              		.cfi_def_cfa_offset 8
+ 976 0002 84B0     		sub	sp, sp, #16
+ 977              	.LCFI25:
+ 978              		.cfi_def_cfa_offset 24
+ 979 0004 00AF     		add	r7, sp, #0
+ 980              		.cfi_offset 14, -4
+ 981              		.cfi_offset 7, -8
+ 982              	.LCFI26:
+ 983              		.cfi_def_cfa_register 7
+ 229:.\main.c      ****     char strbuffer[15];
+ 230:.\main.c      ****     inf_fall[2] = (int) Timer_Infrared_2_ReadCapture();
+ 984              		.loc 1 230 0
+ 985 0006 FFF7FEFF 		bl	Timer_Infrared_2_ReadCapture
+ 986 000a 0346     		mov	r3, r0
+ 987 000c 1A46     		mov	r2, r3
+ 988 000e 40F20003 		movw	r3, #:lower16:inf_fall
+ 989 0012 C0F20003 		movt	r3, #:upper16:inf_fall
+ 990 0016 9A60     		str	r2, [r3, #8]
+ 231:.\main.c      ****     n_fallingEdges[2] += 1;
+ 991              		.loc 1 231 0
+ 992 0018 40F20003 		movw	r3, #:lower16:n_fallingEdges
+ 993 001c C0F20003 		movt	r3, #:upper16:n_fallingEdges
+ 994 0020 9B68     		ldr	r3, [r3, #8]
+ 995 0022 03F10102 		add	r2, r3, #1
+ 996 0026 40F20003 		movw	r3, #:lower16:n_fallingEdges
+ 997 002a C0F20003 		movt	r3, #:upper16:n_fallingEdges
+ 998 002e 9A60     		str	r2, [r3, #8]
+ 232:.\main.c      ****     
+ 233:.\main.c      ****     sprintf(strbuffer, "%i", n_fallingEdges[2]);
+ 999              		.loc 1 233 0
+ 1000 0030 40F20003 		movw	r3, #:lower16:n_fallingEdges
+ 1001 0034 C0F20003 		movt	r3, #:upper16:n_fallingEdges
+ 1002 0038 9B68     		ldr	r3, [r3, #8]
+ 1003 003a 3A46     		mov	r2, r7
+ 1004 003c 1046     		mov	r0, r2
+ 1005 003e 40F20001 		movw	r1, #:lower16:.LC0
+ 1006 0042 C0F20001 		movt	r1, #:upper16:.LC0
+ 1007 0046 1A46     		mov	r2, r3
+ 1008 0048 FFF7FEFF 		bl	sprintf
+ 234:.\main.c      ****     LCD_Position(1,0);
+ 1009              		.loc 1 234 0
+ 1010 004c 4FF00100 		mov	r0, #1
+ 1011 0050 4FF00001 		mov	r1, #0
+ 1012 0054 FFF7FEFF 		bl	LCD_Position
+ 235:.\main.c      ****     LCD_PrintString(strbuffer);
+ 1013              		.loc 1 235 0
+ 1014 0058 3B46     		mov	r3, r7
+ 1015 005a 1846     		mov	r0, r3
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 23
+
+
+ 1016 005c FFF7FEFF 		bl	LCD_PrintString
+ 236:.\main.c      **** }
+ 1017              		.loc 1 236 0
+ 1018 0060 07F11007 		add	r7, r7, #16
+ 1019 0064 BD46     		mov	sp, r7
+ 1020 0066 80BD     		pop	{r7, pc}
+ 1021              		.cfi_endproc
+ 1022              	.LFE38:
+ 1023              		.size	inter_infrared_falling_2, .-inter_infrared_falling_2
+ 1024              		.section	.text.inter_infrared_rising_3,"ax",%progbits
+ 1025              		.align	2
+ 1026              		.global	inter_infrared_rising_3
+ 1027              		.thumb
+ 1028              		.thumb_func
+ 1029              		.type	inter_infrared_rising_3, %function
+ 1030              	inter_infrared_rising_3:
+ 1031              	.LFB39:
+ 237:.\main.c      **** 
+ 238:.\main.c      **** // 4
+ 239:.\main.c      **** CY_ISR(inter_infrared_rising_3) {
+ 1032              		.loc 1 239 0
+ 1033              		.cfi_startproc
+ 1034              		@ args = 0, pretend = 0, frame = 0
+ 1035              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1036 0000 80B5     		push	{r7, lr}
+ 1037              	.LCFI27:
+ 1038              		.cfi_def_cfa_offset 8
+ 1039 0002 00AF     		add	r7, sp, #0
+ 1040              		.cfi_offset 14, -4
+ 1041              		.cfi_offset 7, -8
+ 1042              	.LCFI28:
+ 1043              		.cfi_def_cfa_register 7
+ 240:.\main.c      ****     inf_rise_prev[3] = inf_rise[3];
+ 1044              		.loc 1 240 0
+ 1045 0004 40F20003 		movw	r3, #:lower16:inf_rise
+ 1046 0008 C0F20003 		movt	r3, #:upper16:inf_rise
+ 1047 000c DA68     		ldr	r2, [r3, #12]
+ 1048 000e 40F20003 		movw	r3, #:lower16:inf_rise_prev
+ 1049 0012 C0F20003 		movt	r3, #:upper16:inf_rise_prev
+ 1050 0016 DA60     		str	r2, [r3, #12]
+ 241:.\main.c      ****     inf_rise[3] = (int) Timer_Infrared_3_ReadCapture();
+ 1051              		.loc 1 241 0
+ 1052 0018 FFF7FEFF 		bl	Timer_Infrared_3_ReadCapture
+ 1053 001c 0346     		mov	r3, r0
+ 1054 001e 1A46     		mov	r2, r3
+ 1055 0020 40F20003 		movw	r3, #:lower16:inf_rise
+ 1056 0024 C0F20003 		movt	r3, #:upper16:inf_rise
+ 1057 0028 DA60     		str	r2, [r3, #12]
+ 242:.\main.c      ****     updateSensorPos(3);
+ 1058              		.loc 1 242 0
+ 1059 002a 4FF00300 		mov	r0, #3
+ 1060 002e FFF7FEFF 		bl	updateSensorPos
+ 243:.\main.c      **** }
+ 1061              		.loc 1 243 0
+ 1062 0032 80BD     		pop	{r7, pc}
+ 1063              		.cfi_endproc
+ 1064              	.LFE39:
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 24
+
+
+ 1065              		.size	inter_infrared_rising_3, .-inter_infrared_rising_3
+ 1066              		.section	.text.inter_infrared_falling_3,"ax",%progbits
+ 1067              		.align	2
+ 1068              		.global	inter_infrared_falling_3
+ 1069              		.thumb
+ 1070              		.thumb_func
+ 1071              		.type	inter_infrared_falling_3, %function
+ 1072              	inter_infrared_falling_3:
+ 1073              	.LFB40:
+ 244:.\main.c      **** 
+ 245:.\main.c      **** CY_ISR(inter_infrared_falling_3) {
+ 1074              		.loc 1 245 0
+ 1075              		.cfi_startproc
+ 1076              		@ args = 0, pretend = 0, frame = 16
+ 1077              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1078 0000 80B5     		push	{r7, lr}
+ 1079              	.LCFI29:
+ 1080              		.cfi_def_cfa_offset 8
+ 1081 0002 84B0     		sub	sp, sp, #16
+ 1082              	.LCFI30:
+ 1083              		.cfi_def_cfa_offset 24
+ 1084 0004 00AF     		add	r7, sp, #0
+ 1085              		.cfi_offset 14, -4
+ 1086              		.cfi_offset 7, -8
+ 1087              	.LCFI31:
+ 1088              		.cfi_def_cfa_register 7
+ 246:.\main.c      ****     char strbuffer[15];
+ 247:.\main.c      ****     inf_fall[3] = (int) Timer_Infrared_3_ReadCapture();
+ 1089              		.loc 1 247 0
+ 1090 0006 FFF7FEFF 		bl	Timer_Infrared_3_ReadCapture
+ 1091 000a 0346     		mov	r3, r0
+ 1092 000c 1A46     		mov	r2, r3
+ 1093 000e 40F20003 		movw	r3, #:lower16:inf_fall
+ 1094 0012 C0F20003 		movt	r3, #:upper16:inf_fall
+ 1095 0016 DA60     		str	r2, [r3, #12]
+ 248:.\main.c      ****     n_fallingEdges[3] += 1;
+ 1096              		.loc 1 248 0
+ 1097 0018 40F20003 		movw	r3, #:lower16:n_fallingEdges
+ 1098 001c C0F20003 		movt	r3, #:upper16:n_fallingEdges
+ 1099 0020 DB68     		ldr	r3, [r3, #12]
+ 1100 0022 03F10102 		add	r2, r3, #1
+ 1101 0026 40F20003 		movw	r3, #:lower16:n_fallingEdges
+ 1102 002a C0F20003 		movt	r3, #:upper16:n_fallingEdges
+ 1103 002e DA60     		str	r2, [r3, #12]
+ 249:.\main.c      ****     
+ 250:.\main.c      ****     sprintf(strbuffer, "%i", n_fallingEdges[3]);
+ 1104              		.loc 1 250 0
+ 1105 0030 40F20003 		movw	r3, #:lower16:n_fallingEdges
+ 1106 0034 C0F20003 		movt	r3, #:upper16:n_fallingEdges
+ 1107 0038 DB68     		ldr	r3, [r3, #12]
+ 1108 003a 3A46     		mov	r2, r7
+ 1109 003c 1046     		mov	r0, r2
+ 1110 003e 40F20001 		movw	r1, #:lower16:.LC0
+ 1111 0042 C0F20001 		movt	r1, #:upper16:.LC0
+ 1112 0046 1A46     		mov	r2, r3
+ 1113 0048 FFF7FEFF 		bl	sprintf
+ 251:.\main.c      ****     LCD_Position(1,7);
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 25
+
+
+ 1114              		.loc 1 251 0
+ 1115 004c 4FF00100 		mov	r0, #1
+ 1116 0050 4FF00701 		mov	r1, #7
+ 1117 0054 FFF7FEFF 		bl	LCD_Position
+ 252:.\main.c      ****     LCD_PrintString(strbuffer);
+ 1118              		.loc 1 252 0
+ 1119 0058 3B46     		mov	r3, r7
+ 1120 005a 1846     		mov	r0, r3
+ 1121 005c FFF7FEFF 		bl	LCD_PrintString
+ 253:.\main.c      **** }
+ 1122              		.loc 1 253 0
+ 1123 0060 07F11007 		add	r7, r7, #16
+ 1124 0064 BD46     		mov	sp, r7
+ 1125 0066 80BD     		pop	{r7, pc}
+ 1126              		.cfi_endproc
+ 1127              	.LFE40:
+ 1128              		.size	inter_infrared_falling_3, .-inter_infrared_falling_3
+ 1129              		.section	.text.main,"ax",%progbits
+ 1130              		.align	2
+ 1131              		.global	main
+ 1132              		.thumb
+ 1133              		.thumb_func
+ 1134              		.type	main, %function
+ 1135              	main:
+ 1136              	.LFB41:
+ 254:.\main.c      **** 
+ 255:.\main.c      **** /*
+ 256:.\main.c      **** static void printSensorPos(int id) {
+ 257:.\main.c      ****     char strbuffer[15];
+ 258:.\main.c      ****     //int clk = 24000;
+ 259:.\main.c      ****     
+ 260:.\main.c      ****     //double dx = (double) inf_dx[id] / clk;
+ 261:.\main.c      ****     //double dy = (double) inf_dy[id] / clk;
+ 262:.\main.c      ****     
+ 263:.\main.c      ****     if (id == 0) {
+ 264:.\main.c      ****         sprintf(strbuffer, "%.1f", inf_dx[id]);
+ 265:.\main.c      ****         LCD_Position(0,0);
+ 266:.\main.c      ****         LCD_PrintString(strbuffer);
+ 267:.\main.c      ****         
+ 268:.\main.c      ****         sprintf(strbuffer, "%.1f", inf_dy[id]);
+ 269:.\main.c      ****         LCD_Position(1,0);
+ 270:.\main.c      ****         LCD_PrintString(strbuffer);
+ 271:.\main.c      ****         
+ 272:.\main.c      ****     }
+ 273:.\main.c      ****     else if (id == 1) {
+ 274:.\main.c      ****         sprintf(strbuffer, "%.1f", inf_dx[id]);
+ 275:.\main.c      ****         LCD_Position(0,4);
+ 276:.\main.c      ****         LCD_PrintString(strbuffer);
+ 277:.\main.c      ****         
+ 278:.\main.c      ****         sprintf(strbuffer, "%.1f", inf_dy[id]);
+ 279:.\main.c      ****         LCD_Position(1,4);
+ 280:.\main.c      ****         LCD_PrintString(strbuffer);
+ 281:.\main.c      ****     }
+ 282:.\main.c      ****     else if (id == 2) {
+ 283:.\main.c      ****         sprintf(strbuffer, "%.1f", inf_dx[id]);
+ 284:.\main.c      ****         LCD_Position(0,8);
+ 285:.\main.c      ****         LCD_PrintString(strbuffer);
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 26
+
+
+ 286:.\main.c      ****         
+ 287:.\main.c      ****         sprintf(strbuffer, "%.1f", inf_dy[id]);
+ 288:.\main.c      ****         LCD_Position(1,8);
+ 289:.\main.c      ****         LCD_PrintString(strbuffer);
+ 290:.\main.c      ****     }
+ 291:.\main.c      ****     else if (id == 3) {
+ 292:.\main.c      ****         sprintf(strbuffer, "%.1f", inf_dx[id]);
+ 293:.\main.c      ****         LCD_Position(0,12);
+ 294:.\main.c      ****         LCD_PrintString(strbuffer);
+ 295:.\main.c      ****         
+ 296:.\main.c      ****         sprintf(strbuffer, "%.1f", inf_dy[id]);
+ 297:.\main.c      ****         LCD_Position(1,12);
+ 298:.\main.c      ****         LCD_PrintString(strbuffer);
+ 299:.\main.c      ****     }
+ 300:.\main.c      **** }*/
+ 301:.\main.c      **** 
+ 302:.\main.c      **** /*
+ 303:.\main.c      **** int updateSensorOpt(int id) {
+ 304:.\main.c      ****     if (xUpdated && yUpdated) return 1;
+ 305:.\main.c      ****     
+ 306:.\main.c      ****     //char strbuffer[15]; 
+ 307:.\main.c      ****     if (risingEdge[id] != 1) return 0;
+ 308:.\main.c      ****     risingEdge[id] = 0;
+ 309:.\main.c      ****     
+ 310:.\main.c      ****     int n_counts;
+ 311:.\main.c      ****     if (inf_fall[id] > inf_rise[id]) {
+ 312:.\main.c      ****         n_counts = inf_fall[id] - inf_rise[id];
+ 313:.\main.c      ****     }
+ 314:.\main.c      ****     else {
+ 315:.\main.c      ****         n_counts = inf_fall[id] + (inf_timer_count - inf_rise[id]);
+ 316:.\main.c      ****     }
+ 317:.\main.c      ****     
+ 318:.\main.c      ****     int sync_width = n_counts / 24;
+ 319:.\main.c      ****     if (sync_width < 40) {
+ 320:.\main.c      ****         int dt;
+ 321:.\main.c      ****         if (inf_rise_prev[id] > inf_fall[id]) {
+ 322:.\main.c      ****             dt = inf_rise_prev[id] - inf_fall[id];
+ 323:.\main.c      ****         }
+ 324:.\main.c      ****         else {
+ 325:.\main.c      ****             dt = inf_rise_prev[id] + (inf_timer_count - inf_fall[id]);
+ 326:.\main.c      ****         }
+ 327:.\main.c      ****         
+ 328:.\main.c      ****         if (xUpdated && axis[id] == 0) return 0;
+ 329:.\main.c      ****         else if (yUpdated && axis[id] == 1) return 0;
+ 330:.\main.c      ****         
+ 331:.\main.c      ****         sendWireless(id, dt, axis[id]);
+ 332:.\main.c      ****         if (axis[id] == 0) {
+ 333:.\main.c      ****             xUpdated = 1;
+ 334:.\main.c      ****         }
+ 335:.\main.c      ****         else {
+ 336:.\main.c      ****             yUpdated = 1;
+ 337:.\main.c      ****         }
+ 338:.\main.c      ****     }
+ 339:.\main.c      ****     else if (abs(sync_width - 63) <= timing_tolerance) {
+ 340:.\main.c      ****         skip = 0;
+ 341:.\main.c      ****         axis[id] = 0;
+ 342:.\main.c      ****     }
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 27
+
+
+ 343:.\main.c      ****     else if (abs(sync_width - 73) <= timing_tolerance) {
+ 344:.\main.c      ****         skip = 0;
+ 345:.\main.c      ****         axis[id] = 1;
+ 346:.\main.c      ****     }
+ 347:.\main.c      ****     else if (abs(sync_width - 83) <= timing_tolerance) {
+ 348:.\main.c      ****         skip = 0;
+ 349:.\main.c      ****         axis[id] = 0;
+ 350:.\main.c      ****     }
+ 351:.\main.c      ****     else if (abs(sync_width - 94) <= timing_tolerance) {
+ 352:.\main.c      ****         skip = 0;
+ 353:.\main.c      ****         axis[id] = 1;
+ 354:.\main.c      ****     }
+ 355:.\main.c      ****     return 0;
+ 356:.\main.c      **** }*/
+ 357:.\main.c      **** 
+ 358:.\main.c      **** void main() {   
+ 1137              		.loc 1 358 0
+ 1138              		.cfi_startproc
+ 1139              		@ args = 0, pretend = 0, frame = 0
+ 1140              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1141 0000 80B5     		push	{r7, lr}
+ 1142              	.LCFI32:
+ 1143              		.cfi_def_cfa_offset 8
+ 1144 0002 00AF     		add	r7, sp, #0
+ 1145              		.cfi_offset 14, -4
+ 1146              		.cfi_offset 7, -8
+ 1147              	.LCFI33:
+ 1148              		.cfi_def_cfa_register 7
+ 359:.\main.c      ****     //char strbuffer[15];
+ 360:.\main.c      ****     i = 0;
+ 1149              		.loc 1 360 0
+ 1150 0004 40F20003 		movw	r3, #:lower16:i
+ 1151 0008 C0F20003 		movt	r3, #:upper16:i
+ 1152 000c 4FF00002 		mov	r2, #0
+ 1153 0010 1A60     		str	r2, [r3, #0]
+ 361:.\main.c      ****     j = 0;
+ 1154              		.loc 1 361 0
+ 1155 0012 40F20003 		movw	r3, #:lower16:j
+ 1156 0016 C0F20003 		movt	r3, #:upper16:j
+ 1157 001a 4FF00002 		mov	r2, #0
+ 1158 001e 1A60     		str	r2, [r3, #0]
+ 362:.\main.c      ****     
+ 363:.\main.c      ****     // initialize components
+ 364:.\main.c      ****     CyGlobalIntEnable; // enable global interrupts
+ 1159              		.loc 1 364 0
+ 1160              	@ 364 ".\main.c" 1
+ 1161 0020 62B6     		CPSIE   i
+ 1162              	@ 0 "" 2
+ 365:.\main.c      ****     inter_HE_Start();
+ 1163              		.loc 1 365 0
+ 1164              		.thumb
+ 1165 0022 FFF7FEFF 		bl	inter_HE_Start
+ 366:.\main.c      ****     inter_HE_SetVector(inter_HE);
+ 1166              		.loc 1 366 0
+ 1167 0026 40F20000 		movw	r0, #:lower16:inter_HE
+ 1168 002a C0F20000 		movt	r0, #:upper16:inter_HE
+ 1169 002e FFF7FEFF 		bl	inter_HE_SetVector
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 28
+
+
+ 367:.\main.c      ****     
+ 368:.\main.c      ****     // 1
+ 369:.\main.c      ****     inter_infrared_rising_0_Start();
+ 1170              		.loc 1 369 0
+ 1171 0032 FFF7FEFF 		bl	inter_infrared_rising_0_Start
+ 370:.\main.c      ****     inter_infrared_rising_0_SetVector(inter_infrared_rising_0);
+ 1172              		.loc 1 370 0
+ 1173 0036 40F20000 		movw	r0, #:lower16:inter_infrared_rising_0
+ 1174 003a C0F20000 		movt	r0, #:upper16:inter_infrared_rising_0
+ 1175 003e FFF7FEFF 		bl	inter_infrared_rising_0_SetVector
+ 371:.\main.c      ****     inter_infrared_falling_0_Start();
+ 1176              		.loc 1 371 0
+ 1177 0042 FFF7FEFF 		bl	inter_infrared_falling_0_Start
+ 372:.\main.c      ****     inter_infrared_falling_0_SetVector(inter_infrared_falling_0);
+ 1178              		.loc 1 372 0
+ 1179 0046 40F20000 		movw	r0, #:lower16:inter_infrared_falling_0
+ 1180 004a C0F20000 		movt	r0, #:upper16:inter_infrared_falling_0
+ 1181 004e FFF7FEFF 		bl	inter_infrared_falling_0_SetVector
+ 373:.\main.c      ****     
+ 374:.\main.c      ****     // 2
+ 375:.\main.c      ****     inter_infrared_rising_1_Start();
+ 1182              		.loc 1 375 0
+ 1183 0052 FFF7FEFF 		bl	inter_infrared_rising_1_Start
+ 376:.\main.c      ****     inter_infrared_rising_1_SetVector(inter_infrared_rising_1);
+ 1184              		.loc 1 376 0
+ 1185 0056 40F20000 		movw	r0, #:lower16:inter_infrared_rising_1
+ 1186 005a C0F20000 		movt	r0, #:upper16:inter_infrared_rising_1
+ 1187 005e FFF7FEFF 		bl	inter_infrared_rising_1_SetVector
+ 377:.\main.c      ****     inter_infrared_falling_1_Start();
+ 1188              		.loc 1 377 0
+ 1189 0062 FFF7FEFF 		bl	inter_infrared_falling_1_Start
+ 378:.\main.c      ****     inter_infrared_falling_1_SetVector(inter_infrared_falling_1);
+ 1190              		.loc 1 378 0
+ 1191 0066 40F20000 		movw	r0, #:lower16:inter_infrared_falling_1
+ 1192 006a C0F20000 		movt	r0, #:upper16:inter_infrared_falling_1
+ 1193 006e FFF7FEFF 		bl	inter_infrared_falling_1_SetVector
+ 379:.\main.c      ****     
+ 380:.\main.c      ****     // 3
+ 381:.\main.c      ****     inter_infrared_rising_2_Start();
+ 1194              		.loc 1 381 0
+ 1195 0072 FFF7FEFF 		bl	inter_infrared_rising_2_Start
+ 382:.\main.c      ****     inter_infrared_rising_2_SetVector(inter_infrared_rising_2);
+ 1196              		.loc 1 382 0
+ 1197 0076 40F20000 		movw	r0, #:lower16:inter_infrared_rising_2
+ 1198 007a C0F20000 		movt	r0, #:upper16:inter_infrared_rising_2
+ 1199 007e FFF7FEFF 		bl	inter_infrared_rising_2_SetVector
+ 383:.\main.c      ****     inter_infrared_falling_2_Start();
+ 1200              		.loc 1 383 0
+ 1201 0082 FFF7FEFF 		bl	inter_infrared_falling_2_Start
+ 384:.\main.c      ****     inter_infrared_falling_2_SetVector(inter_infrared_falling_2);
+ 1202              		.loc 1 384 0
+ 1203 0086 40F20000 		movw	r0, #:lower16:inter_infrared_falling_2
+ 1204 008a C0F20000 		movt	r0, #:upper16:inter_infrared_falling_2
+ 1205 008e FFF7FEFF 		bl	inter_infrared_falling_2_SetVector
+ 385:.\main.c      ****     
+ 386:.\main.c      ****     // 4
+ 387:.\main.c      ****     inter_infrared_rising_3_Start();
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 29
+
+
+ 1206              		.loc 1 387 0
+ 1207 0092 FFF7FEFF 		bl	inter_infrared_rising_3_Start
+ 388:.\main.c      ****     inter_infrared_rising_3_SetVector(inter_infrared_rising_3);
+ 1208              		.loc 1 388 0
+ 1209 0096 40F20000 		movw	r0, #:lower16:inter_infrared_rising_3
+ 1210 009a C0F20000 		movt	r0, #:upper16:inter_infrared_rising_3
+ 1211 009e FFF7FEFF 		bl	inter_infrared_rising_3_SetVector
+ 389:.\main.c      ****     inter_infrared_falling_3_Start();
+ 1212              		.loc 1 389 0
+ 1213 00a2 FFF7FEFF 		bl	inter_infrared_falling_3_Start
+ 390:.\main.c      ****     inter_infrared_falling_3_SetVector(inter_infrared_falling_3);
+ 1214              		.loc 1 390 0
+ 1215 00a6 40F20000 		movw	r0, #:lower16:inter_infrared_falling_3
+ 1216 00aa C0F20000 		movt	r0, #:upper16:inter_infrared_falling_3
+ 1217 00ae FFF7FEFF 		bl	inter_infrared_falling_3_SetVector
+ 391:.\main.c      ****     
+ 392:.\main.c      ****     PWM_Motor_Start();
+ 1218              		.loc 1 392 0
+ 1219 00b2 FFF7FEFF 		bl	PWM_Motor_Start
+ 393:.\main.c      ****     PWM_Servo_Start();
+ 1220              		.loc 1 393 0
+ 1221 00b6 FFF7FEFF 		bl	PWM_Servo_Start
+ 394:.\main.c      ****     
+ 395:.\main.c      ****     Timer_HE_Start();
+ 1222              		.loc 1 395 0
+ 1223 00ba FFF7FEFF 		bl	Timer_HE_Start
+ 396:.\main.c      ****     Timer_Infrared_0_Start();
+ 1224              		.loc 1 396 0
+ 1225 00be FFF7FEFF 		bl	Timer_Infrared_0_Start
+ 397:.\main.c      ****     Timer_Infrared_1_Start();
+ 1226              		.loc 1 397 0
+ 1227 00c2 FFF7FEFF 		bl	Timer_Infrared_1_Start
+ 398:.\main.c      ****     Timer_Infrared_2_Start();
+ 1228              		.loc 1 398 0
+ 1229 00c6 FFF7FEFF 		bl	Timer_Infrared_2_Start
+ 399:.\main.c      ****     Timer_Infrared_3_Start();
+ 1230              		.loc 1 399 0
+ 1231 00ca FFF7FEFF 		bl	Timer_Infrared_3_Start
+ 400:.\main.c      ****     
+ 401:.\main.c      ****     Clock_Motor_Start();
+ 1232              		.loc 1 401 0
+ 1233 00ce FFF7FEFF 		bl	Clock_Motor_Start
+ 402:.\main.c      ****     Clock_Servo_Start(); 
+ 1234              		.loc 1 402 0
+ 1235 00d2 FFF7FEFF 		bl	Clock_Servo_Start
+ 403:.\main.c      ****     Clock_Infrared_Start();
+ 1236              		.loc 1 403 0
+ 1237 00d6 FFF7FEFF 		bl	Clock_Infrared_Start
+ 404:.\main.c      ****     
+ 405:.\main.c      ****     UART_Start();
+ 1238              		.loc 1 405 0
+ 1239 00da FFF7FEFF 		bl	UART_Start
+ 406:.\main.c      ****     LCD_Start();
+ 1240              		.loc 1 406 0
+ 1241 00de FFF7FEFF 		bl	LCD_Start
+ 407:.\main.c      ****     
+ 408:.\main.c      ****     // initialize variables
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 30
+
+
+ 409:.\main.c      ****     delta_t = 0;
+ 1242              		.loc 1 409 0
+ 1243 00e2 40F20003 		movw	r3, #:lower16:delta_t
+ 1244 00e6 C0F20003 		movt	r3, #:upper16:delta_t
+ 1245 00ea 4FF00000 		mov	r0, #0
+ 1246 00ee 4FF00001 		mov	r1, #0
+ 1247 00f2 C3E90001 		strd	r0, [r3]
+ 410:.\main.c      ****     err_current = 0;
+ 1248              		.loc 1 410 0
+ 1249 00f6 40F20003 		movw	r3, #:lower16:err_current
+ 1250 00fa C0F20003 		movt	r3, #:upper16:err_current
+ 1251 00fe 4FF00000 		mov	r0, #0
+ 1252 0102 4FF00001 		mov	r1, #0
+ 1253 0106 C3E90001 		strd	r0, [r3]
+ 411:.\main.c      ****     error_sum = 0;
+ 1254              		.loc 1 411 0
+ 1255 010a 40F20003 		movw	r3, #:lower16:error_sum
+ 1256 010e C0F20003 		movt	r3, #:upper16:error_sum
+ 1257 0112 4FF00000 		mov	r0, #0
+ 1258 0116 4FF00001 		mov	r1, #0
+ 1259 011a C3E90001 		strd	r0, [r3]
+ 412:.\main.c      ****     output_initial = 60;
+ 1260              		.loc 1 412 0
+ 1261 011e 40F20003 		movw	r3, #:lower16:output_initial
+ 1262 0122 C0F20003 		movt	r3, #:upper16:output_initial
+ 1263 0126 4FF03C02 		mov	r2, #60
+ 1264 012a 1A60     		str	r2, [r3, #0]
+ 413:.\main.c      ****     output_current = output_initial;
+ 1265              		.loc 1 413 0
+ 1266 012c 40F20003 		movw	r3, #:lower16:output_initial
+ 1267 0130 C0F20003 		movt	r3, #:upper16:output_initial
+ 1268 0134 1B68     		ldr	r3, [r3, #0]
+ 1269 0136 1846     		mov	r0, r3
+ 1270 0138 FFF7FEFF 		bl	__aeabi_i2d
+ 1271 013c 40F20003 		movw	r3, #:lower16:output_current
+ 1272 0140 C0F20003 		movt	r3, #:upper16:output_current
+ 1273 0144 C3E90001 		strd	r0, [r3]
+ 414:.\main.c      ****     
+ 415:.\main.c      ****     // initialize pid control variables
+ 416:.\main.c      ****     kp = 30;
+ 1274              		.loc 1 416 0
+ 1275 0148 40F20003 		movw	r3, #:lower16:kp
+ 1276 014c C0F20003 		movt	r3, #:upper16:kp
+ 1277 0150 4FF00000 		mov	r0, #0
+ 1278 0154 4FF08041 		mov	r1, #1073741824
+ 1279 0158 01F57811 		add	r1, r1, #4063232
+ 1280 015c C3E90001 		strd	r0, [r3]
+ 417:.\main.c      ****     ki = 10;
+ 1281              		.loc 1 417 0
+ 1282 0160 40F20003 		movw	r3, #:lower16:ki
+ 1283 0164 C0F20003 		movt	r3, #:upper16:ki
+ 1284 0168 4FF00000 		mov	r0, #0
+ 1285 016c 4FF08041 		mov	r1, #1073741824
+ 1286 0170 01F51011 		add	r1, r1, #2359296
+ 1287 0174 C3E90001 		strd	r0, [r3]
+ 418:.\main.c      ****     
+ 419:.\main.c      ****     speed = 0;
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 31
+
+
+ 1288              		.loc 1 419 0
+ 1289 0178 40F20003 		movw	r3, #:lower16:speed
+ 1290 017c C0F20003 		movt	r3, #:upper16:speed
+ 1291 0180 4FF00000 		mov	r0, #0
+ 1292 0184 4FF00001 		mov	r1, #0
+ 1293 0188 C3E90001 		strd	r0, [r3]
+ 420:.\main.c      ****     
+ 421:.\main.c      ****     /*---------------------infrared tracking----------------------------*/
+ 422:.\main.c      ****     zeroIntArr(inf_rise, n_sensors);
+ 1294              		.loc 1 422 0
+ 1295 018c 40F20000 		movw	r0, #:lower16:inf_rise
+ 1296 0190 C0F20000 		movt	r0, #:upper16:inf_rise
+ 1297 0194 4FF00401 		mov	r1, #4
+ 1298 0198 FFF7FEFF 		bl	zeroIntArr
+ 423:.\main.c      ****     zeroIntArr(inf_rise_prev, n_sensors);
+ 1299              		.loc 1 423 0
+ 1300 019c 40F20000 		movw	r0, #:lower16:inf_rise_prev
+ 1301 01a0 C0F20000 		movt	r0, #:upper16:inf_rise_prev
+ 1302 01a4 4FF00401 		mov	r1, #4
+ 1303 01a8 FFF7FEFF 		bl	zeroIntArr
+ 424:.\main.c      ****     zeroIntArr(inf_fall, n_sensors);
+ 1304              		.loc 1 424 0
+ 1305 01ac 40F20000 		movw	r0, #:lower16:inf_fall
+ 1306 01b0 C0F20000 		movt	r0, #:upper16:inf_fall
+ 1307 01b4 4FF00401 		mov	r1, #4
+ 1308 01b8 FFF7FEFF 		bl	zeroIntArr
+ 425:.\main.c      ****     zeroIntArr(risingEdge, n_sensors);
+ 1309              		.loc 1 425 0
+ 1310 01bc 40F20000 		movw	r0, #:lower16:risingEdge
+ 1311 01c0 C0F20000 		movt	r0, #:upper16:risingEdge
+ 1312 01c4 4FF00401 		mov	r1, #4
+ 1313 01c8 FFF7FEFF 		bl	zeroIntArr
+ 426:.\main.c      ****     zeroIntArr(axis, n_sensors);
+ 1314              		.loc 1 426 0
+ 1315 01cc 40F20000 		movw	r0, #:lower16:axis
+ 1316 01d0 C0F20000 		movt	r0, #:upper16:axis
+ 1317 01d4 4FF00401 		mov	r1, #4
+ 1318 01d8 FFF7FEFF 		bl	zeroIntArr
+ 427:.\main.c      ****     zeroIntArr(n_fallingEdges, n_sensors);
+ 1319              		.loc 1 427 0
+ 1320 01dc 40F20000 		movw	r0, #:lower16:n_fallingEdges
+ 1321 01e0 C0F20000 		movt	r0, #:upper16:n_fallingEdges
+ 1322 01e4 4FF00401 		mov	r1, #4
+ 1323 01e8 FFF7FEFF 		bl	zeroIntArr
+ 428:.\main.c      ****     
+ 429:.\main.c      ****     skip = 0;
+ 1324              		.loc 1 429 0
+ 1325 01ec 40F20003 		movw	r3, #:lower16:skip
+ 1326 01f0 C0F20003 		movt	r3, #:upper16:skip
+ 1327 01f4 4FF00002 		mov	r2, #0
+ 1328 01f8 1A60     		str	r2, [r3, #0]
+ 430:.\main.c      ****     inf_dbg = 0;
+ 1329              		.loc 1 430 0
+ 1330 01fa 40F20003 		movw	r3, #:lower16:inf_dbg
+ 1331 01fe C0F20003 		movt	r3, #:upper16:inf_dbg
+ 1332 0202 4FF00002 		mov	r2, #0
+ 1333 0206 1A60     		str	r2, [r3, #0]
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 32
+
+
+ 431:.\main.c      ****     dbg3 = 0;
+ 1334              		.loc 1 431 0
+ 1335 0208 40F20003 		movw	r3, #:lower16:dbg3
+ 1336 020c C0F20003 		movt	r3, #:upper16:dbg3
+ 1337 0210 4FF00002 		mov	r2, #0
+ 1338 0214 1A60     		str	r2, [r3, #0]
+ 432:.\main.c      ****     
+ 433:.\main.c      ****     xUpdated = 0;
+ 1339              		.loc 1 433 0
+ 1340 0216 40F20003 		movw	r3, #:lower16:xUpdated
+ 1341 021a C0F20003 		movt	r3, #:upper16:xUpdated
+ 1342 021e 4FF00002 		mov	r2, #0
+ 1343 0222 1A60     		str	r2, [r3, #0]
+ 434:.\main.c      ****     yUpdated = 0;
+ 1344              		.loc 1 434 0
+ 1345 0224 40F20003 		movw	r3, #:lower16:yUpdated
+ 1346 0228 C0F20003 		movt	r3, #:upper16:yUpdated
+ 1347 022c 4FF00002 		mov	r2, #0
+ 1348 0230 1A60     		str	r2, [r3, #0]
+ 435:.\main.c      ****     
+ 436:.\main.c      ****     PWM_Motor_WriteCompare(output_initial);   // set initial PWM duty cycle
+ 1349              		.loc 1 436 0
+ 1350 0232 40F20003 		movw	r3, #:lower16:output_initial
+ 1351 0236 C0F20003 		movt	r3, #:upper16:output_initial
+ 1352 023a 1B68     		ldr	r3, [r3, #0]
+ 1353 023c DBB2     		uxtb	r3, r3
+ 1354 023e 1846     		mov	r0, r3
+ 1355 0240 FFF7FEFF 		bl	PWM_Motor_WriteCompare
+ 437:.\main.c      ****     previous_capture = (int) Timer_HE_ReadCapture();  // read initial capture count
+ 1356              		.loc 1 437 0
+ 1357 0244 FFF7FEFF 		bl	Timer_HE_ReadCapture
+ 1358 0248 0346     		mov	r3, r0
+ 1359 024a 1A46     		mov	r2, r3
+ 1360 024c 40F20003 		movw	r3, #:lower16:previous_capture
+ 1361 0250 C0F20003 		movt	r3, #:upper16:previous_capture
+ 1362 0254 1A60     		str	r2, [r3, #0]
+ 438:.\main.c      ****     
+ 439:.\main.c      ****     Control_Reg_Write(activate_0);
+ 1363              		.loc 1 439 0
+ 1364 0256 40F20003 		movw	r3, #:lower16:activate_0
+ 1365 025a C0F20003 		movt	r3, #:upper16:activate_0
+ 1366 025e 1B68     		ldr	r3, [r3, #0]
+ 1367 0260 DBB2     		uxtb	r3, r3
+ 1368 0262 1846     		mov	r0, r3
+ 1369 0264 FFF7FEFF 		bl	Control_Reg_Write
+ 1370              	.L46:
+ 440:.\main.c      ****     for(;;)
+ 441:.\main.c      ****     {   
+ 442:.\main.c      ****         while (n_fallingEdges[0] < time_slice) {
+ 1371              		.loc 1 442 0
+ 1372 0268 40F20003 		movw	r3, #:lower16:n_fallingEdges
+ 1373 026c C0F20003 		movt	r3, #:upper16:n_fallingEdges
+ 1374 0270 1A68     		ldr	r2, [r3, #0]
+ 1375 0272 40F20003 		movw	r3, #:lower16:time_slice
+ 1376 0276 C0F20003 		movt	r3, #:upper16:time_slice
+ 1377 027a 1B68     		ldr	r3, [r3, #0]
+ 1378 027c 9A42     		cmp	r2, r3
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 33
+
+
+ 1379 027e F3DB     		blt	.L46
+ 443:.\main.c      ****         }
+ 444:.\main.c      ****         sendWireless(0, dx[0], 0);
+ 1380              		.loc 1 444 0
+ 1381 0280 40F20003 		movw	r3, #:lower16:dx
+ 1382 0284 C0F20003 		movt	r3, #:upper16:dx
+ 1383 0288 1B68     		ldr	r3, [r3, #0]
+ 1384 028a 4FF00000 		mov	r0, #0
+ 1385 028e 1946     		mov	r1, r3
+ 1386 0290 4FF00002 		mov	r2, #0
+ 1387 0294 FFF7FEFF 		bl	sendWireless
+ 445:.\main.c      ****         sendWireless(0, dy[0], 1);
+ 1388              		.loc 1 445 0
+ 1389 0298 40F20003 		movw	r3, #:lower16:dy
+ 1390 029c C0F20003 		movt	r3, #:upper16:dy
+ 1391 02a0 1B68     		ldr	r3, [r3, #0]
+ 1392 02a2 4FF00000 		mov	r0, #0
+ 1393 02a6 1946     		mov	r1, r3
+ 1394 02a8 4FF00102 		mov	r2, #1
+ 1395 02ac FFF7FEFF 		bl	sendWireless
+ 446:.\main.c      ****         n_fallingEdges[0] = 0;
+ 1396              		.loc 1 446 0
+ 1397 02b0 40F20003 		movw	r3, #:lower16:n_fallingEdges
+ 1398 02b4 C0F20003 		movt	r3, #:upper16:n_fallingEdges
+ 1399 02b8 4FF00002 		mov	r2, #0
+ 1400 02bc 1A60     		str	r2, [r3, #0]
+ 447:.\main.c      ****  
+ 448:.\main.c      ****         /*
+ 449:.\main.c      ****         Control_Reg_Write(activate_0);
+ 450:.\main.c      ****         n_fallingEdges[0] = 0;
+ 451:.\main.c      ****         while (n_fallingEdges[0] < time_slice) {
+ 452:.\main.c      ****         }
+ 453:.\main.c      ****         sendWireless(0, dx[0], 0);
+ 454:.\main.c      ****         sendWireless(0, dy[0], 1);*/
+ 455:.\main.c      ****         
+ 456:.\main.c      ****         /*
+ 457:.\main.c      ****         Control_Reg_Write(activate_1);
+ 458:.\main.c      ****         n_fallingEdges[0] = 0;
+ 459:.\main.c      ****         while (n_fallingEdges[1] < time_slice) {
+ 460:.\main.c      ****         }
+ 461:.\main.c      ****         sendWireless(1, dx[1], 0);
+ 462:.\main.c      ****         sendWireless(1, dy[1], 1);
+ 463:.\main.c      ****         
+ 464:.\main.c      ****         Control_Reg_Write(activate_2);
+ 465:.\main.c      ****         n_fallingEdges[1] = 0;
+ 466:.\main.c      ****         while (n_fallingEdges[2] < time_slice) {
+ 467:.\main.c      ****         }
+ 468:.\main.c      ****         sendWireless(2, dx[2], 0);
+ 469:.\main.c      ****         sendWireless(2, dy[2], 1);*/
+ 470:.\main.c      ****         
+ 471:.\main.c      ****         //Timer_Infrared_1_ReadStatusRegister();
+ 472:.\main.c      ****         //Control_Reg_Write(activate_3);
+ 473:.\main.c      ****         //n_fallingEdges[2] = 0;
+ 474:.\main.c      ****         //while (n_fallingEdges[3] < time_slice) {
+ 475:.\main.c      ****         //}
+ 476:.\main.c      ****         //sendWireless(3, dx[3], 0);
+ 477:.\main.c      ****         //sendWireless(3, dy[3], 1);
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 34
+
+
+ 478:.\main.c      ****         
+ 479:.\main.c      ****         /*
+ 480:.\main.c      ****         for (i = 0; i < n_sensors-1; i++) {
+ 481:.\main.c      ****             if (dx[i] != 0) {
+ 482:.\main.c      ****                 sendWireless(i, dx[i], 0);
+ 483:.\main.c      ****                 dx[i] = 0;
+ 484:.\main.c      ****             }
+ 485:.\main.c      ****             if (dy[i] != 0) {
+ 486:.\main.c      ****                 sendWireless(i, dy[i], 1);
+ 487:.\main.c      ****                 dy[i] = 0;
+ 488:.\main.c      ****             }
+ 489:.\main.c      ****         }*/
+ 490:.\main.c      ****         
+ 491:.\main.c      ****         // 0
+ 492:.\main.c      ****         /*
+ 493:.\main.c      ****         int n_loop = 10;
+ 494:.\main.c      ****         for (i = 0; i < n_loop; i++) {
+ 495:.\main.c      ****             if (dx[0] != 0) {
+ 496:.\main.c      ****                 sendWireless(0, dx[0], 0);
+ 497:.\main.c      ****                 dx[0] = 0;
+ 498:.\main.c      ****                 break;
+ 499:.\main.c      ****             }
+ 500:.\main.c      ****         }
+ 501:.\main.c      ****         
+ 502:.\main.c      ****         for (i = 0; i < n_loop; i++) {
+ 503:.\main.c      ****             if (dy[0] != 0) {
+ 504:.\main.c      ****                 sendWireless(0, dy[0], 1);
+ 505:.\main.c      ****                 dx[0] = 0;
+ 506:.\main.c      ****                 break;
+ 507:.\main.c      ****             }
+ 508:.\main.c      ****         }
+ 509:.\main.c      ****         
+ 510:.\main.c      ****         // 1
+ 511:.\main.c      ****         for (i = 0; i < n_loop; i++) {
+ 512:.\main.c      ****             if (dx[1] != 0) {
+ 513:.\main.c      ****                 sendWireless(1, dx[1], 0);
+ 514:.\main.c      ****                 dx[1] = 0;
+ 515:.\main.c      ****                 break;
+ 516:.\main.c      ****             }
+ 517:.\main.c      ****         }
+ 518:.\main.c      ****         
+ 519:.\main.c      ****         for (i = 0; i < n_loop; i++) {
+ 520:.\main.c      ****             if (dy[1] != 0) {
+ 521:.\main.c      ****                 sendWireless(1, dy[1], 1);
+ 522:.\main.c      ****                 dy[1] = 0;
+ 523:.\main.c      ****                 break;
+ 524:.\main.c      ****             }
+ 525:.\main.c      ****         }
+ 526:.\main.c      ****         
+ 527:.\main.c      ****         // 2
+ 528:.\main.c      ****         for (i = 0; i < n_loop; i++) {
+ 529:.\main.c      ****             if (dx[2] != 0) {
+ 530:.\main.c      ****                 sendWireless(2, dx[2], 0);
+ 531:.\main.c      ****                 dx[2] = 0;
+ 532:.\main.c      ****                 break;
+ 533:.\main.c      ****             }
+ 534:.\main.c      ****         }
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 35
+
+
+ 535:.\main.c      ****         
+ 536:.\main.c      ****         for (i = 0; i < n_loop; i++) {
+ 537:.\main.c      ****             if (dy[2] != 0) {
+ 538:.\main.c      ****                 sendWireless(2, dy[2], 1);
+ 539:.\main.c      ****                 dy[2] = 0;
+ 540:.\main.c      ****                 break;
+ 541:.\main.c      ****             }
+ 542:.\main.c      ****         }*/
+ 543:.\main.c      ****         /*
+ 544:.\main.c      ****         for (i = 0; i < n_sensors; i++) {
+ 545:.\main.c      ****             updateSensorPos(i);
+ 546:.\main.c      ****         }
+ 547:.\main.c      ****         for (i = 0; i < n_sensors-1; i++) {
+ 548:.\main.c      ****             if (!updateSensorOpt(i)) {
+ 549:.\main.c      ****                 i--;
+ 550:.\main.c      ****             }
+ 551:.\main.c      ****             else {
+ 552:.\main.c      ****                 xUpdated = 0;
+ 553:.\main.c      ****                 yUpdated = 0;
+ 554:.\main.c      ****             }
+ 555:.\main.c      ****         }*/
+ 556:.\main.c      ****     }
+ 1401              		.loc 1 556 0
+ 1402 02be D3E7     		b	.L46
+ 1403              		.cfi_endproc
+ 1404              	.LFE41:
+ 1405              		.size	main, .-main
+ 1406              		.text
+ 1407              	.Letext0:
+ 1408              		.section	.debug_loc,"",%progbits
+ 1409              	.Ldebug_loc0:
+ 1410              	.LLST0:
+ 1411 0000 00000000 		.4byte	.LFB29
+ 1412 0004 02000000 		.4byte	.LCFI0
+ 1413 0008 0100     		.2byte	0x1
+ 1414 000a 5D       		.byte	0x5d
+ 1415 000b 02000000 		.4byte	.LCFI0
+ 1416 000f 04000000 		.4byte	.LCFI1
+ 1417 0013 0200     		.2byte	0x2
+ 1418 0015 7D       		.byte	0x7d
+ 1419 0016 04       		.sleb128 4
+ 1420 0017 04000000 		.4byte	.LCFI1
+ 1421 001b 06000000 		.4byte	.LCFI2
+ 1422 001f 0200     		.2byte	0x2
+ 1423 0021 7D       		.byte	0x7d
+ 1424 0022 18       		.sleb128 24
+ 1425 0023 06000000 		.4byte	.LCFI2
+ 1426 0027 3C000000 		.4byte	.LFE29
+ 1427 002b 0200     		.2byte	0x2
+ 1428 002d 77       		.byte	0x77
+ 1429 002e 18       		.sleb128 24
+ 1430 002f 00000000 		.4byte	0x0
+ 1431 0033 00000000 		.4byte	0x0
+ 1432              	.LLST1:
+ 1433 0037 00000000 		.4byte	.LFB30
+ 1434 003b 02000000 		.4byte	.LCFI3
+ 1435 003f 0100     		.2byte	0x1
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 36
+
+
+ 1436 0041 5D       		.byte	0x5d
+ 1437 0042 02000000 		.4byte	.LCFI3
+ 1438 0046 04000000 		.4byte	.LCFI4
+ 1439 004a 0200     		.2byte	0x2
+ 1440 004c 7D       		.byte	0x7d
+ 1441 004d 08       		.sleb128 8
+ 1442 004e 04000000 		.4byte	.LCFI4
+ 1443 0052 06000000 		.4byte	.LCFI5
+ 1444 0056 0200     		.2byte	0x2
+ 1445 0058 7D       		.byte	0x7d
+ 1446 0059 18       		.sleb128 24
+ 1447 005a 06000000 		.4byte	.LCFI5
+ 1448 005e 56000000 		.4byte	.LFE30
+ 1449 0062 0200     		.2byte	0x2
+ 1450 0064 77       		.byte	0x77
+ 1451 0065 18       		.sleb128 24
+ 1452 0066 00000000 		.4byte	0x0
+ 1453 006a 00000000 		.4byte	0x0
+ 1454              	.LLST2:
+ 1455 006e 00000000 		.4byte	.LFB31
+ 1456 0072 02000000 		.4byte	.LCFI6
+ 1457 0076 0100     		.2byte	0x1
+ 1458 0078 5D       		.byte	0x5d
+ 1459 0079 02000000 		.4byte	.LCFI6
+ 1460 007d 04000000 		.4byte	.LCFI7
+ 1461 0081 0200     		.2byte	0x2
+ 1462 0083 7D       		.byte	0x7d
+ 1463 0084 04       		.sleb128 4
+ 1464 0085 04000000 		.4byte	.LCFI7
+ 1465 0089 06000000 		.4byte	.LCFI8
+ 1466 008d 0200     		.2byte	0x2
+ 1467 008f 7D       		.byte	0x7d
+ 1468 0090 20       		.sleb128 32
+ 1469 0091 06000000 		.4byte	.LCFI8
+ 1470 0095 02020000 		.4byte	.LFE31
+ 1471 0099 0200     		.2byte	0x2
+ 1472 009b 77       		.byte	0x77
+ 1473 009c 20       		.sleb128 32
+ 1474 009d 00000000 		.4byte	0x0
+ 1475 00a1 00000000 		.4byte	0x0
+ 1476              	.LLST3:
+ 1477 00a5 00000000 		.4byte	.LFB32
+ 1478 00a9 02000000 		.4byte	.LCFI9
+ 1479 00ad 0100     		.2byte	0x1
+ 1480 00af 5D       		.byte	0x5d
+ 1481 00b0 02000000 		.4byte	.LCFI9
+ 1482 00b4 04000000 		.4byte	.LCFI10
+ 1483 00b8 0200     		.2byte	0x2
+ 1484 00ba 7D       		.byte	0x7d
+ 1485 00bb 10       		.sleb128 16
+ 1486 00bc 04000000 		.4byte	.LCFI10
+ 1487 00c0 06000000 		.4byte	.LCFI11
+ 1488 00c4 0200     		.2byte	0x2
+ 1489 00c6 7D       		.byte	0x7d
+ 1490 00c7 18       		.sleb128 24
+ 1491 00c8 06000000 		.4byte	.LCFI11
+ 1492 00cc 2E020000 		.4byte	.LFE32
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 37
+
+
+ 1493 00d0 0200     		.2byte	0x2
+ 1494 00d2 77       		.byte	0x77
+ 1495 00d3 18       		.sleb128 24
+ 1496 00d4 00000000 		.4byte	0x0
+ 1497 00d8 00000000 		.4byte	0x0
+ 1498              	.LLST4:
+ 1499 00dc 00000000 		.4byte	.LFB33
+ 1500 00e0 02000000 		.4byte	.LCFI12
+ 1501 00e4 0100     		.2byte	0x1
+ 1502 00e6 5D       		.byte	0x5d
+ 1503 00e7 02000000 		.4byte	.LCFI12
+ 1504 00eb 04000000 		.4byte	.LCFI13
+ 1505 00ef 0200     		.2byte	0x2
+ 1506 00f1 7D       		.byte	0x7d
+ 1507 00f2 08       		.sleb128 8
+ 1508 00f3 04000000 		.4byte	.LCFI13
+ 1509 00f7 34000000 		.4byte	.LFE33
+ 1510 00fb 0200     		.2byte	0x2
+ 1511 00fd 77       		.byte	0x77
+ 1512 00fe 08       		.sleb128 8
+ 1513 00ff 00000000 		.4byte	0x0
+ 1514 0103 00000000 		.4byte	0x0
+ 1515              	.LLST5:
+ 1516 0107 00000000 		.4byte	.LFB34
+ 1517 010b 02000000 		.4byte	.LCFI14
+ 1518 010f 0100     		.2byte	0x1
+ 1519 0111 5D       		.byte	0x5d
+ 1520 0112 02000000 		.4byte	.LCFI14
+ 1521 0116 04000000 		.4byte	.LCFI15
+ 1522 011a 0200     		.2byte	0x2
+ 1523 011c 7D       		.byte	0x7d
+ 1524 011d 08       		.sleb128 8
+ 1525 011e 04000000 		.4byte	.LCFI15
+ 1526 0122 06000000 		.4byte	.LCFI16
+ 1527 0126 0200     		.2byte	0x2
+ 1528 0128 7D       		.byte	0x7d
+ 1529 0129 18       		.sleb128 24
+ 1530 012a 06000000 		.4byte	.LCFI16
+ 1531 012e 68000000 		.4byte	.LFE34
+ 1532 0132 0200     		.2byte	0x2
+ 1533 0134 77       		.byte	0x77
+ 1534 0135 18       		.sleb128 24
+ 1535 0136 00000000 		.4byte	0x0
+ 1536 013a 00000000 		.4byte	0x0
+ 1537              	.LLST6:
+ 1538 013e 00000000 		.4byte	.LFB35
+ 1539 0142 02000000 		.4byte	.LCFI17
+ 1540 0146 0100     		.2byte	0x1
+ 1541 0148 5D       		.byte	0x5d
+ 1542 0149 02000000 		.4byte	.LCFI17
+ 1543 014d 04000000 		.4byte	.LCFI18
+ 1544 0151 0200     		.2byte	0x2
+ 1545 0153 7D       		.byte	0x7d
+ 1546 0154 08       		.sleb128 8
+ 1547 0155 04000000 		.4byte	.LCFI18
+ 1548 0159 34000000 		.4byte	.LFE35
+ 1549 015d 0200     		.2byte	0x2
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 38
+
+
+ 1550 015f 77       		.byte	0x77
+ 1551 0160 08       		.sleb128 8
+ 1552 0161 00000000 		.4byte	0x0
+ 1553 0165 00000000 		.4byte	0x0
+ 1554              	.LLST7:
+ 1555 0169 00000000 		.4byte	.LFB36
+ 1556 016d 02000000 		.4byte	.LCFI19
+ 1557 0171 0100     		.2byte	0x1
+ 1558 0173 5D       		.byte	0x5d
+ 1559 0174 02000000 		.4byte	.LCFI19
+ 1560 0178 04000000 		.4byte	.LCFI20
+ 1561 017c 0200     		.2byte	0x2
+ 1562 017e 7D       		.byte	0x7d
+ 1563 017f 08       		.sleb128 8
+ 1564 0180 04000000 		.4byte	.LCFI20
+ 1565 0184 06000000 		.4byte	.LCFI21
+ 1566 0188 0200     		.2byte	0x2
+ 1567 018a 7D       		.byte	0x7d
+ 1568 018b 18       		.sleb128 24
+ 1569 018c 06000000 		.4byte	.LCFI21
+ 1570 0190 68000000 		.4byte	.LFE36
+ 1571 0194 0200     		.2byte	0x2
+ 1572 0196 77       		.byte	0x77
+ 1573 0197 18       		.sleb128 24
+ 1574 0198 00000000 		.4byte	0x0
+ 1575 019c 00000000 		.4byte	0x0
+ 1576              	.LLST8:
+ 1577 01a0 00000000 		.4byte	.LFB37
+ 1578 01a4 02000000 		.4byte	.LCFI22
+ 1579 01a8 0100     		.2byte	0x1
+ 1580 01aa 5D       		.byte	0x5d
+ 1581 01ab 02000000 		.4byte	.LCFI22
+ 1582 01af 04000000 		.4byte	.LCFI23
+ 1583 01b3 0200     		.2byte	0x2
+ 1584 01b5 7D       		.byte	0x7d
+ 1585 01b6 08       		.sleb128 8
+ 1586 01b7 04000000 		.4byte	.LCFI23
+ 1587 01bb 34000000 		.4byte	.LFE37
+ 1588 01bf 0200     		.2byte	0x2
+ 1589 01c1 77       		.byte	0x77
+ 1590 01c2 08       		.sleb128 8
+ 1591 01c3 00000000 		.4byte	0x0
+ 1592 01c7 00000000 		.4byte	0x0
+ 1593              	.LLST9:
+ 1594 01cb 00000000 		.4byte	.LFB38
+ 1595 01cf 02000000 		.4byte	.LCFI24
+ 1596 01d3 0100     		.2byte	0x1
+ 1597 01d5 5D       		.byte	0x5d
+ 1598 01d6 02000000 		.4byte	.LCFI24
+ 1599 01da 04000000 		.4byte	.LCFI25
+ 1600 01de 0200     		.2byte	0x2
+ 1601 01e0 7D       		.byte	0x7d
+ 1602 01e1 08       		.sleb128 8
+ 1603 01e2 04000000 		.4byte	.LCFI25
+ 1604 01e6 06000000 		.4byte	.LCFI26
+ 1605 01ea 0200     		.2byte	0x2
+ 1606 01ec 7D       		.byte	0x7d
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 39
+
+
+ 1607 01ed 18       		.sleb128 24
+ 1608 01ee 06000000 		.4byte	.LCFI26
+ 1609 01f2 68000000 		.4byte	.LFE38
+ 1610 01f6 0200     		.2byte	0x2
+ 1611 01f8 77       		.byte	0x77
+ 1612 01f9 18       		.sleb128 24
+ 1613 01fa 00000000 		.4byte	0x0
+ 1614 01fe 00000000 		.4byte	0x0
+ 1615              	.LLST10:
+ 1616 0202 00000000 		.4byte	.LFB39
+ 1617 0206 02000000 		.4byte	.LCFI27
+ 1618 020a 0100     		.2byte	0x1
+ 1619 020c 5D       		.byte	0x5d
+ 1620 020d 02000000 		.4byte	.LCFI27
+ 1621 0211 04000000 		.4byte	.LCFI28
+ 1622 0215 0200     		.2byte	0x2
+ 1623 0217 7D       		.byte	0x7d
+ 1624 0218 08       		.sleb128 8
+ 1625 0219 04000000 		.4byte	.LCFI28
+ 1626 021d 34000000 		.4byte	.LFE39
+ 1627 0221 0200     		.2byte	0x2
+ 1628 0223 77       		.byte	0x77
+ 1629 0224 08       		.sleb128 8
+ 1630 0225 00000000 		.4byte	0x0
+ 1631 0229 00000000 		.4byte	0x0
+ 1632              	.LLST11:
+ 1633 022d 00000000 		.4byte	.LFB40
+ 1634 0231 02000000 		.4byte	.LCFI29
+ 1635 0235 0100     		.2byte	0x1
+ 1636 0237 5D       		.byte	0x5d
+ 1637 0238 02000000 		.4byte	.LCFI29
+ 1638 023c 04000000 		.4byte	.LCFI30
+ 1639 0240 0200     		.2byte	0x2
+ 1640 0242 7D       		.byte	0x7d
+ 1641 0243 08       		.sleb128 8
+ 1642 0244 04000000 		.4byte	.LCFI30
+ 1643 0248 06000000 		.4byte	.LCFI31
+ 1644 024c 0200     		.2byte	0x2
+ 1645 024e 7D       		.byte	0x7d
+ 1646 024f 18       		.sleb128 24
+ 1647 0250 06000000 		.4byte	.LCFI31
+ 1648 0254 68000000 		.4byte	.LFE40
+ 1649 0258 0200     		.2byte	0x2
+ 1650 025a 77       		.byte	0x77
+ 1651 025b 18       		.sleb128 24
+ 1652 025c 00000000 		.4byte	0x0
+ 1653 0260 00000000 		.4byte	0x0
+ 1654              	.LLST12:
+ 1655 0264 00000000 		.4byte	.LFB41
+ 1656 0268 02000000 		.4byte	.LCFI32
+ 1657 026c 0100     		.2byte	0x1
+ 1658 026e 5D       		.byte	0x5d
+ 1659 026f 02000000 		.4byte	.LCFI32
+ 1660 0273 04000000 		.4byte	.LCFI33
+ 1661 0277 0200     		.2byte	0x2
+ 1662 0279 7D       		.byte	0x7d
+ 1663 027a 08       		.sleb128 8
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 40
+
+
+ 1664 027b 04000000 		.4byte	.LCFI33
+ 1665 027f C0020000 		.4byte	.LFE41
+ 1666 0283 0200     		.2byte	0x2
+ 1667 0285 77       		.byte	0x77
+ 1668 0286 08       		.sleb128 8
+ 1669 0287 00000000 		.4byte	0x0
+ 1670 028b 00000000 		.4byte	0x0
+ 1671              		.file 2 "./Generated_Source/PSoC5/core_cm3.h"
+ 1672              		.section	.debug_info
+ 1673 0000 A6050000 		.4byte	0x5a6
+ 1674 0004 0200     		.2byte	0x2
+ 1675 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1676 000a 04       		.byte	0x4
+ 1677 000b 01       		.uleb128 0x1
+ 1678 000c 54030000 		.4byte	.LASF65
+ 1679 0010 01       		.byte	0x1
+ 1680 0011 05030000 		.4byte	.LASF66
+ 1681 0015 3B020000 		.4byte	.LASF67
+ 1682 0019 00000000 		.4byte	0x0
+ 1683 001d 00000000 		.4byte	0x0
+ 1684 0021 00000000 		.4byte	.Ldebug_ranges0+0x0
+ 1685 0025 00000000 		.4byte	.Ldebug_line0
+ 1686 0029 02       		.uleb128 0x2
+ 1687 002a 01       		.byte	0x1
+ 1688 002b 06       		.byte	0x6
+ 1689 002c 56010000 		.4byte	.LASF0
+ 1690 0030 02       		.uleb128 0x2
+ 1691 0031 01       		.byte	0x1
+ 1692 0032 08       		.byte	0x8
+ 1693 0033 32010000 		.4byte	.LASF1
+ 1694 0037 02       		.uleb128 0x2
+ 1695 0038 02       		.byte	0x2
+ 1696 0039 05       		.byte	0x5
+ 1697 003a 15000000 		.4byte	.LASF2
+ 1698 003e 02       		.uleb128 0x2
+ 1699 003f 02       		.byte	0x2
+ 1700 0040 07       		.byte	0x7
+ 1701 0041 BD020000 		.4byte	.LASF3
+ 1702 0045 02       		.uleb128 0x2
+ 1703 0046 04       		.byte	0x4
+ 1704 0047 05       		.byte	0x5
+ 1705 0048 23020000 		.4byte	.LASF4
+ 1706 004c 02       		.uleb128 0x2
+ 1707 004d 04       		.byte	0x4
+ 1708 004e 07       		.byte	0x7
+ 1709 004f D0020000 		.4byte	.LASF5
+ 1710 0053 02       		.uleb128 0x2
+ 1711 0054 08       		.byte	0x8
+ 1712 0055 05       		.byte	0x5
+ 1713 0056 C7000000 		.4byte	.LASF6
+ 1714 005a 02       		.uleb128 0x2
+ 1715 005b 08       		.byte	0x8
+ 1716 005c 07       		.byte	0x7
+ 1717 005d 7A010000 		.4byte	.LASF7
+ 1718 0061 03       		.uleb128 0x3
+ 1719 0062 04       		.byte	0x4
+ 1720 0063 05       		.byte	0x5
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 41
+
+
+ 1721 0064 696E7400 		.ascii	"int\000"
+ 1722 0068 02       		.uleb128 0x2
+ 1723 0069 04       		.byte	0x4
+ 1724 006a 07       		.byte	0x7
+ 1725 006b AA010000 		.4byte	.LASF8
+ 1726 006f 02       		.uleb128 0x2
+ 1727 0070 01       		.byte	0x1
+ 1728 0071 08       		.byte	0x8
+ 1729 0072 1E020000 		.4byte	.LASF9
+ 1730 0076 04       		.uleb128 0x4
+ 1731 0077 04       		.byte	0x4
+ 1732 0078 07       		.byte	0x7
+ 1733 0079 02       		.uleb128 0x2
+ 1734 007a 08       		.byte	0x8
+ 1735 007b 04       		.byte	0x4
+ 1736 007c EB020000 		.4byte	.LASF10
+ 1737 0080 02       		.uleb128 0x2
+ 1738 0081 04       		.byte	0x4
+ 1739 0082 04       		.byte	0x4
+ 1740 0083 C1000000 		.4byte	.LASF11
+ 1741 0087 02       		.uleb128 0x2
+ 1742 0088 08       		.byte	0x8
+ 1743 0089 04       		.byte	0x4
+ 1744 008a 11010000 		.4byte	.LASF12
+ 1745 008e 05       		.uleb128 0x5
+ 1746 008f B6000000 		.4byte	.LASF14
+ 1747 0093 01       		.byte	0x1
+ 1748 0094 48       		.byte	0x48
+ 1749 0095 01       		.byte	0x1
+ 1750 0096 00000000 		.4byte	.LFB29
+ 1751 009a 3C000000 		.4byte	.LFE29
+ 1752 009e 00000000 		.4byte	.LLST0
+ 1753 00a2 CF000000 		.4byte	0xcf
+ 1754 00a6 06       		.uleb128 0x6
+ 1755 00a7 61727200 		.ascii	"arr\000"
+ 1756 00ab 01       		.byte	0x1
+ 1757 00ac 48       		.byte	0x48
+ 1758 00ad CF000000 		.4byte	0xcf
+ 1759 00b1 02       		.byte	0x2
+ 1760 00b2 91       		.byte	0x91
+ 1761 00b3 6C       		.sleb128 -20
+ 1762 00b4 07       		.uleb128 0x7
+ 1763 00b5 72000000 		.4byte	.LASF13
+ 1764 00b9 01       		.byte	0x1
+ 1765 00ba 48       		.byte	0x48
+ 1766 00bb 61000000 		.4byte	0x61
+ 1767 00bf 02       		.byte	0x2
+ 1768 00c0 91       		.byte	0x91
+ 1769 00c1 68       		.sleb128 -24
+ 1770 00c2 08       		.uleb128 0x8
+ 1771 00c3 6900     		.ascii	"i\000"
+ 1772 00c5 01       		.byte	0x1
+ 1773 00c6 49       		.byte	0x49
+ 1774 00c7 61000000 		.4byte	0x61
+ 1775 00cb 02       		.byte	0x2
+ 1776 00cc 91       		.byte	0x91
+ 1777 00cd 74       		.sleb128 -12
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 42
+
+
+ 1778 00ce 00       		.byte	0x0
+ 1779 00cf 09       		.uleb128 0x9
+ 1780 00d0 04       		.byte	0x4
+ 1781 00d1 61000000 		.4byte	0x61
+ 1782 00d5 05       		.uleb128 0x5
+ 1783 00d6 99000000 		.4byte	.LASF15
+ 1784 00da 01       		.byte	0x1
+ 1785 00db 50       		.byte	0x50
+ 1786 00dc 01       		.byte	0x1
+ 1787 00dd 00000000 		.4byte	.LFB30
+ 1788 00e1 56000000 		.4byte	.LFE30
+ 1789 00e5 37000000 		.4byte	.LLST1
+ 1790 00e9 16010000 		.4byte	0x116
+ 1791 00ed 06       		.uleb128 0x6
+ 1792 00ee 696400   		.ascii	"id\000"
+ 1793 00f1 01       		.byte	0x1
+ 1794 00f2 50       		.byte	0x50
+ 1795 00f3 61000000 		.4byte	0x61
+ 1796 00f7 02       		.byte	0x2
+ 1797 00f8 91       		.byte	0x91
+ 1798 00f9 74       		.sleb128 -12
+ 1799 00fa 06       		.uleb128 0x6
+ 1800 00fb 647400   		.ascii	"dt\000"
+ 1801 00fe 01       		.byte	0x1
+ 1802 00ff 50       		.byte	0x50
+ 1803 0100 61000000 		.4byte	0x61
+ 1804 0104 02       		.byte	0x2
+ 1805 0105 91       		.byte	0x91
+ 1806 0106 70       		.sleb128 -16
+ 1807 0107 07       		.uleb128 0x7
+ 1808 0108 03010000 		.4byte	.LASF16
+ 1809 010c 01       		.byte	0x1
+ 1810 010d 50       		.byte	0x50
+ 1811 010e 61000000 		.4byte	0x61
+ 1812 0112 02       		.byte	0x2
+ 1813 0113 91       		.byte	0x91
+ 1814 0114 6C       		.sleb128 -20
+ 1815 0115 00       		.byte	0x0
+ 1816 0116 05       		.uleb128 0x5
+ 1817 0117 2E030000 		.4byte	.LASF17
+ 1818 011b 01       		.byte	0x1
+ 1819 011c 5B       		.byte	0x5b
+ 1820 011d 01       		.byte	0x1
+ 1821 011e 00000000 		.4byte	.LFB31
+ 1822 0122 02020000 		.4byte	.LFE31
+ 1823 0126 6E000000 		.4byte	.LLST2
+ 1824 012a 6F010000 		.4byte	0x16f
+ 1825 012e 06       		.uleb128 0x6
+ 1826 012f 696400   		.ascii	"id\000"
+ 1827 0132 01       		.byte	0x1
+ 1828 0133 5B       		.byte	0x5b
+ 1829 0134 61000000 		.4byte	0x61
+ 1830 0138 02       		.byte	0x2
+ 1831 0139 91       		.byte	0x91
+ 1832 013a 64       		.sleb128 -28
+ 1833 013b 0A       		.uleb128 0xa
+ 1834 013c FC020000 		.4byte	.LASF18
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 43
+
+
+ 1835 0140 01       		.byte	0x1
+ 1836 0141 5C       		.byte	0x5c
+ 1837 0142 61000000 		.4byte	0x61
+ 1838 0146 02       		.byte	0x2
+ 1839 0147 91       		.byte	0x91
+ 1840 0148 6C       		.sleb128 -20
+ 1841 0149 0A       		.uleb128 0xa
+ 1842 014a 49030000 		.4byte	.LASF19
+ 1843 014e 01       		.byte	0x1
+ 1844 014f 64       		.byte	0x64
+ 1845 0150 61000000 		.4byte	0x61
+ 1846 0154 02       		.byte	0x2
+ 1847 0155 91       		.byte	0x91
+ 1848 0156 70       		.sleb128 -16
+ 1849 0157 0B       		.uleb128 0xb
+ 1850 0158 92000000 		.4byte	.LBB2
+ 1851 015c 3A010000 		.4byte	.LBE2
+ 1852 0160 08       		.uleb128 0x8
+ 1853 0161 647400   		.ascii	"dt\000"
+ 1854 0164 01       		.byte	0x1
+ 1855 0165 66       		.byte	0x66
+ 1856 0166 61000000 		.4byte	0x61
+ 1857 016a 02       		.byte	0x2
+ 1858 016b 91       		.byte	0x91
+ 1859 016c 74       		.sleb128 -12
+ 1860 016d 00       		.byte	0x0
+ 1861 016e 00       		.byte	0x0
+ 1862 016f 0C       		.uleb128 0xc
+ 1863 0170 01       		.byte	0x1
+ 1864 0171 FD010000 		.4byte	.LASF22
+ 1865 0175 01       		.byte	0x1
+ 1866 0176 8E       		.byte	0x8e
+ 1867 0177 01       		.byte	0x1
+ 1868 0178 00000000 		.4byte	.LFB32
+ 1869 017c 2E020000 		.4byte	.LFE32
+ 1870 0180 A5000000 		.4byte	.LLST3
+ 1871 0184 A5010000 		.4byte	0x1a5
+ 1872 0188 0A       		.uleb128 0xa
+ 1873 0189 A6000000 		.4byte	.LASF20
+ 1874 018d 01       		.byte	0x1
+ 1875 018e 91       		.byte	0x91
+ 1876 018f 61000000 		.4byte	0x61
+ 1877 0193 02       		.byte	0x2
+ 1878 0194 91       		.byte	0x91
+ 1879 0195 68       		.sleb128 -24
+ 1880 0196 0A       		.uleb128 0xa
+ 1881 0197 0E000000 		.4byte	.LASF21
+ 1882 019b 01       		.byte	0x1
+ 1883 019c 92       		.byte	0x92
+ 1884 019d 61000000 		.4byte	0x61
+ 1885 01a1 02       		.byte	0x2
+ 1886 01a2 91       		.byte	0x91
+ 1887 01a3 6C       		.sleb128 -20
+ 1888 01a4 00       		.byte	0x0
+ 1889 01a5 0D       		.uleb128 0xd
+ 1890 01a6 01       		.byte	0x1
+ 1891 01a7 CD010000 		.4byte	.LASF25
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 44
+
+
+ 1892 01ab 01       		.byte	0x1
+ 1893 01ac BC       		.byte	0xbc
+ 1894 01ad 01       		.byte	0x1
+ 1895 01ae 00000000 		.4byte	.LFB33
+ 1896 01b2 34000000 		.4byte	.LFE33
+ 1897 01b6 DC000000 		.4byte	.LLST4
+ 1898 01ba 0C       		.uleb128 0xc
+ 1899 01bb 01       		.byte	0x1
+ 1900 01bc 91010000 		.4byte	.LASF23
+ 1901 01c0 01       		.byte	0x1
+ 1902 01c1 C2       		.byte	0xc2
+ 1903 01c2 01       		.byte	0x1
+ 1904 01c3 00000000 		.4byte	.LFB34
+ 1905 01c7 68000000 		.4byte	.LFE34
+ 1906 01cb 07010000 		.4byte	.LLST5
+ 1907 01cf E2010000 		.4byte	0x1e2
+ 1908 01d3 0A       		.uleb128 0xa
+ 1909 01d4 F2020000 		.4byte	.LASF24
+ 1910 01d8 01       		.byte	0x1
+ 1911 01d9 C3       		.byte	0xc3
+ 1912 01da E2010000 		.4byte	0x1e2
+ 1913 01de 02       		.byte	0x2
+ 1914 01df 91       		.byte	0x91
+ 1915 01e0 68       		.sleb128 -24
+ 1916 01e1 00       		.byte	0x0
+ 1917 01e2 0E       		.uleb128 0xe
+ 1918 01e3 6F000000 		.4byte	0x6f
+ 1919 01e7 F2010000 		.4byte	0x1f2
+ 1920 01eb 0F       		.uleb128 0xf
+ 1921 01ec 76000000 		.4byte	0x76
+ 1922 01f0 0E       		.byte	0xe
+ 1923 01f1 00       		.byte	0x0
+ 1924 01f2 0D       		.uleb128 0xd
+ 1925 01f3 01       		.byte	0x1
+ 1926 01f4 E5010000 		.4byte	.LASF26
+ 1927 01f8 01       		.byte	0x1
+ 1928 01f9 CD       		.byte	0xcd
+ 1929 01fa 01       		.byte	0x1
+ 1930 01fb 00000000 		.4byte	.LFB35
+ 1931 01ff 34000000 		.4byte	.LFE35
+ 1932 0203 3E010000 		.4byte	.LLST6
+ 1933 0207 0C       		.uleb128 0xc
+ 1934 0208 01       		.byte	0x1
+ 1935 0209 27000000 		.4byte	.LASF27
+ 1936 020d 01       		.byte	0x1
+ 1937 020e D3       		.byte	0xd3
+ 1938 020f 01       		.byte	0x1
+ 1939 0210 00000000 		.4byte	.LFB36
+ 1940 0214 68000000 		.4byte	.LFE36
+ 1941 0218 69010000 		.4byte	.LLST7
+ 1942 021c 2F020000 		.4byte	0x22f
+ 1943 0220 0A       		.uleb128 0xa
+ 1944 0221 F2020000 		.4byte	.LASF24
+ 1945 0225 01       		.byte	0x1
+ 1946 0226 D4       		.byte	0xd4
+ 1947 0227 E2010000 		.4byte	0x1e2
+ 1948 022b 02       		.byte	0x2
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 45
+
+
+ 1949 022c 91       		.byte	0x91
+ 1950 022d 68       		.sleb128 -24
+ 1951 022e 00       		.byte	0x0
+ 1952 022f 0D       		.uleb128 0xd
+ 1953 0230 01       		.byte	0x1
+ 1954 0231 62010000 		.4byte	.LASF28
+ 1955 0235 01       		.byte	0x1
+ 1956 0236 DE       		.byte	0xde
+ 1957 0237 01       		.byte	0x1
+ 1958 0238 00000000 		.4byte	.LFB37
+ 1959 023c 34000000 		.4byte	.LFE37
+ 1960 0240 A0010000 		.4byte	.LLST8
+ 1961 0244 0C       		.uleb128 0xc
+ 1962 0245 01       		.byte	0x1
+ 1963 0246 40000000 		.4byte	.LASF29
+ 1964 024a 01       		.byte	0x1
+ 1965 024b E4       		.byte	0xe4
+ 1966 024c 01       		.byte	0x1
+ 1967 024d 00000000 		.4byte	.LFB38
+ 1968 0251 68000000 		.4byte	.LFE38
+ 1969 0255 CB010000 		.4byte	.LLST9
+ 1970 0259 6C020000 		.4byte	0x26c
+ 1971 025d 0A       		.uleb128 0xa
+ 1972 025e F2020000 		.4byte	.LASF24
+ 1973 0262 01       		.byte	0x1
+ 1974 0263 E5       		.byte	0xe5
+ 1975 0264 E2010000 		.4byte	0x1e2
+ 1976 0268 02       		.byte	0x2
+ 1977 0269 91       		.byte	0x91
+ 1978 026a 68       		.sleb128 -24
+ 1979 026b 00       		.byte	0x0
+ 1980 026c 0D       		.uleb128 0xd
+ 1981 026d 01       		.byte	0x1
+ 1982 026e 06020000 		.4byte	.LASF30
+ 1983 0272 01       		.byte	0x1
+ 1984 0273 EF       		.byte	0xef
+ 1985 0274 01       		.byte	0x1
+ 1986 0275 00000000 		.4byte	.LFB39
+ 1987 0279 34000000 		.4byte	.LFE39
+ 1988 027d 02020000 		.4byte	.LLST10
+ 1989 0281 0C       		.uleb128 0xc
+ 1990 0282 01       		.byte	0x1
+ 1991 0283 59000000 		.4byte	.LASF31
+ 1992 0287 01       		.byte	0x1
+ 1993 0288 F5       		.byte	0xf5
+ 1994 0289 01       		.byte	0x1
+ 1995 028a 00000000 		.4byte	.LFB40
+ 1996 028e 68000000 		.4byte	.LFE40
+ 1997 0292 2D020000 		.4byte	.LLST11
+ 1998 0296 A9020000 		.4byte	0x2a9
+ 1999 029a 0A       		.uleb128 0xa
+ 2000 029b F2020000 		.4byte	.LASF24
+ 2001 029f 01       		.byte	0x1
+ 2002 02a0 F6       		.byte	0xf6
+ 2003 02a1 E2010000 		.4byte	0x1e2
+ 2004 02a5 02       		.byte	0x2
+ 2005 02a6 91       		.byte	0x91
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 46
+
+
+ 2006 02a7 68       		.sleb128 -24
+ 2007 02a8 00       		.byte	0x0
+ 2008 02a9 10       		.uleb128 0x10
+ 2009 02aa 01       		.byte	0x1
+ 2010 02ab 79000000 		.4byte	.LASF68
+ 2011 02af 01       		.byte	0x1
+ 2012 02b0 6601     		.2byte	0x166
+ 2013 02b2 00000000 		.4byte	.LFB41
+ 2014 02b6 C0020000 		.4byte	.LFE41
+ 2015 02ba 64020000 		.4byte	.LLST12
+ 2016 02be 11       		.uleb128 0x11
+ 2017 02bf 68030000 		.4byte	.LASF32
+ 2018 02c3 02       		.byte	0x2
+ 2019 02c4 CE06     		.2byte	0x6ce
+ 2020 02c6 CC020000 		.4byte	0x2cc
+ 2021 02ca 01       		.byte	0x1
+ 2022 02cb 01       		.byte	0x1
+ 2023 02cc 12       		.uleb128 0x12
+ 2024 02cd 61000000 		.4byte	0x61
+ 2025 02d1 13       		.uleb128 0x13
+ 2026 02d2 40010000 		.4byte	.LASF33
+ 2027 02d6 01       		.byte	0x1
+ 2028 02d7 15       		.byte	0x15
+ 2029 02d8 79000000 		.4byte	0x79
+ 2030 02dc 01       		.byte	0x1
+ 2031 02dd 05       		.byte	0x5
+ 2032 02de 03       		.byte	0x3
+ 2033 02df 00000000 		.4byte	circumference
+ 2034 02e3 13       		.uleb128 0x13
+ 2035 02e4 27010000 		.4byte	.LASF34
+ 2036 02e8 01       		.byte	0x1
+ 2037 02e9 16       		.byte	0x16
+ 2038 02ea 61000000 		.4byte	0x61
+ 2039 02ee 01       		.byte	0x1
+ 2040 02ef 05       		.byte	0x5
+ 2041 02f0 03       		.byte	0x3
+ 2042 02f1 00000000 		.4byte	clock_freq
+ 2043 02f5 13       		.uleb128 0x13
+ 2044 02f6 7E000000 		.4byte	.LASF35
+ 2045 02fa 01       		.byte	0x1
+ 2046 02fb 17       		.byte	0x17
+ 2047 02fc 61000000 		.4byte	0x61
+ 2048 0300 01       		.byte	0x1
+ 2049 0301 05       		.byte	0x5
+ 2050 0302 03       		.byte	0x3
+ 2051 0303 00000000 		.4byte	n_sensors_per_rev
+ 2052 0307 13       		.uleb128 0x13
+ 2053 0308 D5000000 		.4byte	.LASF36
+ 2054 030c 01       		.byte	0x1
+ 2055 030d 18       		.byte	0x18
+ 2056 030e 61000000 		.4byte	0x61
+ 2057 0312 01       		.byte	0x1
+ 2058 0313 05       		.byte	0x5
+ 2059 0314 03       		.byte	0x3
+ 2060 0315 00000000 		.4byte	inches_per_foot
+ 2061 0319 13       		.uleb128 0x13
+ 2062 031a 81030000 		.4byte	.LASF37
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 47
+
+
+ 2063 031e 01       		.byte	0x1
+ 2064 031f 19       		.byte	0x19
+ 2065 0320 61000000 		.4byte	0x61
+ 2066 0324 01       		.byte	0x1
+ 2067 0325 05       		.byte	0x5
+ 2068 0326 03       		.byte	0x3
+ 2069 0327 00000000 		.4byte	max_timer_count
+ 2070 032b 13       		.uleb128 0x13
+ 2071 032c F6000000 		.4byte	.LASF38
+ 2072 0330 01       		.byte	0x1
+ 2073 0331 1B       		.byte	0x1b
+ 2074 0332 79000000 		.4byte	0x79
+ 2075 0336 01       		.byte	0x1
+ 2076 0337 05       		.byte	0x5
+ 2077 0338 03       		.byte	0x3
+ 2078 0339 00000000 		.4byte	target_speed
+ 2079 033d 13       		.uleb128 0x13
+ 2080 033e 1D030000 		.4byte	.LASF39
+ 2081 0342 01       		.byte	0x1
+ 2082 0343 1C       		.byte	0x1c
+ 2083 0344 61000000 		.4byte	0x61
+ 2084 0348 01       		.byte	0x1
+ 2085 0349 05       		.byte	0x5
+ 2086 034a 03       		.byte	0x3
+ 2087 034b 00000000 		.4byte	previous_capture
+ 2088 034f 14       		.uleb128 0x14
+ 2089 0350 6B7000   		.ascii	"kp\000"
+ 2090 0353 01       		.byte	0x1
+ 2091 0354 1E       		.byte	0x1e
+ 2092 0355 79000000 		.4byte	0x79
+ 2093 0359 01       		.byte	0x1
+ 2094 035a 05       		.byte	0x5
+ 2095 035b 03       		.byte	0x3
+ 2096 035c 00000000 		.4byte	kp
+ 2097 0360 14       		.uleb128 0x14
+ 2098 0361 6B6900   		.ascii	"ki\000"
+ 2099 0364 01       		.byte	0x1
+ 2100 0365 1F       		.byte	0x1f
+ 2101 0366 79000000 		.4byte	0x79
+ 2102 036a 01       		.byte	0x1
+ 2103 036b 05       		.byte	0x5
+ 2104 036c 03       		.byte	0x3
+ 2105 036d 00000000 		.4byte	ki
+ 2106 0371 13       		.uleb128 0x13
+ 2107 0372 A0030000 		.4byte	.LASF40
+ 2108 0376 01       		.byte	0x1
+ 2109 0377 20       		.byte	0x20
+ 2110 0378 79000000 		.4byte	0x79
+ 2111 037c 01       		.byte	0x1
+ 2112 037d 05       		.byte	0x5
+ 2113 037e 03       		.byte	0x3
+ 2114 037f 00000000 		.4byte	err_current
+ 2115 0383 13       		.uleb128 0x13
+ 2116 0384 C7010000 		.4byte	.LASF41
+ 2117 0388 01       		.byte	0x1
+ 2118 0389 21       		.byte	0x21
+ 2119 038a 79000000 		.4byte	0x79
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 48
+
+
+ 2120 038e 01       		.byte	0x1
+ 2121 038f 05       		.byte	0x5
+ 2122 0390 03       		.byte	0x3
+ 2123 0391 00000000 		.4byte	speed
+ 2124 0395 13       		.uleb128 0x13
+ 2125 0396 4E010000 		.4byte	.LASF42
+ 2126 039a 01       		.byte	0x1
+ 2127 039b 23       		.byte	0x23
+ 2128 039c 79000000 		.4byte	0x79
+ 2129 03a0 01       		.byte	0x1
+ 2130 03a1 05       		.byte	0x5
+ 2131 03a2 03       		.byte	0x3
+ 2132 03a3 00000000 		.4byte	delta_t
+ 2133 03a7 13       		.uleb128 0x13
+ 2134 03a8 2C020000 		.4byte	.LASF43
+ 2135 03ac 01       		.byte	0x1
+ 2136 03ad 24       		.byte	0x24
+ 2137 03ae 79000000 		.4byte	0x79
+ 2138 03b2 01       		.byte	0x1
+ 2139 03b3 05       		.byte	0x5
+ 2140 03b4 03       		.byte	0x3
+ 2141 03b5 00000000 		.4byte	output_current
+ 2142 03b9 13       		.uleb128 0x13
+ 2143 03ba 1D010000 		.4byte	.LASF44
+ 2144 03be 01       		.byte	0x1
+ 2145 03bf 25       		.byte	0x25
+ 2146 03c0 79000000 		.4byte	0x79
+ 2147 03c4 01       		.byte	0x1
+ 2148 03c5 05       		.byte	0x5
+ 2149 03c6 03       		.byte	0x3
+ 2150 03c7 00000000 		.4byte	error_sum
+ 2151 03cb 13       		.uleb128 0x13
+ 2152 03cc 75030000 		.4byte	.LASF45
+ 2153 03d0 01       		.byte	0x1
+ 2154 03d1 26       		.byte	0x26
+ 2155 03d2 79000000 		.4byte	0x79
+ 2156 03d6 01       		.byte	0x1
+ 2157 03d7 05       		.byte	0x5
+ 2158 03d8 03       		.byte	0x3
+ 2159 03d9 00000000 		.4byte	weight
+ 2160 03dd 13       		.uleb128 0x13
+ 2161 03de 0E030000 		.4byte	.LASF46
+ 2162 03e2 01       		.byte	0x1
+ 2163 03e3 27       		.byte	0x27
+ 2164 03e4 61000000 		.4byte	0x61
+ 2165 03e8 01       		.byte	0x1
+ 2166 03e9 05       		.byte	0x5
+ 2167 03ea 03       		.byte	0x3
+ 2168 03eb 00000000 		.4byte	output_initial
+ 2169 03ef 14       		.uleb128 0x14
+ 2170 03f0 6900     		.ascii	"i\000"
+ 2171 03f2 01       		.byte	0x1
+ 2172 03f3 29       		.byte	0x29
+ 2173 03f4 61000000 		.4byte	0x61
+ 2174 03f8 01       		.byte	0x1
+ 2175 03f9 05       		.byte	0x5
+ 2176 03fa 03       		.byte	0x3
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 49
+
+
+ 2177 03fb 00000000 		.4byte	i
+ 2178 03ff 14       		.uleb128 0x14
+ 2179 0400 6A00     		.ascii	"j\000"
+ 2180 0402 01       		.byte	0x1
+ 2181 0403 2A       		.byte	0x2a
+ 2182 0404 61000000 		.4byte	0x61
+ 2183 0408 01       		.byte	0x1
+ 2184 0409 05       		.byte	0x5
+ 2185 040a 03       		.byte	0x3
+ 2186 040b 00000000 		.4byte	j
+ 2187 040f 13       		.uleb128 0x13
+ 2188 0410 60030000 		.4byte	.LASF47
+ 2189 0414 01       		.byte	0x1
+ 2190 0415 2D       		.byte	0x2d
+ 2191 0416 61000000 		.4byte	0x61
+ 2192 041a 01       		.byte	0x1
+ 2193 041b 05       		.byte	0x5
+ 2194 041c 03       		.byte	0x3
+ 2195 041d 00000000 		.4byte	inf_clk
+ 2196 0421 13       		.uleb128 0x13
+ 2197 0422 B7010000 		.4byte	.LASF48
+ 2198 0426 01       		.byte	0x1
+ 2199 0427 2E       		.byte	0x2e
+ 2200 0428 61000000 		.4byte	0x61
+ 2201 042c 01       		.byte	0x1
+ 2202 042d 05       		.byte	0x5
+ 2203 042e 03       		.byte	0x3
+ 2204 042f 00000000 		.4byte	inf_timer_count
+ 2205 0433 13       		.uleb128 0x13
+ 2206 0434 E5000000 		.4byte	.LASF49
+ 2207 0438 01       		.byte	0x1
+ 2208 0439 2F       		.byte	0x2f
+ 2209 043a 61000000 		.4byte	0x61
+ 2210 043e 01       		.byte	0x1
+ 2211 043f 05       		.byte	0x5
+ 2212 0440 03       		.byte	0x3
+ 2213 0441 00000000 		.4byte	timing_tolerance
+ 2214 0445 0E       		.uleb128 0xe
+ 2215 0446 61000000 		.4byte	0x61
+ 2216 044a 55040000 		.4byte	0x455
+ 2217 044e 0F       		.uleb128 0xf
+ 2218 044f 76000000 		.4byte	0x76
+ 2219 0453 03       		.byte	0x3
+ 2220 0454 00       		.byte	0x0
+ 2221 0455 13       		.uleb128 0x13
+ 2222 0456 90000000 		.4byte	.LASF50
+ 2223 045a 01       		.byte	0x1
+ 2224 045b 31       		.byte	0x31
+ 2225 045c 45040000 		.4byte	0x445
+ 2226 0460 01       		.byte	0x1
+ 2227 0461 05       		.byte	0x5
+ 2228 0462 03       		.byte	0x3
+ 2229 0463 00000000 		.4byte	inf_rise
+ 2230 0467 13       		.uleb128 0x13
+ 2231 0468 78020000 		.4byte	.LASF51
+ 2232 046c 01       		.byte	0x1
+ 2233 046d 32       		.byte	0x32
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 50
+
+
+ 2234 046e 45040000 		.4byte	0x445
+ 2235 0472 01       		.byte	0x1
+ 2236 0473 05       		.byte	0x5
+ 2237 0474 03       		.byte	0x3
+ 2238 0475 00000000 		.4byte	inf_rise_prev
+ 2239 0479 13       		.uleb128 0x13
+ 2240 047a 00000000 		.4byte	.LASF52
+ 2241 047e 01       		.byte	0x1
+ 2242 047f 33       		.byte	0x33
+ 2243 0480 45040000 		.4byte	0x445
+ 2244 0484 01       		.byte	0x1
+ 2245 0485 05       		.byte	0x5
+ 2246 0486 03       		.byte	0x3
+ 2247 0487 00000000 		.4byte	inf_fall
+ 2248 048b 13       		.uleb128 0x13
+ 2249 048c 3E030000 		.4byte	.LASF53
+ 2250 0490 01       		.byte	0x1
+ 2251 0491 34       		.byte	0x34
+ 2252 0492 45040000 		.4byte	0x445
+ 2253 0496 01       		.byte	0x1
+ 2254 0497 05       		.byte	0x5
+ 2255 0498 03       		.byte	0x3
+ 2256 0499 00000000 		.4byte	risingEdge
+ 2257 049d 14       		.uleb128 0x14
+ 2258 049e 647800   		.ascii	"dx\000"
+ 2259 04a1 01       		.byte	0x1
+ 2260 04a2 35       		.byte	0x35
+ 2261 04a3 45040000 		.4byte	0x445
+ 2262 04a7 01       		.byte	0x1
+ 2263 04a8 05       		.byte	0x5
+ 2264 04a9 03       		.byte	0x3
+ 2265 04aa 00000000 		.4byte	dx
+ 2266 04ae 14       		.uleb128 0x14
+ 2267 04af 647900   		.ascii	"dy\000"
+ 2268 04b2 01       		.byte	0x1
+ 2269 04b3 36       		.byte	0x36
+ 2270 04b4 45040000 		.4byte	0x445
+ 2271 04b8 01       		.byte	0x1
+ 2272 04b9 05       		.byte	0x5
+ 2273 04ba 03       		.byte	0x3
+ 2274 04bb 00000000 		.4byte	dy
+ 2275 04bf 13       		.uleb128 0x13
+ 2276 04c0 91030000 		.4byte	.LASF54
+ 2277 04c4 01       		.byte	0x1
+ 2278 04c5 37       		.byte	0x37
+ 2279 04c6 45040000 		.4byte	0x445
+ 2280 04ca 01       		.byte	0x1
+ 2281 04cb 05       		.byte	0x5
+ 2282 04cc 03       		.byte	0x3
+ 2283 04cd 00000000 		.4byte	n_fallingEdges
+ 2284 04d1 13       		.uleb128 0x13
+ 2285 04d2 09000000 		.4byte	.LASF55
+ 2286 04d6 01       		.byte	0x1
+ 2287 04d7 39       		.byte	0x39
+ 2288 04d8 61000000 		.4byte	0x61
+ 2289 04dc 01       		.byte	0x1
+ 2290 04dd 05       		.byte	0x5
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 51
+
+
+ 2291 04de 03       		.byte	0x3
+ 2292 04df 00000000 		.4byte	skip
+ 2293 04e3 13       		.uleb128 0x13
+ 2294 04e4 03010000 		.4byte	.LASF16
+ 2295 04e8 01       		.byte	0x1
+ 2296 04e9 3A       		.byte	0x3a
+ 2297 04ea 45040000 		.4byte	0x445
+ 2298 04ee 01       		.byte	0x1
+ 2299 04ef 05       		.byte	0x5
+ 2300 04f0 03       		.byte	0x3
+ 2301 04f1 00000000 		.4byte	axis
+ 2302 04f5 13       		.uleb128 0x13
+ 2303 04f6 49030000 		.4byte	.LASF19
+ 2304 04fa 01       		.byte	0x1
+ 2305 04fb 3C       		.byte	0x3c
+ 2306 04fc 79000000 		.4byte	0x79
+ 2307 0500 01       		.byte	0x1
+ 2308 0501 05       		.byte	0x5
+ 2309 0502 03       		.byte	0x3
+ 2310 0503 00000000 		.4byte	sync_width
+ 2311 0507 13       		.uleb128 0x13
+ 2312 0508 1F000000 		.4byte	.LASF56
+ 2313 050c 01       		.byte	0x1
+ 2314 050d 3D       		.byte	0x3d
+ 2315 050e 61000000 		.4byte	0x61
+ 2316 0512 01       		.byte	0x1
+ 2317 0513 05       		.byte	0x5
+ 2318 0514 03       		.byte	0x3
+ 2319 0515 00000000 		.4byte	inf_dbg
+ 2320 0519 13       		.uleb128 0x13
+ 2321 051a 08010000 		.4byte	.LASF57
+ 2322 051e 01       		.byte	0x1
+ 2323 051f 3E       		.byte	0x3e
+ 2324 0520 61000000 		.4byte	0x61
+ 2325 0524 01       		.byte	0x1
+ 2326 0525 05       		.byte	0x5
+ 2327 0526 03       		.byte	0x3
+ 2328 0527 00000000 		.4byte	xUpdated
+ 2329 052b 13       		.uleb128 0x13
+ 2330 052c E2020000 		.4byte	.LASF58
+ 2331 0530 01       		.byte	0x1
+ 2332 0531 3F       		.byte	0x3f
+ 2333 0532 61000000 		.4byte	0x61
+ 2334 0536 01       		.byte	0x1
+ 2335 0537 05       		.byte	0x5
+ 2336 0538 03       		.byte	0x3
+ 2337 0539 00000000 		.4byte	yUpdated
+ 2338 053d 13       		.uleb128 0x13
+ 2339 053e 7C030000 		.4byte	.LASF59
+ 2340 0542 01       		.byte	0x1
+ 2341 0543 40       		.byte	0x40
+ 2342 0544 61000000 		.4byte	0x61
+ 2343 0548 01       		.byte	0x1
+ 2344 0549 05       		.byte	0x5
+ 2345 054a 03       		.byte	0x3
+ 2346 054b 00000000 		.4byte	dbg3
+ 2347 054f 13       		.uleb128 0x13
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 52
+
+
+ 2348 0550 91020000 		.4byte	.LASF60
+ 2349 0554 01       		.byte	0x1
+ 2350 0555 42       		.byte	0x42
+ 2351 0556 61000000 		.4byte	0x61
+ 2352 055a 01       		.byte	0x1
+ 2353 055b 05       		.byte	0x5
+ 2354 055c 03       		.byte	0x3
+ 2355 055d 00000000 		.4byte	activate_0
+ 2356 0561 13       		.uleb128 0x13
+ 2357 0562 9C020000 		.4byte	.LASF61
+ 2358 0566 01       		.byte	0x1
+ 2359 0567 43       		.byte	0x43
+ 2360 0568 61000000 		.4byte	0x61
+ 2361 056c 01       		.byte	0x1
+ 2362 056d 05       		.byte	0x5
+ 2363 056e 03       		.byte	0x3
+ 2364 056f 00000000 		.4byte	activate_1
+ 2365 0573 13       		.uleb128 0x13
+ 2366 0574 A7020000 		.4byte	.LASF62
+ 2367 0578 01       		.byte	0x1
+ 2368 0579 44       		.byte	0x44
+ 2369 057a 61000000 		.4byte	0x61
+ 2370 057e 01       		.byte	0x1
+ 2371 057f 05       		.byte	0x5
+ 2372 0580 03       		.byte	0x3
+ 2373 0581 00000000 		.4byte	activate_2
+ 2374 0585 13       		.uleb128 0x13
+ 2375 0586 B2020000 		.4byte	.LASF63
+ 2376 058a 01       		.byte	0x1
+ 2377 058b 45       		.byte	0x45
+ 2378 058c 61000000 		.4byte	0x61
+ 2379 0590 01       		.byte	0x1
+ 2380 0591 05       		.byte	0x5
+ 2381 0592 03       		.byte	0x3
+ 2382 0593 00000000 		.4byte	activate_3
+ 2383 0597 13       		.uleb128 0x13
+ 2384 0598 86020000 		.4byte	.LASF64
+ 2385 059c 01       		.byte	0x1
+ 2386 059d 46       		.byte	0x46
+ 2387 059e 61000000 		.4byte	0x61
+ 2388 05a2 01       		.byte	0x1
+ 2389 05a3 05       		.byte	0x5
+ 2390 05a4 03       		.byte	0x3
+ 2391 05a5 00000000 		.4byte	time_slice
+ 2392 05a9 00       		.byte	0x0
+ 2393              		.section	.debug_abbrev
+ 2394 0000 01       		.uleb128 0x1
+ 2395 0001 11       		.uleb128 0x11
+ 2396 0002 01       		.byte	0x1
+ 2397 0003 25       		.uleb128 0x25
+ 2398 0004 0E       		.uleb128 0xe
+ 2399 0005 13       		.uleb128 0x13
+ 2400 0006 0B       		.uleb128 0xb
+ 2401 0007 03       		.uleb128 0x3
+ 2402 0008 0E       		.uleb128 0xe
+ 2403 0009 1B       		.uleb128 0x1b
+ 2404 000a 0E       		.uleb128 0xe
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 53
+
+
+ 2405 000b 11       		.uleb128 0x11
+ 2406 000c 01       		.uleb128 0x1
+ 2407 000d 52       		.uleb128 0x52
+ 2408 000e 01       		.uleb128 0x1
+ 2409 000f 55       		.uleb128 0x55
+ 2410 0010 06       		.uleb128 0x6
+ 2411 0011 10       		.uleb128 0x10
+ 2412 0012 06       		.uleb128 0x6
+ 2413 0013 00       		.byte	0x0
+ 2414 0014 00       		.byte	0x0
+ 2415 0015 02       		.uleb128 0x2
+ 2416 0016 24       		.uleb128 0x24
+ 2417 0017 00       		.byte	0x0
+ 2418 0018 0B       		.uleb128 0xb
+ 2419 0019 0B       		.uleb128 0xb
+ 2420 001a 3E       		.uleb128 0x3e
+ 2421 001b 0B       		.uleb128 0xb
+ 2422 001c 03       		.uleb128 0x3
+ 2423 001d 0E       		.uleb128 0xe
+ 2424 001e 00       		.byte	0x0
+ 2425 001f 00       		.byte	0x0
+ 2426 0020 03       		.uleb128 0x3
+ 2427 0021 24       		.uleb128 0x24
+ 2428 0022 00       		.byte	0x0
+ 2429 0023 0B       		.uleb128 0xb
+ 2430 0024 0B       		.uleb128 0xb
+ 2431 0025 3E       		.uleb128 0x3e
+ 2432 0026 0B       		.uleb128 0xb
+ 2433 0027 03       		.uleb128 0x3
+ 2434 0028 08       		.uleb128 0x8
+ 2435 0029 00       		.byte	0x0
+ 2436 002a 00       		.byte	0x0
+ 2437 002b 04       		.uleb128 0x4
+ 2438 002c 24       		.uleb128 0x24
+ 2439 002d 00       		.byte	0x0
+ 2440 002e 0B       		.uleb128 0xb
+ 2441 002f 0B       		.uleb128 0xb
+ 2442 0030 3E       		.uleb128 0x3e
+ 2443 0031 0B       		.uleb128 0xb
+ 2444 0032 00       		.byte	0x0
+ 2445 0033 00       		.byte	0x0
+ 2446 0034 05       		.uleb128 0x5
+ 2447 0035 2E       		.uleb128 0x2e
+ 2448 0036 01       		.byte	0x1
+ 2449 0037 03       		.uleb128 0x3
+ 2450 0038 0E       		.uleb128 0xe
+ 2451 0039 3A       		.uleb128 0x3a
+ 2452 003a 0B       		.uleb128 0xb
+ 2453 003b 3B       		.uleb128 0x3b
+ 2454 003c 0B       		.uleb128 0xb
+ 2455 003d 27       		.uleb128 0x27
+ 2456 003e 0C       		.uleb128 0xc
+ 2457 003f 11       		.uleb128 0x11
+ 2458 0040 01       		.uleb128 0x1
+ 2459 0041 12       		.uleb128 0x12
+ 2460 0042 01       		.uleb128 0x1
+ 2461 0043 40       		.uleb128 0x40
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 54
+
+
+ 2462 0044 06       		.uleb128 0x6
+ 2463 0045 01       		.uleb128 0x1
+ 2464 0046 13       		.uleb128 0x13
+ 2465 0047 00       		.byte	0x0
+ 2466 0048 00       		.byte	0x0
+ 2467 0049 06       		.uleb128 0x6
+ 2468 004a 05       		.uleb128 0x5
+ 2469 004b 00       		.byte	0x0
+ 2470 004c 03       		.uleb128 0x3
+ 2471 004d 08       		.uleb128 0x8
+ 2472 004e 3A       		.uleb128 0x3a
+ 2473 004f 0B       		.uleb128 0xb
+ 2474 0050 3B       		.uleb128 0x3b
+ 2475 0051 0B       		.uleb128 0xb
+ 2476 0052 49       		.uleb128 0x49
+ 2477 0053 13       		.uleb128 0x13
+ 2478 0054 02       		.uleb128 0x2
+ 2479 0055 0A       		.uleb128 0xa
+ 2480 0056 00       		.byte	0x0
+ 2481 0057 00       		.byte	0x0
+ 2482 0058 07       		.uleb128 0x7
+ 2483 0059 05       		.uleb128 0x5
+ 2484 005a 00       		.byte	0x0
+ 2485 005b 03       		.uleb128 0x3
+ 2486 005c 0E       		.uleb128 0xe
+ 2487 005d 3A       		.uleb128 0x3a
+ 2488 005e 0B       		.uleb128 0xb
+ 2489 005f 3B       		.uleb128 0x3b
+ 2490 0060 0B       		.uleb128 0xb
+ 2491 0061 49       		.uleb128 0x49
+ 2492 0062 13       		.uleb128 0x13
+ 2493 0063 02       		.uleb128 0x2
+ 2494 0064 0A       		.uleb128 0xa
+ 2495 0065 00       		.byte	0x0
+ 2496 0066 00       		.byte	0x0
+ 2497 0067 08       		.uleb128 0x8
+ 2498 0068 34       		.uleb128 0x34
+ 2499 0069 00       		.byte	0x0
+ 2500 006a 03       		.uleb128 0x3
+ 2501 006b 08       		.uleb128 0x8
+ 2502 006c 3A       		.uleb128 0x3a
+ 2503 006d 0B       		.uleb128 0xb
+ 2504 006e 3B       		.uleb128 0x3b
+ 2505 006f 0B       		.uleb128 0xb
+ 2506 0070 49       		.uleb128 0x49
+ 2507 0071 13       		.uleb128 0x13
+ 2508 0072 02       		.uleb128 0x2
+ 2509 0073 0A       		.uleb128 0xa
+ 2510 0074 00       		.byte	0x0
+ 2511 0075 00       		.byte	0x0
+ 2512 0076 09       		.uleb128 0x9
+ 2513 0077 0F       		.uleb128 0xf
+ 2514 0078 00       		.byte	0x0
+ 2515 0079 0B       		.uleb128 0xb
+ 2516 007a 0B       		.uleb128 0xb
+ 2517 007b 49       		.uleb128 0x49
+ 2518 007c 13       		.uleb128 0x13
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 55
+
+
+ 2519 007d 00       		.byte	0x0
+ 2520 007e 00       		.byte	0x0
+ 2521 007f 0A       		.uleb128 0xa
+ 2522 0080 34       		.uleb128 0x34
+ 2523 0081 00       		.byte	0x0
+ 2524 0082 03       		.uleb128 0x3
+ 2525 0083 0E       		.uleb128 0xe
+ 2526 0084 3A       		.uleb128 0x3a
+ 2527 0085 0B       		.uleb128 0xb
+ 2528 0086 3B       		.uleb128 0x3b
+ 2529 0087 0B       		.uleb128 0xb
+ 2530 0088 49       		.uleb128 0x49
+ 2531 0089 13       		.uleb128 0x13
+ 2532 008a 02       		.uleb128 0x2
+ 2533 008b 0A       		.uleb128 0xa
+ 2534 008c 00       		.byte	0x0
+ 2535 008d 00       		.byte	0x0
+ 2536 008e 0B       		.uleb128 0xb
+ 2537 008f 0B       		.uleb128 0xb
+ 2538 0090 01       		.byte	0x1
+ 2539 0091 11       		.uleb128 0x11
+ 2540 0092 01       		.uleb128 0x1
+ 2541 0093 12       		.uleb128 0x12
+ 2542 0094 01       		.uleb128 0x1
+ 2543 0095 00       		.byte	0x0
+ 2544 0096 00       		.byte	0x0
+ 2545 0097 0C       		.uleb128 0xc
+ 2546 0098 2E       		.uleb128 0x2e
+ 2547 0099 01       		.byte	0x1
+ 2548 009a 3F       		.uleb128 0x3f
+ 2549 009b 0C       		.uleb128 0xc
+ 2550 009c 03       		.uleb128 0x3
+ 2551 009d 0E       		.uleb128 0xe
+ 2552 009e 3A       		.uleb128 0x3a
+ 2553 009f 0B       		.uleb128 0xb
+ 2554 00a0 3B       		.uleb128 0x3b
+ 2555 00a1 0B       		.uleb128 0xb
+ 2556 00a2 27       		.uleb128 0x27
+ 2557 00a3 0C       		.uleb128 0xc
+ 2558 00a4 11       		.uleb128 0x11
+ 2559 00a5 01       		.uleb128 0x1
+ 2560 00a6 12       		.uleb128 0x12
+ 2561 00a7 01       		.uleb128 0x1
+ 2562 00a8 40       		.uleb128 0x40
+ 2563 00a9 06       		.uleb128 0x6
+ 2564 00aa 01       		.uleb128 0x1
+ 2565 00ab 13       		.uleb128 0x13
+ 2566 00ac 00       		.byte	0x0
+ 2567 00ad 00       		.byte	0x0
+ 2568 00ae 0D       		.uleb128 0xd
+ 2569 00af 2E       		.uleb128 0x2e
+ 2570 00b0 00       		.byte	0x0
+ 2571 00b1 3F       		.uleb128 0x3f
+ 2572 00b2 0C       		.uleb128 0xc
+ 2573 00b3 03       		.uleb128 0x3
+ 2574 00b4 0E       		.uleb128 0xe
+ 2575 00b5 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 56
+
+
+ 2576 00b6 0B       		.uleb128 0xb
+ 2577 00b7 3B       		.uleb128 0x3b
+ 2578 00b8 0B       		.uleb128 0xb
+ 2579 00b9 27       		.uleb128 0x27
+ 2580 00ba 0C       		.uleb128 0xc
+ 2581 00bb 11       		.uleb128 0x11
+ 2582 00bc 01       		.uleb128 0x1
+ 2583 00bd 12       		.uleb128 0x12
+ 2584 00be 01       		.uleb128 0x1
+ 2585 00bf 40       		.uleb128 0x40
+ 2586 00c0 06       		.uleb128 0x6
+ 2587 00c1 00       		.byte	0x0
+ 2588 00c2 00       		.byte	0x0
+ 2589 00c3 0E       		.uleb128 0xe
+ 2590 00c4 01       		.uleb128 0x1
+ 2591 00c5 01       		.byte	0x1
+ 2592 00c6 49       		.uleb128 0x49
+ 2593 00c7 13       		.uleb128 0x13
+ 2594 00c8 01       		.uleb128 0x1
+ 2595 00c9 13       		.uleb128 0x13
+ 2596 00ca 00       		.byte	0x0
+ 2597 00cb 00       		.byte	0x0
+ 2598 00cc 0F       		.uleb128 0xf
+ 2599 00cd 21       		.uleb128 0x21
+ 2600 00ce 00       		.byte	0x0
+ 2601 00cf 49       		.uleb128 0x49
+ 2602 00d0 13       		.uleb128 0x13
+ 2603 00d1 2F       		.uleb128 0x2f
+ 2604 00d2 0B       		.uleb128 0xb
+ 2605 00d3 00       		.byte	0x0
+ 2606 00d4 00       		.byte	0x0
+ 2607 00d5 10       		.uleb128 0x10
+ 2608 00d6 2E       		.uleb128 0x2e
+ 2609 00d7 00       		.byte	0x0
+ 2610 00d8 3F       		.uleb128 0x3f
+ 2611 00d9 0C       		.uleb128 0xc
+ 2612 00da 03       		.uleb128 0x3
+ 2613 00db 0E       		.uleb128 0xe
+ 2614 00dc 3A       		.uleb128 0x3a
+ 2615 00dd 0B       		.uleb128 0xb
+ 2616 00de 3B       		.uleb128 0x3b
+ 2617 00df 05       		.uleb128 0x5
+ 2618 00e0 11       		.uleb128 0x11
+ 2619 00e1 01       		.uleb128 0x1
+ 2620 00e2 12       		.uleb128 0x12
+ 2621 00e3 01       		.uleb128 0x1
+ 2622 00e4 40       		.uleb128 0x40
+ 2623 00e5 06       		.uleb128 0x6
+ 2624 00e6 00       		.byte	0x0
+ 2625 00e7 00       		.byte	0x0
+ 2626 00e8 11       		.uleb128 0x11
+ 2627 00e9 34       		.uleb128 0x34
+ 2628 00ea 00       		.byte	0x0
+ 2629 00eb 03       		.uleb128 0x3
+ 2630 00ec 0E       		.uleb128 0xe
+ 2631 00ed 3A       		.uleb128 0x3a
+ 2632 00ee 0B       		.uleb128 0xb
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 57
+
+
+ 2633 00ef 3B       		.uleb128 0x3b
+ 2634 00f0 05       		.uleb128 0x5
+ 2635 00f1 49       		.uleb128 0x49
+ 2636 00f2 13       		.uleb128 0x13
+ 2637 00f3 3F       		.uleb128 0x3f
+ 2638 00f4 0C       		.uleb128 0xc
+ 2639 00f5 3C       		.uleb128 0x3c
+ 2640 00f6 0C       		.uleb128 0xc
+ 2641 00f7 00       		.byte	0x0
+ 2642 00f8 00       		.byte	0x0
+ 2643 00f9 12       		.uleb128 0x12
+ 2644 00fa 35       		.uleb128 0x35
+ 2645 00fb 00       		.byte	0x0
+ 2646 00fc 49       		.uleb128 0x49
+ 2647 00fd 13       		.uleb128 0x13
+ 2648 00fe 00       		.byte	0x0
+ 2649 00ff 00       		.byte	0x0
+ 2650 0100 13       		.uleb128 0x13
+ 2651 0101 34       		.uleb128 0x34
+ 2652 0102 00       		.byte	0x0
+ 2653 0103 03       		.uleb128 0x3
+ 2654 0104 0E       		.uleb128 0xe
+ 2655 0105 3A       		.uleb128 0x3a
+ 2656 0106 0B       		.uleb128 0xb
+ 2657 0107 3B       		.uleb128 0x3b
+ 2658 0108 0B       		.uleb128 0xb
+ 2659 0109 49       		.uleb128 0x49
+ 2660 010a 13       		.uleb128 0x13
+ 2661 010b 3F       		.uleb128 0x3f
+ 2662 010c 0C       		.uleb128 0xc
+ 2663 010d 02       		.uleb128 0x2
+ 2664 010e 0A       		.uleb128 0xa
+ 2665 010f 00       		.byte	0x0
+ 2666 0110 00       		.byte	0x0
+ 2667 0111 14       		.uleb128 0x14
+ 2668 0112 34       		.uleb128 0x34
+ 2669 0113 00       		.byte	0x0
+ 2670 0114 03       		.uleb128 0x3
+ 2671 0115 08       		.uleb128 0x8
+ 2672 0116 3A       		.uleb128 0x3a
+ 2673 0117 0B       		.uleb128 0xb
+ 2674 0118 3B       		.uleb128 0x3b
+ 2675 0119 0B       		.uleb128 0xb
+ 2676 011a 49       		.uleb128 0x49
+ 2677 011b 13       		.uleb128 0x13
+ 2678 011c 3F       		.uleb128 0x3f
+ 2679 011d 0C       		.uleb128 0xc
+ 2680 011e 02       		.uleb128 0x2
+ 2681 011f 0A       		.uleb128 0xa
+ 2682 0120 00       		.byte	0x0
+ 2683 0121 00       		.byte	0x0
+ 2684 0122 00       		.byte	0x0
+ 2685              		.section	.debug_pubnames,"",%progbits
+ 2686 0000 38030000 		.4byte	0x338
+ 2687 0004 0200     		.2byte	0x2
+ 2688 0006 00000000 		.4byte	.Ldebug_info0
+ 2689 000a AA050000 		.4byte	0x5aa
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 58
+
+
+ 2690 000e 6F010000 		.4byte	0x16f
+ 2691 0012 696E7465 		.ascii	"inter_HE\000"
+ 2691      725F4845 
+ 2691      00
+ 2692 001b A5010000 		.4byte	0x1a5
+ 2693 001f 696E7465 		.ascii	"inter_infrared_rising_0\000"
+ 2693      725F696E 
+ 2693      66726172 
+ 2693      65645F72 
+ 2693      6973696E 
+ 2694 0037 BA010000 		.4byte	0x1ba
+ 2695 003b 696E7465 		.ascii	"inter_infrared_falling_0\000"
+ 2695      725F696E 
+ 2695      66726172 
+ 2695      65645F66 
+ 2695      616C6C69 
+ 2696 0054 F2010000 		.4byte	0x1f2
+ 2697 0058 696E7465 		.ascii	"inter_infrared_rising_1\000"
+ 2697      725F696E 
+ 2697      66726172 
+ 2697      65645F72 
+ 2697      6973696E 
+ 2698 0070 07020000 		.4byte	0x207
+ 2699 0074 696E7465 		.ascii	"inter_infrared_falling_1\000"
+ 2699      725F696E 
+ 2699      66726172 
+ 2699      65645F66 
+ 2699      616C6C69 
+ 2700 008d 2F020000 		.4byte	0x22f
+ 2701 0091 696E7465 		.ascii	"inter_infrared_rising_2\000"
+ 2701      725F696E 
+ 2701      66726172 
+ 2701      65645F72 
+ 2701      6973696E 
+ 2702 00a9 44020000 		.4byte	0x244
+ 2703 00ad 696E7465 		.ascii	"inter_infrared_falling_2\000"
+ 2703      725F696E 
+ 2703      66726172 
+ 2703      65645F66 
+ 2703      616C6C69 
+ 2704 00c6 6C020000 		.4byte	0x26c
+ 2705 00ca 696E7465 		.ascii	"inter_infrared_rising_3\000"
+ 2705      725F696E 
+ 2705      66726172 
+ 2705      65645F72 
+ 2705      6973696E 
+ 2706 00e2 81020000 		.4byte	0x281
+ 2707 00e6 696E7465 		.ascii	"inter_infrared_falling_3\000"
+ 2707      725F696E 
+ 2707      66726172 
+ 2707      65645F66 
+ 2707      616C6C69 
+ 2708 00ff A9020000 		.4byte	0x2a9
+ 2709 0103 6D61696E 		.ascii	"main\000"
+ 2709      00
+ 2710 0108 D1020000 		.4byte	0x2d1
+ 2711 010c 63697263 		.ascii	"circumference\000"
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 59
+
+
+ 2711      756D6665 
+ 2711      72656E63 
+ 2711      6500
+ 2712 011a E3020000 		.4byte	0x2e3
+ 2713 011e 636C6F63 		.ascii	"clock_freq\000"
+ 2713      6B5F6672 
+ 2713      657100
+ 2714 0129 F5020000 		.4byte	0x2f5
+ 2715 012d 6E5F7365 		.ascii	"n_sensors_per_rev\000"
+ 2715      6E736F72 
+ 2715      735F7065 
+ 2715      725F7265 
+ 2715      7600
+ 2716 013f 07030000 		.4byte	0x307
+ 2717 0143 696E6368 		.ascii	"inches_per_foot\000"
+ 2717      65735F70 
+ 2717      65725F66 
+ 2717      6F6F7400 
+ 2718 0153 19030000 		.4byte	0x319
+ 2719 0157 6D61785F 		.ascii	"max_timer_count\000"
+ 2719      74696D65 
+ 2719      725F636F 
+ 2719      756E7400 
+ 2720 0167 2B030000 		.4byte	0x32b
+ 2721 016b 74617267 		.ascii	"target_speed\000"
+ 2721      65745F73 
+ 2721      70656564 
+ 2721      00
+ 2722 0178 3D030000 		.4byte	0x33d
+ 2723 017c 70726576 		.ascii	"previous_capture\000"
+ 2723      696F7573 
+ 2723      5F636170 
+ 2723      74757265 
+ 2723      00
+ 2724 018d 4F030000 		.4byte	0x34f
+ 2725 0191 6B7000   		.ascii	"kp\000"
+ 2726 0194 60030000 		.4byte	0x360
+ 2727 0198 6B6900   		.ascii	"ki\000"
+ 2728 019b 71030000 		.4byte	0x371
+ 2729 019f 6572725F 		.ascii	"err_current\000"
+ 2729      63757272 
+ 2729      656E7400 
+ 2730 01ab 83030000 		.4byte	0x383
+ 2731 01af 73706565 		.ascii	"speed\000"
+ 2731      6400
+ 2732 01b5 95030000 		.4byte	0x395
+ 2733 01b9 64656C74 		.ascii	"delta_t\000"
+ 2733      615F7400 
+ 2734 01c1 A7030000 		.4byte	0x3a7
+ 2735 01c5 6F757470 		.ascii	"output_current\000"
+ 2735      75745F63 
+ 2735      75727265 
+ 2735      6E7400
+ 2736 01d4 B9030000 		.4byte	0x3b9
+ 2737 01d8 6572726F 		.ascii	"error_sum\000"
+ 2737      725F7375 
+ 2737      6D00
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 60
+
+
+ 2738 01e2 CB030000 		.4byte	0x3cb
+ 2739 01e6 77656967 		.ascii	"weight\000"
+ 2739      687400
+ 2740 01ed DD030000 		.4byte	0x3dd
+ 2741 01f1 6F757470 		.ascii	"output_initial\000"
+ 2741      75745F69 
+ 2741      6E697469 
+ 2741      616C00
+ 2742 0200 EF030000 		.4byte	0x3ef
+ 2743 0204 6900     		.ascii	"i\000"
+ 2744 0206 FF030000 		.4byte	0x3ff
+ 2745 020a 6A00     		.ascii	"j\000"
+ 2746 020c 0F040000 		.4byte	0x40f
+ 2747 0210 696E665F 		.ascii	"inf_clk\000"
+ 2747      636C6B00 
+ 2748 0218 21040000 		.4byte	0x421
+ 2749 021c 696E665F 		.ascii	"inf_timer_count\000"
+ 2749      74696D65 
+ 2749      725F636F 
+ 2749      756E7400 
+ 2750 022c 33040000 		.4byte	0x433
+ 2751 0230 74696D69 		.ascii	"timing_tolerance\000"
+ 2751      6E675F74 
+ 2751      6F6C6572 
+ 2751      616E6365 
+ 2751      00
+ 2752 0241 55040000 		.4byte	0x455
+ 2753 0245 696E665F 		.ascii	"inf_rise\000"
+ 2753      72697365 
+ 2753      00
+ 2754 024e 67040000 		.4byte	0x467
+ 2755 0252 696E665F 		.ascii	"inf_rise_prev\000"
+ 2755      72697365 
+ 2755      5F707265 
+ 2755      7600
+ 2756 0260 79040000 		.4byte	0x479
+ 2757 0264 696E665F 		.ascii	"inf_fall\000"
+ 2757      66616C6C 
+ 2757      00
+ 2758 026d 8B040000 		.4byte	0x48b
+ 2759 0271 72697369 		.ascii	"risingEdge\000"
+ 2759      6E674564 
+ 2759      676500
+ 2760 027c 9D040000 		.4byte	0x49d
+ 2761 0280 647800   		.ascii	"dx\000"
+ 2762 0283 AE040000 		.4byte	0x4ae
+ 2763 0287 647900   		.ascii	"dy\000"
+ 2764 028a BF040000 		.4byte	0x4bf
+ 2765 028e 6E5F6661 		.ascii	"n_fallingEdges\000"
+ 2765      6C6C696E 
+ 2765      67456467 
+ 2765      657300
+ 2766 029d D1040000 		.4byte	0x4d1
+ 2767 02a1 736B6970 		.ascii	"skip\000"
+ 2767      00
+ 2768 02a6 E3040000 		.4byte	0x4e3
+ 2769 02aa 61786973 		.ascii	"axis\000"
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 61
+
+
+ 2769      00
+ 2770 02af F5040000 		.4byte	0x4f5
+ 2771 02b3 73796E63 		.ascii	"sync_width\000"
+ 2771      5F776964 
+ 2771      746800
+ 2772 02be 07050000 		.4byte	0x507
+ 2773 02c2 696E665F 		.ascii	"inf_dbg\000"
+ 2773      64626700 
+ 2774 02ca 19050000 		.4byte	0x519
+ 2775 02ce 78557064 		.ascii	"xUpdated\000"
+ 2775      61746564 
+ 2775      00
+ 2776 02d7 2B050000 		.4byte	0x52b
+ 2777 02db 79557064 		.ascii	"yUpdated\000"
+ 2777      61746564 
+ 2777      00
+ 2778 02e4 3D050000 		.4byte	0x53d
+ 2779 02e8 64626733 		.ascii	"dbg3\000"
+ 2779      00
+ 2780 02ed 4F050000 		.4byte	0x54f
+ 2781 02f1 61637469 		.ascii	"activate_0\000"
+ 2781      76617465 
+ 2781      5F3000
+ 2782 02fc 61050000 		.4byte	0x561
+ 2783 0300 61637469 		.ascii	"activate_1\000"
+ 2783      76617465 
+ 2783      5F3100
+ 2784 030b 73050000 		.4byte	0x573
+ 2785 030f 61637469 		.ascii	"activate_2\000"
+ 2785      76617465 
+ 2785      5F3200
+ 2786 031a 85050000 		.4byte	0x585
+ 2787 031e 61637469 		.ascii	"activate_3\000"
+ 2787      76617465 
+ 2787      5F3300
+ 2788 0329 97050000 		.4byte	0x597
+ 2789 032d 74696D65 		.ascii	"time_slice\000"
+ 2789      5F736C69 
+ 2789      636500
+ 2790 0338 00000000 		.4byte	0x0
+ 2791              		.section	.debug_aranges,"",%progbits
+ 2792 0000 7C000000 		.4byte	0x7c
+ 2793 0004 0200     		.2byte	0x2
+ 2794 0006 00000000 		.4byte	.Ldebug_info0
+ 2795 000a 04       		.byte	0x4
+ 2796 000b 00       		.byte	0x0
+ 2797 000c 0000     		.2byte	0x0
+ 2798 000e 0000     		.2byte	0x0
+ 2799 0010 00000000 		.4byte	.LFB29
+ 2800 0014 3C000000 		.4byte	.LFE29-.LFB29
+ 2801 0018 00000000 		.4byte	.LFB30
+ 2802 001c 56000000 		.4byte	.LFE30-.LFB30
+ 2803 0020 00000000 		.4byte	.LFB31
+ 2804 0024 02020000 		.4byte	.LFE31-.LFB31
+ 2805 0028 00000000 		.4byte	.LFB32
+ 2806 002c 2E020000 		.4byte	.LFE32-.LFB32
+ 2807 0030 00000000 		.4byte	.LFB33
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 62
+
+
+ 2808 0034 34000000 		.4byte	.LFE33-.LFB33
+ 2809 0038 00000000 		.4byte	.LFB34
+ 2810 003c 68000000 		.4byte	.LFE34-.LFB34
+ 2811 0040 00000000 		.4byte	.LFB35
+ 2812 0044 34000000 		.4byte	.LFE35-.LFB35
+ 2813 0048 00000000 		.4byte	.LFB36
+ 2814 004c 68000000 		.4byte	.LFE36-.LFB36
+ 2815 0050 00000000 		.4byte	.LFB37
+ 2816 0054 34000000 		.4byte	.LFE37-.LFB37
+ 2817 0058 00000000 		.4byte	.LFB38
+ 2818 005c 68000000 		.4byte	.LFE38-.LFB38
+ 2819 0060 00000000 		.4byte	.LFB39
+ 2820 0064 34000000 		.4byte	.LFE39-.LFB39
+ 2821 0068 00000000 		.4byte	.LFB40
+ 2822 006c 68000000 		.4byte	.LFE40-.LFB40
+ 2823 0070 00000000 		.4byte	.LFB41
+ 2824 0074 C0020000 		.4byte	.LFE41-.LFB41
+ 2825 0078 00000000 		.4byte	0x0
+ 2826 007c 00000000 		.4byte	0x0
+ 2827              		.section	.debug_ranges,"",%progbits
+ 2828              	.Ldebug_ranges0:
+ 2829 0000 00000000 		.4byte	.Ltext0
+ 2830 0004 00000000 		.4byte	.Letext0
+ 2831 0008 00000000 		.4byte	.LFB29
+ 2832 000c 3C000000 		.4byte	.LFE29
+ 2833 0010 00000000 		.4byte	.LFB30
+ 2834 0014 56000000 		.4byte	.LFE30
+ 2835 0018 00000000 		.4byte	.LFB31
+ 2836 001c 02020000 		.4byte	.LFE31
+ 2837 0020 00000000 		.4byte	.LFB32
+ 2838 0024 2E020000 		.4byte	.LFE32
+ 2839 0028 00000000 		.4byte	.LFB33
+ 2840 002c 34000000 		.4byte	.LFE33
+ 2841 0030 00000000 		.4byte	.LFB34
+ 2842 0034 68000000 		.4byte	.LFE34
+ 2843 0038 00000000 		.4byte	.LFB35
+ 2844 003c 34000000 		.4byte	.LFE35
+ 2845 0040 00000000 		.4byte	.LFB36
+ 2846 0044 68000000 		.4byte	.LFE36
+ 2847 0048 00000000 		.4byte	.LFB37
+ 2848 004c 34000000 		.4byte	.LFE37
+ 2849 0050 00000000 		.4byte	.LFB38
+ 2850 0054 68000000 		.4byte	.LFE38
+ 2851 0058 00000000 		.4byte	.LFB39
+ 2852 005c 34000000 		.4byte	.LFE39
+ 2853 0060 00000000 		.4byte	.LFB40
+ 2854 0064 68000000 		.4byte	.LFE40
+ 2855 0068 00000000 		.4byte	.LFB41
+ 2856 006c C0020000 		.4byte	.LFE41
+ 2857 0070 00000000 		.4byte	0x0
+ 2858 0074 00000000 		.4byte	0x0
+ 2859              		.section	.debug_str,"MS",%progbits,1
+ 2860              	.LASF52:
+ 2861 0000 696E665F 		.ascii	"inf_fall\000"
+ 2861      66616C6C 
+ 2861      00
+ 2862              	.LASF55:
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 63
+
+
+ 2863 0009 736B6970 		.ascii	"skip\000"
+ 2863      00
+ 2864              	.LASF21:
+ 2865 000e 636F756E 		.ascii	"counts\000"
+ 2865      747300
+ 2866              	.LASF2:
+ 2867 0015 73686F72 		.ascii	"short int\000"
+ 2867      7420696E 
+ 2867      7400
+ 2868              	.LASF56:
+ 2869 001f 696E665F 		.ascii	"inf_dbg\000"
+ 2869      64626700 
+ 2870              	.LASF27:
+ 2871 0027 696E7465 		.ascii	"inter_infrared_falling_1\000"
+ 2871      725F696E 
+ 2871      66726172 
+ 2871      65645F66 
+ 2871      616C6C69 
+ 2872              	.LASF29:
+ 2873 0040 696E7465 		.ascii	"inter_infrared_falling_2\000"
+ 2873      725F696E 
+ 2873      66726172 
+ 2873      65645F66 
+ 2873      616C6C69 
+ 2874              	.LASF31:
+ 2875 0059 696E7465 		.ascii	"inter_infrared_falling_3\000"
+ 2875      725F696E 
+ 2875      66726172 
+ 2875      65645F66 
+ 2875      616C6C69 
+ 2876              	.LASF13:
+ 2877 0072 6C656E67 		.ascii	"length\000"
+ 2877      746800
+ 2878              	.LASF68:
+ 2879 0079 6D61696E 		.ascii	"main\000"
+ 2879      00
+ 2880              	.LASF35:
+ 2881 007e 6E5F7365 		.ascii	"n_sensors_per_rev\000"
+ 2881      6E736F72 
+ 2881      735F7065 
+ 2881      725F7265 
+ 2881      7600
+ 2882              	.LASF50:
+ 2883 0090 696E665F 		.ascii	"inf_rise\000"
+ 2883      72697365 
+ 2883      00
+ 2884              	.LASF15:
+ 2885 0099 73656E64 		.ascii	"sendWireless\000"
+ 2885      57697265 
+ 2885      6C657373 
+ 2885      00
+ 2886              	.LASF20:
+ 2887 00a6 63757272 		.ascii	"current_capture\000"
+ 2887      656E745F 
+ 2887      63617074 
+ 2887      75726500 
+ 2888              	.LASF14:
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 64
+
+
+ 2889 00b6 7A65726F 		.ascii	"zeroIntArr\000"
+ 2889      496E7441 
+ 2889      727200
+ 2890              	.LASF11:
+ 2891 00c1 666C6F61 		.ascii	"float\000"
+ 2891      7400
+ 2892              	.LASF6:
+ 2893 00c7 6C6F6E67 		.ascii	"long long int\000"
+ 2893      206C6F6E 
+ 2893      6720696E 
+ 2893      7400
+ 2894              	.LASF36:
+ 2895 00d5 696E6368 		.ascii	"inches_per_foot\000"
+ 2895      65735F70 
+ 2895      65725F66 
+ 2895      6F6F7400 
+ 2896              	.LASF49:
+ 2897 00e5 74696D69 		.ascii	"timing_tolerance\000"
+ 2897      6E675F74 
+ 2897      6F6C6572 
+ 2897      616E6365 
+ 2897      00
+ 2898              	.LASF38:
+ 2899 00f6 74617267 		.ascii	"target_speed\000"
+ 2899      65745F73 
+ 2899      70656564 
+ 2899      00
+ 2900              	.LASF16:
+ 2901 0103 61786973 		.ascii	"axis\000"
+ 2901      00
+ 2902              	.LASF57:
+ 2903 0108 78557064 		.ascii	"xUpdated\000"
+ 2903      61746564 
+ 2903      00
+ 2904              	.LASF12:
+ 2905 0111 6C6F6E67 		.ascii	"long double\000"
+ 2905      20646F75 
+ 2905      626C6500 
+ 2906              	.LASF44:
+ 2907 011d 6572726F 		.ascii	"error_sum\000"
+ 2907      725F7375 
+ 2907      6D00
+ 2908              	.LASF34:
+ 2909 0127 636C6F63 		.ascii	"clock_freq\000"
+ 2909      6B5F6672 
+ 2909      657100
+ 2910              	.LASF1:
+ 2911 0132 756E7369 		.ascii	"unsigned char\000"
+ 2911      676E6564 
+ 2911      20636861 
+ 2911      7200
+ 2912              	.LASF33:
+ 2913 0140 63697263 		.ascii	"circumference\000"
+ 2913      756D6665 
+ 2913      72656E63 
+ 2913      6500
+ 2914              	.LASF42:
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 65
+
+
+ 2915 014e 64656C74 		.ascii	"delta_t\000"
+ 2915      615F7400 
+ 2916              	.LASF0:
+ 2917 0156 7369676E 		.ascii	"signed char\000"
+ 2917      65642063 
+ 2917      68617200 
+ 2918              	.LASF28:
+ 2919 0162 696E7465 		.ascii	"inter_infrared_rising_2\000"
+ 2919      725F696E 
+ 2919      66726172 
+ 2919      65645F72 
+ 2919      6973696E 
+ 2920              	.LASF7:
+ 2921 017a 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2921      206C6F6E 
+ 2921      6720756E 
+ 2921      7369676E 
+ 2921      65642069 
+ 2922              	.LASF23:
+ 2923 0191 696E7465 		.ascii	"inter_infrared_falling_0\000"
+ 2923      725F696E 
+ 2923      66726172 
+ 2923      65645F66 
+ 2923      616C6C69 
+ 2924              	.LASF8:
+ 2925 01aa 756E7369 		.ascii	"unsigned int\000"
+ 2925      676E6564 
+ 2925      20696E74 
+ 2925      00
+ 2926              	.LASF48:
+ 2927 01b7 696E665F 		.ascii	"inf_timer_count\000"
+ 2927      74696D65 
+ 2927      725F636F 
+ 2927      756E7400 
+ 2928              	.LASF41:
+ 2929 01c7 73706565 		.ascii	"speed\000"
+ 2929      6400
+ 2930              	.LASF25:
+ 2931 01cd 696E7465 		.ascii	"inter_infrared_rising_0\000"
+ 2931      725F696E 
+ 2931      66726172 
+ 2931      65645F72 
+ 2931      6973696E 
+ 2932              	.LASF26:
+ 2933 01e5 696E7465 		.ascii	"inter_infrared_rising_1\000"
+ 2933      725F696E 
+ 2933      66726172 
+ 2933      65645F72 
+ 2933      6973696E 
+ 2934              	.LASF22:
+ 2935 01fd 696E7465 		.ascii	"inter_HE\000"
+ 2935      725F4845 
+ 2935      00
+ 2936              	.LASF30:
+ 2937 0206 696E7465 		.ascii	"inter_infrared_rising_3\000"
+ 2937      725F696E 
+ 2937      66726172 
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 66
+
+
+ 2937      65645F72 
+ 2937      6973696E 
+ 2938              	.LASF9:
+ 2939 021e 63686172 		.ascii	"char\000"
+ 2939      00
+ 2940              	.LASF4:
+ 2941 0223 6C6F6E67 		.ascii	"long int\000"
+ 2941      20696E74 
+ 2941      00
+ 2942              	.LASF43:
+ 2943 022c 6F757470 		.ascii	"output_current\000"
+ 2943      75745F63 
+ 2943      75727265 
+ 2943      6E7400
+ 2944              	.LASF67:
+ 2945 023b 433A5C55 		.ascii	"C:\\Users\\Public\\Documents\\Carlab\\carlab_302\\c"
+ 2945      73657273 
+ 2945      5C507562 
+ 2945      6C69635C 
+ 2945      446F6375 
+ 2946 0268 61726C61 		.ascii	"arlab_302.cydsn\000"
+ 2946      625F3330 
+ 2946      322E6379 
+ 2946      64736E00 
+ 2947              	.LASF51:
+ 2948 0278 696E665F 		.ascii	"inf_rise_prev\000"
+ 2948      72697365 
+ 2948      5F707265 
+ 2948      7600
+ 2949              	.LASF64:
+ 2950 0286 74696D65 		.ascii	"time_slice\000"
+ 2950      5F736C69 
+ 2950      636500
+ 2951              	.LASF60:
+ 2952 0291 61637469 		.ascii	"activate_0\000"
+ 2952      76617465 
+ 2952      5F3000
+ 2953              	.LASF61:
+ 2954 029c 61637469 		.ascii	"activate_1\000"
+ 2954      76617465 
+ 2954      5F3100
+ 2955              	.LASF62:
+ 2956 02a7 61637469 		.ascii	"activate_2\000"
+ 2956      76617465 
+ 2956      5F3200
+ 2957              	.LASF63:
+ 2958 02b2 61637469 		.ascii	"activate_3\000"
+ 2958      76617465 
+ 2958      5F3300
+ 2959              	.LASF3:
+ 2960 02bd 73686F72 		.ascii	"short unsigned int\000"
+ 2960      7420756E 
+ 2960      7369676E 
+ 2960      65642069 
+ 2960      6E7400
+ 2961              	.LASF5:
+ 2962 02d0 6C6F6E67 		.ascii	"long unsigned int\000"
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 67
+
+
+ 2962      20756E73 
+ 2962      69676E65 
+ 2962      6420696E 
+ 2962      7400
+ 2963              	.LASF58:
+ 2964 02e2 79557064 		.ascii	"yUpdated\000"
+ 2964      61746564 
+ 2964      00
+ 2965              	.LASF10:
+ 2966 02eb 646F7562 		.ascii	"double\000"
+ 2966      6C6500
+ 2967              	.LASF24:
+ 2968 02f2 73747262 		.ascii	"strbuffer\000"
+ 2968      75666665 
+ 2968      7200
+ 2969              	.LASF18:
+ 2970 02fc 6E5F636F 		.ascii	"n_counts\000"
+ 2970      756E7473 
+ 2970      00
+ 2971              	.LASF66:
+ 2972 0305 2E5C6D61 		.ascii	".\\main.c\000"
+ 2972      696E2E63 
+ 2972      00
+ 2973              	.LASF46:
+ 2974 030e 6F757470 		.ascii	"output_initial\000"
+ 2974      75745F69 
+ 2974      6E697469 
+ 2974      616C00
+ 2975              	.LASF39:
+ 2976 031d 70726576 		.ascii	"previous_capture\000"
+ 2976      696F7573 
+ 2976      5F636170 
+ 2976      74757265 
+ 2976      00
+ 2977              	.LASF17:
+ 2978 032e 75706461 		.ascii	"updateSensorPos\000"
+ 2978      74655365 
+ 2978      6E736F72 
+ 2978      506F7300 
+ 2979              	.LASF53:
+ 2980 033e 72697369 		.ascii	"risingEdge\000"
+ 2980      6E674564 
+ 2980      676500
+ 2981              	.LASF19:
+ 2982 0349 73796E63 		.ascii	"sync_width\000"
+ 2982      5F776964 
+ 2982      746800
+ 2983              	.LASF65:
+ 2984 0354 474E5520 		.ascii	"GNU C 4.4.1\000"
+ 2984      4320342E 
+ 2984      342E3100 
+ 2985              	.LASF47:
+ 2986 0360 696E665F 		.ascii	"inf_clk\000"
+ 2986      636C6B00 
+ 2987              	.LASF32:
+ 2988 0368 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 2988      52784275 
+ARM GAS  C:\Users\dwguo\AppData\Local\Temp\ccX6G6Oe.s 			page 68
+
+
+ 2988      66666572 
+ 2988      00
+ 2989              	.LASF45:
+ 2990 0375 77656967 		.ascii	"weight\000"
+ 2990      687400
+ 2991              	.LASF59:
+ 2992 037c 64626733 		.ascii	"dbg3\000"
+ 2992      00
+ 2993              	.LASF37:
+ 2994 0381 6D61785F 		.ascii	"max_timer_count\000"
+ 2994      74696D65 
+ 2994      725F636F 
+ 2994      756E7400 
+ 2995              	.LASF54:
+ 2996 0391 6E5F6661 		.ascii	"n_fallingEdges\000"
+ 2996      6C6C696E 
+ 2996      67456467 
+ 2996      657300
+ 2997              	.LASF40:
+ 2998 03a0 6572725F 		.ascii	"err_current\000"
+ 2998      63757272 
+ 2998      656E7400 
+ 2999              		.ident	"GCC: (Sourcery G++ Lite 2010q1-188) 4.4.1"
