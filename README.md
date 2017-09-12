@@ -14,6 +14,8 @@ https://user-images.githubusercontent.com/12766954/30307884-6e20d5f8-9736-11e7-9
 
 Unity:  
 In Unity, we created a simple 3D scene and a box to represent our car. We attach a more detailed mesh of a car we designed in Blender to the box and a SensorTriang C# script. The script opens a serial port and reads the data sent by the PSoC. It converts the time measurements to angles, azimuth (beta) and elevation (theta), from the lighthouse.
+https://user-images.githubusercontent.com/12766954/30307889-70dc7db0-9736-11e7-99fc-bcd9ec7e6bbc.PNG
+
 Given three sensors that form a triangle and the beta/theta angles to each sensor, we can calculate the angles between any two sensors with respect to the origin. We can then form a system of non-linear equations for the unknown ranges or distances to each sensor. The length of sides AB, BC, and AC are known and measured beforehand on the car mast. Using the Newtonian root finding method and the Jacobian we iterate until the error is less than a certain threshold.
 https://user-images.githubusercontent.com/12766954/30307886-6fbd5ae4-9736-11e7-8929-dd886ecad65b.png
 
