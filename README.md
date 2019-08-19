@@ -6,6 +6,7 @@ The HTC Vive is a popular virtual reality system that includes a headset, two co
 
 By building an infrared sensor grid to a miniature electric car and decoding the HTC Vive base station laser tracking protocol, we can track the car in virtual reality. Each sensor sends its readings to the PSoC computer onboard the car, which runs a C script to convert sensor signals to the car's positional data. The data is then streamed over wireless XBee communication to a computer that manipulates a virtual car mesh in Unity
 <img src="images/car2.jpeg">
+<img src="images/demo.png">
 
 Lighthouse System/Protocol:  
 Each Vive base station is a lighthouse that sweeps the room with infrared light. On its upper left there is an LED array that emits a sync flash every 8.33 ms (120 Hz). It also has two rotors with lasers that rotate around the horizontal and vertical axes (with respect to the base station’s coordinate system) at 3600 rpm or 60 revolutions per second. 
