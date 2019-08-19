@@ -1,5 +1,11 @@
 # Virtual Reality Tracked Car using Valve Lighthouse System
-Dennis Guo
+
+The HTC Vive is a popular virtual reality system that includes a headset, two controllers, and two base stations. The headset and controllers are equipped with dozens of infrared sensors, and the base stations sweep the tracking area with infrared lasers - the timing of these lasers is used to track headset and controller position.
+<img src="images/vive2.jpeg">
+<img src="images/vive.jpeg">
+
+By building an infrared sensor grid to a miniature electric car and decoding the HTC Vive base station laser tracking protocol, we can track the car in virtual reality.
+<img src="images/car.jpeg" class="rotateimg90">
 
 car: https://user-images.githubusercontent.com/12766954/30307941-bbf722dc-9736-11e7-9c1f-825b0de2cf22.JPG
 lighthouse: https://user-images.githubusercontent.com/12766954/30307942-bbf75702-9736-11e7-99bf-96ae0bd98d4a.JPG
